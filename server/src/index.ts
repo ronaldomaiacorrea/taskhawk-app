@@ -1,15 +1,8 @@
-import { Hono } from 'hono';
+import app from './app';
 
-const app = new Hono();
-
-app.get('/api/hello', (c) => {
-	return c.json({
-		ok: true,
-		message: 'Hello Hono!',
-	});
-});
-
-export default {
+Bun.serve({
 	port: 3030,
 	fetch: app.fetch,
-};
+});
+
+console.log('Server listening at 3030...');
