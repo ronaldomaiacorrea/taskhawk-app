@@ -6,8 +6,8 @@ const taskSchema = z.object({
 	description: z.string().optional(),
 	creationDate: z.coerce.date(),
 	dueDate: z.coerce.date(),
-	priority: z.enum(['low', 'medium', 'high']),
-	status: z.enum(['pending', 'in-progress', 'completed', 'blocked']),
+	priority: z.enum(['Low', 'Medium', 'High']),
+	status: z.enum(['Pending', 'In progress', 'Completed', 'Blocked']),
 	assignedTo: z.string(),
 });
 
@@ -18,8 +18,8 @@ const createTaskSchema = z.object({
 	description: z.string().optional(),
 	creationDate: z.coerce.date(),
 	dueDate: z.coerce.date(),
-	priority: z.enum(['low', 'medium', 'high']),
-	status: z.enum(['pending', 'in-progress', 'completed', 'blocked']),
+	priority: z.enum(['Low', 'Medium', 'High']),
+	status: z.enum(['Pending', 'In progress', 'Completed', 'Blocked']),
 	assignedTo: z.string(),
 });
 

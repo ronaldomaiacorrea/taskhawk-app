@@ -8,8 +8,8 @@ type Task = {
 	description?: string;
 	creationDate: Date;
 	dueDate: Date;
-	priority: 'low' | 'medium' | 'high';
-	status: 'pending' | 'in-progress' | 'completed' | 'blocked';
+	priority: 'Low' | 'Medium' | 'High';
+	status: 'Pending' | 'In progress' | 'Completed' | 'Blocked';
 	assignedTo: string;
 	// TODO: add TAG type and link
 	// tag: string;
@@ -22,8 +22,8 @@ const mockTasks: Task[] = [
 		description: 'This is task 1',
 		creationDate: new Date(),
 		dueDate: new Date(),
-		priority: 'low',
-		status: 'pending',
+		priority: 'Low',
+		status: 'Pending',
 		assignedTo: 'John Doe',
 	},
 	{
@@ -32,8 +32,8 @@ const mockTasks: Task[] = [
 		description: 'This is task 2',
 		creationDate: new Date(),
 		dueDate: new Date(),
-		priority: 'medium',
-		status: 'in-progress',
+		priority: 'Medium',
+		status: 'In progress',
 		assignedTo: 'Jane Smith',
 	},
 	{
@@ -42,8 +42,8 @@ const mockTasks: Task[] = [
 		description: 'This is task 3',
 		creationDate: new Date(),
 		dueDate: new Date(),
-		priority: 'high',
-		status: 'completed',
+		priority: 'High',
+		status: 'Completed',
 		assignedTo: 'Mike Johnson',
 	},
 ];
