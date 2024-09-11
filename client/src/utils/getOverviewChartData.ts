@@ -2,7 +2,7 @@ import { hexToRgba } from './convertHexToRgba';
 import { Task } from './types';
 import { Status } from './types';
 
-export const getOverviewChartData = (data: Task[]) => {
+export const getOverviewChartData = (data: Task[] | undefined) => {
 	const labels = Object.values(Status);
 	const dataValues = new Array(7).fill(0);
 

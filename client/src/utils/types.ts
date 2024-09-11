@@ -14,11 +14,10 @@ export interface Task {
 	dueDate: Date;
 	priority: 'High' | 'Medium' | 'Low';
 	status: Status;
-	assignedTo?: string;
 }
 
 export interface TasksContextType {
-	tasks: Task[];
+	tasks: Task[] | undefined;
 	isLoading: boolean;
 	isFetching: boolean;
 	isError: boolean;

@@ -4,8 +4,6 @@ export enum Status {
 	BLOCKED = 'Blocked',
 	OVERDUE = 'Overdue',
 	IN_PROGRESS = 'In progress',
-	ON_HOLD = 'On hold',
-	CANCELED = 'Canceled',
 }
 
 type Task = {
@@ -16,7 +14,6 @@ type Task = {
 	dueDate: Date;
 	priority: 'High' | 'Medium' | 'Low';
 	status: Status;
-	assignedTo?: string;
 };
 
 export const mockTasks: Task[] = [
@@ -29,7 +26,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-04-07T05:01:56'),
 		priority: 'Low',
 		status: Status.TO_DO,
-		assignedTo: 'Alice Johnson',
 	},
 	{
 		id: 2,
@@ -39,8 +35,7 @@ export const mockTasks: Task[] = [
 		creationDate: new Date('2023-04-01T15:32:08'),
 		dueDate: new Date('2024-06-27T06:44:11'),
 		priority: 'Low',
-		status: Status.CANCELED,
-		assignedTo: 'Michael Smith',
+		status: Status.OVERDUE,
 	},
 	{
 		id: 3,
@@ -50,8 +45,7 @@ export const mockTasks: Task[] = [
 		creationDate: new Date('2023-04-29T03:35:39'),
 		dueDate: new Date('2024-01-13T20:04:36'),
 		priority: 'High',
-		status: Status.ON_HOLD,
-		assignedTo: 'Jessica Lee',
+		status: Status.COMPLETED,
 	},
 	{
 		id: 4,
@@ -62,7 +56,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-10-30T22:28:50'),
 		priority: 'High',
 		status: Status.OVERDUE,
-		assignedTo: 'David Clark',
 	},
 	{
 		id: 5,
@@ -73,7 +66,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-04-13T00:49:00'),
 		priority: 'Medium',
 		status: Status.COMPLETED,
-		assignedTo: 'Sophie Turner',
 	},
 	{
 		id: 6,
@@ -83,8 +75,7 @@ export const mockTasks: Task[] = [
 		creationDate: new Date('2023-11-14T15:05:22'),
 		dueDate: new Date('2024-07-20T06:10:41'),
 		priority: 'Medium',
-		status: Status.CANCELED,
-		assignedTo: 'Daniel Wilson',
+		status: Status.IN_PROGRESS,
 	},
 	{
 		id: 7,
@@ -95,7 +86,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-06-18T02:20:18'),
 		priority: 'Low',
 		status: Status.COMPLETED,
-		assignedTo: 'Olivia Brown',
 	},
 	{
 		id: 8,
@@ -106,7 +96,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-03-23T03:35:26'),
 		priority: 'Medium',
 		status: Status.IN_PROGRESS,
-		assignedTo: 'James Moore',
 	},
 	{
 		id: 9,
@@ -117,7 +106,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-09-10T01:18:46'),
 		priority: 'High',
 		status: Status.BLOCKED,
-		assignedTo: 'Emily Davis',
 	},
 	{
 		id: 10,
@@ -128,7 +116,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-05-05T11:32:29'),
 		priority: 'Low',
 		status: Status.BLOCKED,
-		assignedTo: 'Christopher Green',
 	},
 	{
 		id: 11,
@@ -139,7 +126,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-12-25T17:42:35'),
 		priority: 'High',
 		status: Status.OVERDUE,
-		assignedTo: 'Amelia Harris',
 	},
 	{
 		id: 12,
@@ -150,7 +136,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-04-16T09:54:48'),
 		priority: 'Medium',
 		status: Status.TO_DO,
-		assignedTo: 'Lucas Young',
 	},
 	{
 		id: 13,
@@ -161,7 +146,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-07-31T22:15:11'),
 		priority: 'High',
 		status: Status.COMPLETED,
-		assignedTo: 'Emma Walker',
 	},
 	{
 		id: 14,
@@ -171,8 +155,7 @@ export const mockTasks: Task[] = [
 		creationDate: new Date('2023-12-03T12:45:20'),
 		dueDate: new Date('2024-11-11T20:22:50'),
 		priority: 'Low',
-		status: Status.ON_HOLD,
-		assignedTo: 'Liam Hall',
+		status: Status.TO_DO,
 	},
 	{
 		id: 15,
@@ -182,8 +165,7 @@ export const mockTasks: Task[] = [
 		creationDate: new Date('2023-10-13T20:44:44'),
 		dueDate: new Date('2024-01-09T08:41:37'),
 		priority: 'High',
-		status: Status.ON_HOLD,
-		assignedTo: 'Charlotte Lewis',
+		status: Status.TO_DO,
 	},
 	{
 		id: 16,
@@ -194,7 +176,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-08-14T07:13:54'),
 		priority: 'Medium',
 		status: Status.IN_PROGRESS,
-		assignedTo: 'Mason Adams',
 	},
 	{
 		id: 17,
@@ -205,7 +186,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-02-20T14:11:25'),
 		priority: 'High',
 		status: Status.COMPLETED,
-		assignedTo: 'Evelyn Scott',
 	},
 	{
 		id: 18,
@@ -216,7 +196,6 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2024-08-18T08:15:19'),
 		priority: 'Medium',
 		status: Status.IN_PROGRESS,
-		assignedTo: 'Benjamin White',
 	},
 	{
 		id: 19,
@@ -226,8 +205,7 @@ export const mockTasks: Task[] = [
 		creationDate: new Date('2023-02-21T19:06:24'),
 		dueDate: new Date('2024-07-19T05:01:04'),
 		priority: 'High',
-		status: Status.CANCELED,
-		assignedTo: 'Abigail King',
+		status: Status.COMPLETED,
 	},
 	{
 		id: 20,
@@ -237,7 +215,6 @@ export const mockTasks: Task[] = [
 		creationDate: new Date('2023-11-05T18:17:53'),
 		dueDate: new Date('2024-10-17T03:57:37'),
 		priority: 'High',
-		status: Status.ON_HOLD,
-		assignedTo: 'Henry Martin',
+		status: Status.OVERDUE,
 	},
 ];

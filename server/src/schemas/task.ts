@@ -9,10 +9,7 @@ const taskSchema = z.object({
 	dueDate: z.coerce.date(),
 	priority: z.enum(['Low', 'Medium', 'High']),
 	status: z.enum(Object.values(Status) as [Status, ...Status[]]),
-	assignedTo: z.string(),
 });
-
-type Task = z.infer<typeof taskSchema>;
 
 const createTaskSchema = z.object({
 	title: z.string().min(1).max(100),
@@ -21,7 +18,6 @@ const createTaskSchema = z.object({
 	dueDate: z.coerce.date(),
 	priority: z.enum(['Low', 'Medium', 'High']),
 	status: z.enum(Object.values(Status) as [Status, ...Status[]]),
-	assignedTo: z.string(),
 });
 
 export default createTaskSchema;

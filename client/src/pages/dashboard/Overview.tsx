@@ -26,7 +26,7 @@ const Overview = () => {
 				header="Overview"
 				pt={{
 					header: {
-						className: classNames('bg-teal-800 text-white'),
+						className: classNames('bg-teal-700 text-white'),
 					},
 				}}
 			>

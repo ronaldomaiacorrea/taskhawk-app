@@ -1,7 +1,3 @@
-// import React from 'react';
-// import Overview from './Overview';
-// import Upcoming from './Upcoming';
-
 import PageTitle from '../../components/PageTitle';
 import Overview from './Overview';
 import Upcoming from './Upcoming';
