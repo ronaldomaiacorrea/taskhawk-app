@@ -1,52 +1,7 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import createTaskSchema from '../schemas/task';
-
-type Task = {
-	id: number;
-	title: string;
-	description?: string;
-	creationDate: Date;
-	dueDate: Date;
-	priority: 'Low' | 'Medium' | 'High';
-	status: 'Pending' | 'In progress' | 'Completed' | 'Blocked';
-	assignedTo: string;
-	// TODO: add TAG type and link
-	// tag: string;
-};
-
-const mockTasks: Task[] = [
-	{
-		id: 1,
-		title: 'Task 1',
-		description: 'This is task 1',
-		creationDate: new Date(),
-		dueDate: new Date(),
-		priority: 'Low',
-		status: 'Pending',
-		assignedTo: 'John Doe',
-	},
-	{
-		id: 2,
-		title: 'Task 2',
-		description: 'This is task 2',
-		creationDate: new Date(),
-		dueDate: new Date(),
-		priority: 'Medium',
-		status: 'In progress',
-		assignedTo: 'Jane Smith',
-	},
-	{
-		id: 3,
-		title: 'Task 3',
-		description: 'This is task 3',
-		creationDate: new Date(),
-		dueDate: new Date(),
-		priority: 'High',
-		status: 'Completed',
-		assignedTo: 'Mike Johnson',
-	},
-];
+import { mockTasks } from './_mockData';
 
 export const tasksRoute = new Hono();
 

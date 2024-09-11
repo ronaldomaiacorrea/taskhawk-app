@@ -1,7 +1,14 @@
 import { createContext } from 'react';
 import { useTasks } from '../queries/tasks';
+import { TasksContextType } from '../utils/types';
 
-export const TasksContext = createContext({});
+export const TasksContext = createContext<TasksContextType>({
+	tasks: [],
+	error: null,
+	isLoading: false,
+	isFetching: false,
+	isError: false,
+});
 
 type TasksProviderProps = {
 	children: React.ReactNode;

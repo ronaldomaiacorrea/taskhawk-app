@@ -4,20 +4,24 @@ import { useContext } from 'react';
 import { TasksContext } from '../../context/TasksProvider';
 import { Chart } from 'primereact/chart';
 import { getOverviewChartData } from '../../utils/getOverviewChartData';
+import { TasksContextType } from '../../utils/types';
 
 const Overview = () => {
-	const { tasks, isLoading, error } = useContext(TasksContext);
+	const { tasks, isLoading, error, isError } =
+		useContext<TasksContextType>(TasksContext);
+	const { chartData, options } = getOverviewChartData(tasks);
 
 	const panelContent = () => {
 		if (isLoading) {
 			return <p>Loading...</p>;
 		}
 
-		return <Chart type="pie" data={getOverviewChartData(tasks)} />;
+		return <Chart type="pie" data={chartData} options={options} />;
 	};
 
 	return (
-		<div className="flex-1">
+		<>
+			{isError && <p>Error: {error?.message}</p>}
 			<Panel
 				header="Overview"
 				pt={{
@@ -26,9 +30,22 @@ const Overview = () => {
 					},
 				}}
 			>
-				<div className="flex flex-row justify-center">{panelContent()}</div>
+				<div className="flex flex-row justify-center items-center">
+					<div
+						className="w-3/4h-full"
+						style={{
+							position: 'relative',
+							height: '20vh',
+							width: '40vw',
+							minWidth: '250px',
+							minHeight: '300px',
+						}}
+					>
+						{panelContent()}
+					</div>
+				</div>
 			</Panel>
-		</div>
+		</>
 	);
 };
 

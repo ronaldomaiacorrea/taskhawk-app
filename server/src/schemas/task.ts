@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { Status } from '../routes/_mockData';
 
 const taskSchema = z.object({
 	id: z.number().int().positive().min(1),
@@ -7,7 +8,7 @@ const taskSchema = z.object({
 	creationDate: z.coerce.date(),
 	dueDate: z.coerce.date(),
 	priority: z.enum(['Low', 'Medium', 'High']),
-	status: z.enum(['Pending', 'In progress', 'Completed', 'Blocked']),
+	status: z.enum(Object.values(Status) as [Status, ...Status[]]),
 	assignedTo: z.string(),
 });
 
@@ -19,7 +20,7 @@ const createTaskSchema = z.object({
 	creationDate: z.coerce.date(),
 	dueDate: z.coerce.date(),
 	priority: z.enum(['Low', 'Medium', 'High']),
-	status: z.enum(['Pending', 'In progress', 'Completed', 'Blocked']),
+	status: z.enum(Object.values(Status) as [Status, ...Status[]]),
 	assignedTo: z.string(),
 });
 
