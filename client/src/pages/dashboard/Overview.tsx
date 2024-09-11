@@ -1,10 +1,10 @@
-import { Panel } from 'primereact/panel';
-import { classNames } from 'primereact/utils';
 import { useContext } from 'react';
 import { TasksContext } from '../../context/TasksProvider';
 import { Chart } from 'primereact/chart';
 import { getOverviewChartData } from '../../utils/getOverviewChartData';
 import { TasksContextType } from '../../utils/types';
+import { Card } from 'primereact/card';
+import CardTitle from '../../components/CardTitle';
 
 const Overview = () => {
 	const { tasks, isLoading, error, isError } =
@@ -22,29 +22,23 @@ const Overview = () => {
 	return (
 		<>
 			{isError && <p>Error: {error?.message}</p>}
-			<Panel
-				header="Overview"
-				pt={{
-					header: {
-						className: classNames('bg-teal-700 text-white'),
-					},
-				}}
-			>
+			<Card title={<CardTitle title="Overview" />} className="rounded-none">
+				<div className="border-b border-gray-300 mb-4" />
 				<div className="flex flex-row justify-center items-center">
 					<div
 						className="w-3/4h-full"
 						style={{
 							position: 'relative',
-							height: '20vh',
+							height: '10vh',
 							width: '40vw',
-							minWidth: '250px',
+							minWidth: '150px',
 							minHeight: '300px',
 						}}
 					>
 						{panelContent()}
 					</div>
 				</div>
-			</Panel>
+			</Card>
 		</>
 	);
 };

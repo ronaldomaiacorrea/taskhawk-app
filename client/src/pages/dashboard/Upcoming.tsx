@@ -1,23 +1,17 @@
-import { Panel } from 'primereact/panel';
-import { classNames } from 'primereact/utils';
+import CardTitle from '../../components/CardTitle';
+import { Card } from 'primereact/card';
 
 const Upcoming = () => {
 	return (
 		<div className="flex-1">
-			<Panel
-				header="Upcoming tasks"
-				pt={{
-					header: {
-						className: classNames('bg-teal-800 text-white'),
-					},
-				}}
-			>
+			<Card title={<CardTitle title="Upcoming" />}>
+				<div className="border-b border-gray-300 mb-4" />
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem quisquam
 					labore qui fugit distinctio dolore nisi veritatis vel cum? Vero culpa
 					earum porro suscipit quia reiciendis iste minus veniam nulla?
 				</p>
-			</Panel>
+			</Card>
 		</div>
 	);
 };
