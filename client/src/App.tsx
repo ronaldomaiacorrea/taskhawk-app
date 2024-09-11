@@ -11,12 +11,14 @@ const queryClient = new QueryClient();
 function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Header />
-			<div className="flex">
-				<Sidebar />
-				<Main />
+			<div className="flex flex-col min-h-screen">
+				<Header />
+				<div className="flex flex-1">
+					<Sidebar />
+					<Main />
+				</div>
+				<Footer />
 			</div>
-			<Footer />
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	);
