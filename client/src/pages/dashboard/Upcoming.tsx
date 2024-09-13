@@ -8,11 +8,12 @@ import { Column } from 'primereact/column';
 import { Task } from '../../utils/types';
 import { Button } from 'primereact/button';
 import ConfirmDialog from '../../components/ConfirmDialog';
+import { Toolbar } from 'primereact/toolbar';
 
 const Upcoming = () => {
 	const { tasks } = useContext(TasksContext);
 	const [visible, setVisible] = useState(false);
-	const [task, setTask] = useState('');
+	const [selectedTasks, setSelectedTasks] = useState<Task[] | null>(null);
 
 	const dueDateTemplate = (rowData: Task) => {
 		const date = new Date(rowData.dueDate);
@@ -52,60 +53,72 @@ const Upcoming = () => {
 		</>
 	);
 
-	const checkComplete = (rowData: Task) => {
-		return (
-			<Button
-				icon="pi pi-check"
-				rounded
-				text
-				onClick={() => {
-					setVisible(true);
-					setTask(rowData.title);
+	const checkButton = (
+		<Button
+			icon="pi pi-check"
+			label="Mark as completed"
+			outlined
+			disabled={!selectedTasks || selectedTasks.length === 0}
+			onClick={() => {
+				if (!selectedTasks) return;
+				setVisible(true);
+			}}
+		/>
+	);
 
-					// TODO: Change task status to complete
-				}}
-			/>
-		);
-	};
+	const dialogContent = (
+		<>
+			<p className="py-4">Are you want to mark these tasks as completed?</p>
+			<ul>
+				{selectedTasks?.map((task) => (
+					<li key={task.id} className="p-1 px-2">
+						{task.title}
+					</li>
+				))}
+			</ul>
+		</>
+	);
 
 	return (
-		<div className="flex-1">
+		<>
 			<Card
 				title={<CardTitle title="Upcoming deadlines" />}
 				subTitle="Tasks approaching their due dates."
 			>
 				<div className="border-b border-gray-300 mb-4" />
+				<Toolbar className="mb-4" start={checkButton}></Toolbar>
 				<DataTable
 					stripedRows
 					value={getUpcomingTasks(tasks)}
 					paginator
 					rows={5}
 					rowsPerPageOptions={[5, 10, 20]}
+					selection={selectedTasks}
+					onSelectionChange={(e) => setSelectedTasks(e.value as Task[] | null)}
 				>
+					<Column
+						selectionMode="multiple"
+						headerStyle={{ width: '3rem' }}
+					></Column>
 					<Column field="title" header="Title"></Column>
 					<Column body={dueDateTemplate} header="Due Date"></Column>
 					<Column field="priority" header="Priority" sortable></Column>
 					<Column field="status" header="Status" sortable></Column>
-					<Column
-						body={checkComplete}
-						style={{ flex: '0 0 4rem' }}
-						header="Confirm completion"
-					></Column>
 				</DataTable>
 			</Card>
 			<div className="w-3/4">
 				<ConfirmDialog
-					// header="Confirm task completion"
+					header="Confirm task completion"
 					visible={visible}
 					handleHiding={() => {
 						if (!visible) return;
 						setVisible(false);
 					}}
-					text={`Are you sure you want to mark ${task} as completed?`}
+					content={dialogContent}
 					footer={footerContent}
 				/>
 			</div>
-		</div>
+		</>
 	);
 };
 
