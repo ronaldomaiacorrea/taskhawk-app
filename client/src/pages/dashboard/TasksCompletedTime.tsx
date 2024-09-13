@@ -1,12 +1,12 @@
-import { useContext } from 'react';
-import { TasksContextType } from '../../utils/types';
-import { TasksContext } from '../../context/TasksProvider';
+// import { useContext } from 'react';
+// import { TasksContextType } from '../../utils/types';
+// import { TasksContext } from '../../context/TasksProvider';
 import CardTitle from '../../components/CardTitle';
 import { Card } from 'primereact/card';
-import { Chart } from 'primereact/chart';
+// import { Chart } from 'primereact/chart';
 
 const TasksCompletedTime = () => {
-	const { tasks } = useContext<TasksContextType>(TasksContext);
+	// const { tasks } = useContext<TasksContextType>(TasksContext);
 
 	return (
 		<Card

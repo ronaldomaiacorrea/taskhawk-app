@@ -7,20 +7,30 @@ import TasksPerPriority from './TasksPerPriority';
 
 const Dashboard = () => {
 	return (
-		<div className="flex flex-col gap-6">
-			<PageTitle>Dashboard</PageTitle>
-			<div className="flex flex-col space-y-8 align-center justify-evenly space-x-0 lg:flex-row lg:space-y-0 lg:space-x-8">
-				<Overview />
-				<Divider layout="vertical" className="hidden lg:block" />
-				<Upcoming />
+		<>
+			<div className="flex flex-col gap-6">
+				<PageTitle>Dashboard</PageTitle>
+				<div className="flex flex-col space-y-8 align-center justify-evenly space-x-0 lg:flex-row lg:space-y-0 lg:space-x-8">
+					<div className="flex-1">
+						<Overview />
+					</div>
+					<Divider layout="vertical" className="hidden lg:block" />
+					<div className="flex-1">
+						<Upcoming />
+					</div>
+				</div>
+				<Divider layout="horizontal" className="hidden lg:block" />
+				<div className="flex flex-col space-y-8 align-center justify-evenly space-x-0 lg:flex-row lg:space-y-0 lg:space-x-8">
+					<div className="flex-1">
+						<TasksCompletedTime />
+					</div>
+					<Divider layout="vertical" className="hidden lg:block" />
+					<div className="flex-1">
+						<TasksPerPriority />
+					</div>
+				</div>
 			</div>
-			<Divider layout="horizontal" className="hidden lg:block" />
-			<div className="flex flex-col space-y-8 align-center justify-evenly space-x-0 lg:flex-row lg:space-y-0 lg:space-x-8">
-				<TasksCompletedTime />
-				<Divider layout="vertical" className="hidden lg:block" />
-				<TasksPerPriority />
-			</div>
-		</div>
+		</>
 	);
 };
 

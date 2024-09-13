@@ -1,7 +1,14 @@
 import { Card } from 'primereact/card';
 import CardTitle from '../../components/CardTitle';
+import { useContext } from 'react';
+import { TasksContext } from '../../context/TasksProvider';
+import { Chart } from 'primereact/chart';
+import { getTasksPerPriorityChartData } from '../../utils/getTasksPerPriorityChartData';
 
 const TasksPerPriority = () => {
+	const { tasks } = useContext(TasksContext);
+	const { chartData, options } = getTasksPerPriorityChartData(tasks);
+
 	return (
 		<Card
 			title={<CardTitle title="Tasks per priority" />}
@@ -10,10 +17,7 @@ const TasksPerPriority = () => {
 		>
 			<div className="border-b border-gray-300 mb-4"></div>
 			<div className="flex flex-row justify-center items-center">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ratione a,
-				amet distinctio voluptatem at sint tempore nesciunt fugiat quae
-				temporibus, obcaecati voluptas omnis nobis excepturi quis. Dolor, minima
-				consectetur.
+				<Chart type="bar" data={chartData} options={options} />
 			</div>
 		</Card>
 	);
