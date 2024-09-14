@@ -1,6 +1,7 @@
 import { hexToRgba } from './convertHexToRgba';
 import { Task } from './types';
 import { Status } from './types';
+import { TooltipItem } from 'chart.js';
 
 export const getOverviewChartData = (data: Task[] | undefined) => {
 	const labels = Object.values(Status);
@@ -40,6 +41,23 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
 				borderRadius: 10,
 				labels: {
 					usePointStyle: true,
+				},
+			},
+			tooltip: {
+				boxPadding: 5,
+				callbacks: {
+					label: function (tooltipItem: TooltipItem<'pie'>) {
+						const data = tooltipItem.dataset.data as number[];
+						const currentValue = data[tooltipItem.dataIndex as number];
+
+						const total = data.reduce(
+							(acc: number, value: number) => acc + value,
+							0
+						);
+						const percentage = ((currentValue / total) * 100).toFixed(2);
+
+						return `${percentage}%`;
+					},
 				},
 			},
 		},
