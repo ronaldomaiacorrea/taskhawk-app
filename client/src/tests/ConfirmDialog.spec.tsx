@@ -6,7 +6,7 @@ import type { ConfirmDialogProps } from '../components/ConfirmDialog';
 const mockDefaultProps: ConfirmDialogProps = {
 	visible: true,
 	handleHiding: vi.fn(),
-	text: 'Are you sure?',
+	content: 'Are you sure?',
 };
 
 const renderComponent = (props: Partial<ConfirmDialogProps> = {}) =>
@@ -27,7 +27,7 @@ describe('<ConfirmDialog />', () => {
 	});
 
 	it('should render text when it is provided', () => {
-		renderComponent({ text: 'Are you sure you want to delete this item?' });
+		renderComponent({ content: 'Are you sure you want to delete this item?' });
 
 		expect(
 			screen.getByText('Are you sure you want to delete this item?')
