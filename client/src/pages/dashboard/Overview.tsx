@@ -12,7 +12,7 @@ const Overview = () => {
 
 	return (
 		<Card
-			title={<CardTitle title="Overview" />}
+			title={<CardTitle title="Status overview" />}
 			className="rounded-none"
 			subTitle="Breakdown of tasks by status categories."
 		>
