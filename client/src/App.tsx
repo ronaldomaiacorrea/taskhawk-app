@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Sidebar from './components/Sidebar';
 import Main from './components/Main';
 import Header from './components/Header';
@@ -19,7 +18,6 @@ function App() {
 				</div>
 				<Footer />
 			</div>
-			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	);
 }

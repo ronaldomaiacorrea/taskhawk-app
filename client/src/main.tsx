@@ -7,6 +7,7 @@ import { PrimeReactProvider } from 'primereact/api';
 import Tailwind from 'primereact/passthrough/tailwind';
 import TasksProvider from './context/TasksProvider.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 				<TasksProvider>
 					<App />
 				</TasksProvider>
+				<ReactQueryDevtools initialIsOpen={false} position="right" />
 			</QueryClientProvider>
 		</PrimeReactProvider>
 	</React.StrictMode>
