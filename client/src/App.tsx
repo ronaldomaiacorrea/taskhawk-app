@@ -1,9 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
 import Sidebar from './components/Sidebar';
-import Main from './components/Main';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/dashboard/Dashboard';
+import Categories from './pages/categories/Categories';
 
 const queryClient = new QueryClient();
 
@@ -14,7 +16,14 @@ function App() {
 				<Header />
 				<div className="flex flex-1">
 					<Sidebar />
-					<Main />
+					<div className="flex-1 xl:mx-auto px-8 pb-8">
+						<Routes>
+							<Route path="/" element={<Dashboard />} />
+							<Route path="tasks" element={<h1>Tasks</h1>} />
+							<Route path="settings" element={<h1>Settings</h1>} />
+							<Route path="categories" element={<Categories />} />
+						</Routes>
+					</div>
 				</div>
 				<Footer />
 			</div>

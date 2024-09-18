@@ -23,3 +23,10 @@ export interface TasksContextType {
 	isError: boolean;
 	error: Error | null;
 }
+
+export interface Category {
+	id: number;
+	name: string;
+	icon?: string;
+	description?: string;
+}

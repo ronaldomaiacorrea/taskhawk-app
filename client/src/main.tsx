@@ -8,6 +8,7 @@ import Tailwind from 'primereact/passthrough/tailwind';
 import TasksProvider from './context/TasksProvider.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -16,9 +17,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 		<PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
 			<QueryClientProvider client={queryClient}>
 				<TasksProvider>
-					<App />
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
 				</TasksProvider>
-				<ReactQueryDevtools initialIsOpen={false} position="right" />
+				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
 		</PrimeReactProvider>
 	</React.StrictMode>

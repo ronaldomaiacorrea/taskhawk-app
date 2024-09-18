@@ -1,10 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { TASKS_API_URL } from './constants';
+import { TASK_APP_QUERY_KEYS, TASKS_API_URL } from './constants';
 import { Task } from '../utils/types';
-
-export enum TASK_APP_QUERY_KEYS {
-	GET_TASKS = 'get-tasks',
-}
 
 const fetchTasks = async (url: string) => {
 	const response = await fetch(url);
@@ -17,6 +13,6 @@ const fetchTasks = async (url: string) => {
 
 export const useTasks = () =>
 	useQuery<Task[], Error>({
-		queryKey: [TASK_APP_QUERY_KEYS.GET_TASKS],
+		queryKey: [TASK_APP_QUERY_KEYS.TASKS],
 		queryFn: () => fetchTasks(TASKS_API_URL),
 	});
