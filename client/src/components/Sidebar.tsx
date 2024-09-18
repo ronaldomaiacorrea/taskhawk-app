@@ -9,8 +9,8 @@ type SidebarLink = {
 const sidebarLinks: SidebarLink[] = [
 	{ path: '/', pageName: 'Dashboard', icon: 'pi pi-home' },
 	{ path: '/tasks', pageName: 'Tasks', icon: 'pi pi-list' },
-	{ path: '/settings', pageName: 'Settings', icon: 'pi pi-cog' },
 	{ path: '/categories', pageName: 'Categories', icon: 'pi pi-tags' },
+	{ path: '/settings', pageName: 'Settings', icon: 'pi pi-cog' },
 ];
 
 const Sidebar = () => {

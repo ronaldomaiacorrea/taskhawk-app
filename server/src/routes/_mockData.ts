@@ -283,7 +283,7 @@ export const mockCategories: Category[] = [
 	{
 		id: 5,
 		name: 'Education',
-		icon: 'pi pi-grad',
+		icon: 'pi pi-graduation-cap',
 		description:
 			'Tasks connected to studies, courses, reading, or learning new skills.',
 	},

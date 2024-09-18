@@ -14,6 +14,7 @@ export interface Task {
 	dueDate: Date;
 	priority: 'High' | 'Medium' | 'Low';
 	status: Status;
+	categoryId: number;
 }
 
 export interface TasksContextType {

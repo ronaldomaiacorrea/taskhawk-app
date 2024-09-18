@@ -8,8 +8,8 @@ import TasksPerPriority from './TasksPerPriority';
 const Dashboard = () => {
 	return (
 		<>
+			<PageTitle>Dashboard</PageTitle>
 			<div className="flex flex-col gap-6">
-				<PageTitle>Dashboard</PageTitle>
 				<div className="flex flex-col space-y-8 align-center justify-evenly space-x-0 lg:flex-row lg:space-y-0 lg:space-x-8">
 					<div className="flex-1">
 						<Upcoming />
