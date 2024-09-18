@@ -25,6 +25,7 @@ type Category = {
 	id: number;
 	name: string;
 	icon?: string;
+	description?: string;
 };
 
 export const mockTasks: Task[] = [
@@ -255,50 +256,70 @@ export const mockCategories: Category[] = [
 		id: 1,
 		name: 'Work',
 		icon: 'pi pi-briefcase',
+		description:
+			'Tasks related to your professional work, projects, and office responsibilities.',
 	},
 	{
 		id: 2,
 		name: 'Personal',
 		icon: 'pi pi-user',
+		description:
+			'Personal tasks, hobbies, or goals that are related to self-improvement or leisure.',
 	},
 	{
 		id: 3,
 		name: 'Health',
 		icon: 'pi pi-heart',
+		description:
+			'Tasks related to fitness, medical appointments, wellness, and general health tracking.',
 	},
 	{
 		id: 4,
 		name: 'Finance',
 		icon: 'pi pi-money-bill',
+		description:
+			'Tasks involving budgeting, bill payments, savings, and financial planning.',
 	},
 	{
 		id: 5,
 		name: 'Education',
 		icon: 'pi pi-grad',
+		description:
+			'Tasks connected to studies, courses, reading, or learning new skills.',
 	},
 	{
 		id: 6,
 		name: 'Home',
 		icon: 'pi pi-home',
+		description:
+			'Chores, maintenance, and organization tasks related to household management.',
 	},
 	{
 		id: 7,
 		name: 'Shopping',
 		icon: 'pi pi-shopping-cart',
+		description:
+			'Tasks involving shopping lists, online purchases, or in-store errands.',
 	},
 	{
 		id: 8,
 		name: 'Travel',
 		icon: 'pi pi-globe',
+		description:
+			'Planning, booking, or organizing trips, vacations, and travel-related activities.',
 	},
 	{
 		id: 9,
 		name: 'Social',
 		icon: 'pi pi-users',
+		description:
+			'Tasks related to social activities, gatherings, and staying in touch with friends or family.',
 	},
 	{
 		id: 10,
 		name: 'Other',
 		icon: 'pi pi-question-circle',
+		description:
+			'Tasks that do not fall under any specific category, miscellaneous activities.',
 	},
 ];
