@@ -1,13 +1,26 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import createTaskSchema from '../schemas/task';
-import { mockTasks } from './_mockData';
+import { mockCategories, mockTasks, Task, TaskWithCategory } from './_mockData';
 
 export const tasksRoute = new Hono();
 
+const mergeTasksWithCategories = (task: Task): TaskWithCategory => {
+	const category = mockCategories.find(
+		(category) => category.id === task.categoryId
+	);
+	return { ...task, categoryName: category?.name };
+};
+
 // GET requests
-tasksRoute.get('/', (c) => c.json(mockTasks));
-tasksRoute.get('/:id{[0-9]+}', (c) => {
+tasksRoute.get('/', (c) => {
+	const tasksWithCategories = mockTasks.map((task) =>
+		mergeTasksWithCategories(task)
+	);
+	return c.json(tasksWithCategories);
+});
+
+tasksRoute.get('/:id', (c) => {
 	const id = Number.parseInt(c.req.param('id'));
 	const task = mockTasks.find((task) => task.id === id);
 
@@ -37,7 +50,7 @@ tasksRoute.post('/', zValidator('json', createTaskSchema), async (c) => {
 });
 
 // DELETE request
-tasksRoute.delete('/:id{[0-9]+}', (c) => {
+tasksRoute.delete('/:id', (c) => {
 	const id = Number.parseInt(c.req.param('id'));
 
 	// find the index in the Tasks array of the task with the id
@@ -49,16 +62,14 @@ tasksRoute.delete('/:id{[0-9]+}', (c) => {
 	}
 
 	// splice creates a new array with the deleted element
-	const deletedTask = mockTasks.splice(index, 1);
-
-	mockTasks.map((task) => task.id === mockTasks.length + 1);
+	const [deletedTask] = mockTasks.splice(index, 1);
 
 	// Update the IDs of the remaining tasks after deletion
-	mockTasks.forEach((task, index) => {
-		task.id === index + 1;
+	mockTasks.forEach((task, idx) => {
+		task.id = idx + 1;
 	});
 
 	// It returns the deleted task in the only position of the array
-	return c.json(deletedTask[0]);
+	return c.json(deletedTask);
 });
 // TODO: put

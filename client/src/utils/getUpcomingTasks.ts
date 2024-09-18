@@ -1,6 +1,7 @@
 import { Status, Task } from './types';
 
 export const getUpcomingTasks = (tasks: Task[] | undefined) => {
+	if (!tasks) return [];
 	return tasks
 		?.filter(
 			(task) =>

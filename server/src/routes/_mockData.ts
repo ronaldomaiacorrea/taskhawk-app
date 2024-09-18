@@ -6,7 +6,7 @@ export enum Status {
 	IN_PROGRESS = 'In progress',
 }
 
-type Task = {
+export interface Task {
 	id: number;
 	title: string;
 	description?: string;
@@ -14,6 +14,17 @@ type Task = {
 	dueDate: Date;
 	priority: 'High' | 'Medium' | 'Low';
 	status: Status;
+	categoryId: number;
+}
+
+export type TaskWithCategory = Task & {
+	categoryName?: string;
+};
+
+type Category = {
+	id: number;
+	name: string;
+	icon?: string;
 };
 
 export const mockTasks: Task[] = [
@@ -26,6 +37,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-04-07T05:01:56'),
 		priority: 'Low',
 		status: Status.TO_DO,
+		categoryId: 1,
 	},
 	{
 		id: 2,
@@ -36,6 +48,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-06-27T06:44:11'),
 		priority: 'Low',
 		status: Status.OVERDUE,
+		categoryId: 1,
 	},
 	{
 		id: 3,
@@ -46,6 +59,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-01-13T20:04:36'),
 		priority: 'High',
 		status: Status.COMPLETED,
+		categoryId: 2,
 	},
 	{
 		id: 4,
@@ -56,6 +70,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-10-30T22:28:50'),
 		priority: 'High',
 		status: Status.OVERDUE,
+		categoryId: 3,
 	},
 	{
 		id: 5,
@@ -66,6 +81,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-04-13T00:49:00'),
 		priority: 'Medium',
 		status: Status.COMPLETED,
+		categoryId: 2,
 	},
 	{
 		id: 6,
@@ -76,6 +92,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-07-20T06:10:41'),
 		priority: 'Medium',
 		status: Status.IN_PROGRESS,
+		categoryId: 4,
 	},
 	{
 		id: 7,
@@ -86,6 +103,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-06-18T02:20:18'),
 		priority: 'Low',
 		status: Status.COMPLETED,
+		categoryId: 7,
 	},
 	{
 		id: 8,
@@ -96,6 +114,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-03-23T03:35:26'),
 		priority: 'Medium',
 		status: Status.IN_PROGRESS,
+		categoryId: 11,
 	},
 	{
 		id: 9,
@@ -106,6 +125,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-09-10T01:18:46'),
 		priority: 'High',
 		status: Status.BLOCKED,
+		categoryId: 8,
 	},
 	{
 		id: 10,
@@ -116,6 +136,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-05-05T11:32:29'),
 		priority: 'Low',
 		status: Status.BLOCKED,
+		categoryId: 9,
 	},
 	{
 		id: 11,
@@ -126,6 +147,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-12-25T17:42:35'),
 		priority: 'High',
 		status: Status.OVERDUE,
+		categoryId: 9,
 	},
 	{
 		id: 12,
@@ -136,6 +158,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-04-16T09:54:48'),
 		priority: 'Medium',
 		status: Status.TO_DO,
+		categoryId: 9,
 	},
 	{
 		id: 13,
@@ -146,6 +169,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-07-31T22:15:11'),
 		priority: 'High',
 		status: Status.COMPLETED,
+		categoryId: 4,
 	},
 	{
 		id: 14,
@@ -156,6 +180,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-11-11T20:22:50'),
 		priority: 'Low',
 		status: Status.TO_DO,
+		categoryId: 4,
 	},
 	{
 		id: 15,
@@ -166,6 +191,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-01-09T08:41:37'),
 		priority: 'High',
 		status: Status.TO_DO,
+		categoryId: 2,
 	},
 	{
 		id: 16,
@@ -176,6 +202,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-08-14T07:13:54'),
 		priority: 'Medium',
 		status: Status.IN_PROGRESS,
+		categoryId: 10,
 	},
 	{
 		id: 17,
@@ -186,6 +213,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-02-20T14:11:25'),
 		priority: 'High',
 		status: Status.COMPLETED,
+		categoryId: 6,
 	},
 	{
 		id: 18,
@@ -196,6 +224,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-08-18T08:15:19'),
 		priority: 'Medium',
 		status: Status.IN_PROGRESS,
+		categoryId: 2,
 	},
 	{
 		id: 19,
@@ -206,6 +235,7 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-07-19T05:01:04'),
 		priority: 'High',
 		status: Status.COMPLETED,
+		categoryId: 2,
 	},
 	{
 		id: 20,
@@ -216,5 +246,59 @@ export const mockTasks: Task[] = [
 		dueDate: new Date('2023-10-17T03:57:37'),
 		priority: 'High',
 		status: Status.OVERDUE,
+		categoryId: 3,
+	},
+];
+
+export const mockCategories: Category[] = [
+	{
+		id: 1,
+		name: 'Work',
+		icon: 'pi pi-briefcase',
+	},
+	{
+		id: 2,
+		name: 'Personal',
+		icon: 'pi pi-user',
+	},
+	{
+		id: 3,
+		name: 'Health',
+		icon: 'pi pi-heart',
+	},
+	{
+		id: 4,
+		name: 'Finance',
+		icon: 'pi pi-money-bill',
+	},
+	{
+		id: 5,
+		name: 'Education',
+		icon: 'pi pi-grad',
+	},
+	{
+		id: 6,
+		name: 'Home',
+		icon: 'pi pi-home',
+	},
+	{
+		id: 7,
+		name: 'Shopping',
+		icon: 'pi pi-shopping-cart',
+	},
+	{
+		id: 8,
+		name: 'Travel',
+		icon: 'pi pi-globe',
+	},
+	{
+		id: 9,
+		name: 'Social',
+		icon: 'pi pi-users',
+	},
+	{
+		id: 10,
+		name: 'Other',
+		icon: 'pi pi-question-circle',
 	},
 ];
