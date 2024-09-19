@@ -5,7 +5,7 @@ import CategoryCard, {
 	CategoryCardProps,
 } from '../pages/categories/CategoryCard';
 import { TasksContext } from '../context/TasksProvider';
-import { Status, Task } from '../utils/types';
+import { Status, Task } from '../../../shared/types';
 import userEvent from '@testing-library/user-event';
 
 const defaultProps: CategoryCardProps = {

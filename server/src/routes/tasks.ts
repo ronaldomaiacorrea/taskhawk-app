@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import createTaskSchema from '../schemas/task';
-import { mockCategories, mockTasks, Task, TaskWithCategory } from './_mockData';
+import { mockCategories, mockTasks } from '../data/_mockData';
+import type { Task, TaskWithCategory } from '../../../shared/types';
 
 export const tasksRoute = new Hono();
 

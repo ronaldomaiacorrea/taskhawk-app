@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Status } from '../routes/_mockData';
+import { Status } from '../../../shared/types';
 
 // const taskSchema = z.object({
 // 	id: z.number().int().positive().min(1),

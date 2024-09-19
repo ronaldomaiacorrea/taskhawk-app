@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { TasksContext } from '../../context/TasksProvider';
 import { Chart } from 'primereact/chart';
 import { getOverviewChartData } from '../../utils/getOverviewChartData';
-import { TasksContextType } from '../../utils/types';
+import { TasksContextType } from '../../../../shared/types';
 import { Card } from 'primereact/card';
 import CardTitle from '../../components/CardTitle';
 

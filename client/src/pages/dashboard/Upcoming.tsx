@@ -5,7 +5,7 @@ import { TasksContext } from '../../context/TasksProvider';
 import { getUpcomingTasks } from '../../utils/getUpcomingTasks';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Task } from '../../utils/types';
+import { Task } from '../../../../shared/types';
 import { Button } from 'primereact/button';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import { Toolbar } from 'primereact/toolbar';

@@ -1,32 +1,6 @@
-export enum Status {
-	TO_DO = 'To do',
-	COMPLETED = 'Completed',
-	BLOCKED = 'Blocked',
-	OVERDUE = 'Overdue',
-	IN_PROGRESS = 'In progress',
-}
-
-export interface Task {
-	id: number;
-	title: string;
-	description?: string;
-	creationDate: Date;
-	dueDate: Date;
-	priority: 'High' | 'Medium' | 'Low';
-	status: Status;
-	categoryId: number;
-}
-
-export type TaskWithCategory = Task & {
-	categoryName?: string;
-};
-
-type Category = {
-	id: number;
-	name: string;
-	icon?: string;
-	description?: string;
-};
+import { ICON } from '../../../shared/types';
+import type { Task, Category } from '../../../shared/types';
+import { Status } from '../../../shared/types';
 
 export const mockTasks: Task[] = [
 	{
@@ -255,70 +229,70 @@ export const mockCategories: Category[] = [
 	{
 		id: 1,
 		name: 'Work',
-		icon: 'pi pi-briefcase',
+		icon: ICON.Briefcase,
 		description:
 			'Tasks related to your professional work, projects, and office responsibilities.',
 	},
 	{
 		id: 2,
 		name: 'Personal',
-		icon: 'pi pi-user',
+		icon: ICON.User,
 		description:
 			'Personal tasks, hobbies, or goals that are related to self-improvement or leisure.',
 	},
 	{
 		id: 3,
 		name: 'Health',
-		icon: 'pi pi-heart',
+		icon: ICON.Heart,
 		description:
 			'Tasks related to fitness, medical appointments, wellness, and general health tracking.',
 	},
 	{
 		id: 4,
 		name: 'Finance',
-		icon: 'pi pi-money-bill',
+		icon: ICON.Money,
 		description:
 			'Tasks involving budgeting, bill payments, savings, and financial planning.',
 	},
 	{
 		id: 5,
 		name: 'Education',
-		icon: 'pi pi-graduation-cap',
+		icon: ICON.Education,
 		description:
 			'Tasks connected to studies, courses, reading, or learning new skills.',
 	},
 	{
 		id: 6,
 		name: 'Home',
-		icon: 'pi pi-home',
+		icon: ICON.Home,
 		description:
 			'Chores, maintenance, and organization tasks related to household management.',
 	},
 	{
 		id: 7,
 		name: 'Shopping',
-		icon: 'pi pi-shopping-cart',
+		icon: ICON.ShoppingCart,
 		description:
 			'Tasks involving shopping lists, online purchases, or in-store errands.',
 	},
 	{
 		id: 8,
 		name: 'Travel',
-		icon: 'pi pi-globe',
+		icon: ICON.Travel,
 		description:
 			'Planning, booking, or organizing trips, vacations, and travel-related activities.',
 	},
 	{
 		id: 9,
 		name: 'Social',
-		icon: 'pi pi-users',
+		icon: ICON.Social,
 		description:
 			'Tasks related to social activities, gatherings, and staying in touch with friends or family.',
 	},
 	{
 		id: 10,
 		name: 'Other',
-		icon: 'pi pi-question-circle',
+		icon: ICON.ExclamationTriangle,
 		description:
 			'Tasks that do not fall under any specific category, miscellaneous activities.',
 	},

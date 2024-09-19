@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { CATEGORIES_API_URL, TASK_APP_QUERY_KEYS } from './constants';
-import { Category } from '../utils/types';
+import { Category } from '../../../shared/types';
 
 const fetchCategories = async (url: string) => {
 	const response = await fetch(url);

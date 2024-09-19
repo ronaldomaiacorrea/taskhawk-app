@@ -1,6 +1,6 @@
 import { hexToRgba } from './convertHexToRgba';
-import { Task } from './types';
-import { Status } from './types';
+import { Task } from '../../../shared/types';
+import { Status } from '../../../shared/types';
 import { TooltipItem } from 'chart.js';
 
 export const getOverviewChartData = (data: Task[] | undefined) => {

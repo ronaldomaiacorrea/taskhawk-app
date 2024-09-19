@@ -1,4 +1,4 @@
-import { Status, Task } from './types';
+import { Status, Task } from '../../../shared/types';
 
 export const getUpcomingTasks = (tasks: Task[] | undefined) => {
 	if (!tasks) return [];

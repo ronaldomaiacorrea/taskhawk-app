@@ -1,4 +1,4 @@
-import { Task } from './types';
+import { Task } from '../../../shared/types';
 
 export const getTasksPerPriorityChartData = (tasks: Task[] | undefined) => {
 	const options = {

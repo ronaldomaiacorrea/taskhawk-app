@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
-import { mockCategories } from './_mockData';
+import { mockCategories } from '../data/_mockData';
 import createCategorySchema from '../schemas/category';
 
 export const categoriesRoute = new Hono();

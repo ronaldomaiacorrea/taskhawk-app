@@ -1,5 +1,5 @@
 import { Card } from 'primereact/card';
-import { Category, Task } from '../../utils/types';
+import { Category, Task } from '../../../../shared/types';
 import { Button } from 'primereact/button';
 import { ScrollPanel } from 'primereact/scrollpanel';
 import { TooltipOptions } from 'primereact/tooltip/tooltipoptions';
