@@ -18,11 +18,11 @@ export interface Task {
 }
 
 export interface TasksContextType {
-	tasks: Task[] | undefined;
-	isLoading: boolean;
-	isFetching: boolean;
-	isError: boolean;
-	error: Error | null;
+	tasks?: Task[];
+	isLoading?: boolean;
+	isFetching?: boolean;
+	isError?: boolean;
+	error?: Error | null;
 }
 
 export interface Category {

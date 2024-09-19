@@ -1,36 +1,33 @@
 import { Card } from 'primereact/card';
 import { Category, Task } from '../../utils/types';
 import { Button } from 'primereact/button';
-import { useTasks } from '../../queries/tasks';
 import { ScrollPanel } from 'primereact/scrollpanel';
+import { TooltipOptions } from 'primereact/tooltip/tooltipoptions';
+import { useContext } from 'react';
+import { TasksContext } from '../../context/TasksProvider';
 
-interface CategoryCardProps extends Category {}
+export interface CategoryCardProps extends Category {
+	onDelete: (id: number) => void;
+	onEdit: (id: number) => void;
+}
 
-const CategoryCard = ({ id, name, icon, description }: CategoryCardProps) => {
-	const { data: tasks = [] } = useTasks();
-	const hasTasks = tasks.some((task: Task) => task.categoryId === id);
+const CategoryCard = ({
+	id,
+	name,
+	icon,
+	description,
+	onDelete,
+	onEdit,
+}: CategoryCardProps) => {
+	const { tasks = [] } = useContext(TasksContext);
+	const filteredTasks = tasks.filter((task: Task) => task.categoryId === id);
+	const hasTasks = filteredTasks.length > 0;
 
-	const content = (
-		<>
-			<p className="pb-1 font-bold">Current tasks:</p>
-			<ScrollPanel
-				style={{ width: '100%', height: '100px' }}
-				className="border-2 border-gray-200"
-			>
-				<ul className="px-2 py-1">
-					{hasTasks ? (
-						tasks
-							.filter((task: Task) => task.categoryId === id)
-							.map((task: Task) => <li key={task.id}>{task.title}</li>)
-					) : (
-						<p className="text-center font-thin">
-							No tasks associated with this category.
-						</p>
-					)}
-				</ul>
-			</ScrollPanel>
-		</>
-	);
+	const tooltipOptions: TooltipOptions = {
+		position: 'top',
+		event: 'hover',
+		showOnDisabled: true,
+	};
 
 	const header = (
 		<div className="flex flex-col items-center gap-4">
@@ -41,16 +38,62 @@ const CategoryCard = ({ id, name, icon, description }: CategoryCardProps) => {
 
 	const subTitle = <p className="text-xl text-center">{description}</p>;
 
-	const footer = (
-		<div className="flex flex-row items-center justify-end gap-2">
-			<Button disabled={hasTasks} outlined>
-				Delete
-			</Button>
-			<Button>Edit</Button>
-		</div>
+	const content = (
+		<>
+			<p className="pb-1 font-bold">Current tasks:</p>
+			<ScrollPanel
+				style={{ width: '100%', height: '100px' }}
+				className="border-2 border-gray-200"
+			>
+				<ul className="px-2 py-1">
+					{hasTasks ? (
+						filteredTasks.map((task: Task) => (
+							<li key={task.id}>{task.title}</li>
+						))
+					) : (
+						<p className="text-center font-thin">
+							No tasks associated with this category.
+						</p>
+					)}
+				</ul>
+			</ScrollPanel>
+		</>
 	);
 
-	// const content = <div className="flex flex-col gap-2">{renderTasks()}</div>;
+	const footer = (
+		<div className="flex flex-row items-center justify-end gap-2">
+			<Button
+				disabled={hasTasks}
+				outlined
+				severity="danger"
+				onClick={() => onDelete(id)}
+				tooltip={
+					hasTasks
+						? 'Cannot delete category while tasks are assigned.'
+						: undefined
+				}
+				tooltipOptions={tooltipOptions}
+			>
+				Delete
+			</Button>
+			<Button
+				disabled={hasTasks}
+				onClick={() => onEdit(id)}
+				tooltip={
+					hasTasks
+						? 'Cannot edit category while tasks are assigned.'
+						: undefined
+				}
+				tooltipOptions={{
+					position: 'top',
+					event: 'hover',
+					showOnDisabled: true,
+				}}
+			>
+				Edit
+			</Button>
+		</div>
+	);
 
 	return (
 		<Card

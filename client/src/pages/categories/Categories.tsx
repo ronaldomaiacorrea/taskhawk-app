@@ -10,6 +10,14 @@ const Categories = () => {
 
 	if (isError) return <div>Error: {error.message}</div>;
 
+	const handleDeleteCategory = (id: number) => {
+		console.log('Delete category with id:', id);
+	};
+
+	const handleEditCategory = (id: number) => {
+		console.log('Edit category with id:', id);
+	};
+
 	return (
 		<>
 			<PageTitle>Categories</PageTitle>
@@ -27,6 +35,8 @@ const Categories = () => {
 							name={name}
 							icon={icon}
 							description={description}
+							onDelete={handleDeleteCategory}
+							onEdit={handleEditCategory}
 						/>
 					</div>
 				))}
