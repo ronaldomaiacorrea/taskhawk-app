@@ -23,8 +23,6 @@ const Overview = () => {
 					style={{
 						position: 'relative',
 						height: '10vh',
-						width: '30vw',
-						minWidth: '150px',
 						minHeight: '300px',
 					}}
 				>

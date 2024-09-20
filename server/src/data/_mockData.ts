@@ -292,7 +292,7 @@ export const mockCategories: Category[] = [
 	{
 		id: 10,
 		name: 'Other',
-		icon: ICON.ExclamationTriangle,
+		icon: ICON.QuestionCircle,
 		description:
 			'Tasks that do not fall under any specific category, miscellaneous activities.',
 	},

@@ -102,8 +102,6 @@ const Upcoming = () => {
 					></Column>
 					<Column field="title" header="Title"></Column>
 					<Column body={dueDateTemplate} header="Due Date"></Column>
-					<Column field="priority" header="Priority" sortable></Column>
-					<Column field="status" header="Status" sortable></Column>
 				</DataTable>
 			</Card>
 			<div className="w-3/4">

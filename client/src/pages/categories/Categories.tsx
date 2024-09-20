@@ -25,7 +25,7 @@ const Categories = () => {
 				icon="pi pi-plus"
 				label="Category"
 				outlined
-				className="my-4 text-teal-500 border-teal-500"
+				className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
 			/>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{categories?.map(({ id, name, icon, description }) => (

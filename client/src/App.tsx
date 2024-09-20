@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/dashboard/Dashboard';
 import Categories from './pages/categories/Categories';
+import Tasks from './pages/tasks/Tasks';
+import Settings from './pages/settings/Settings';
 
 const queryClient = new QueryClient();
 
@@ -14,13 +16,13 @@ function App() {
 		<QueryClientProvider client={queryClient}>
 			<div className="flex flex-col min-h-screen">
 				<Header />
-				<div className="flex flex-1">
+				<div className="flex flex-1 dark:bg-black dark:text-white bg-white text-black">
 					<Sidebar />
-					<div className="flex-1 xl:mx-auto px-8 pb-8">
+					<div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
 						<Routes>
 							<Route path="/" element={<Dashboard />} />
-							<Route path="tasks" element={<h1>Tasks</h1>} />
-							<Route path="settings" element={<h1>Settings</h1>} />
+							<Route path="tasks" element={<Tasks />} />
+							<Route path="settings" element={<Settings />} />
 							<Route path="categories" element={<Categories />} />
 						</Routes>
 					</div>
