@@ -1,19 +1,34 @@
+import 'dotenv/config';
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
-import { mockCategories } from '../data/_mockData';
 import createCategorySchema from '../schemas/category';
+import { supabase } from '../app';
+import { Category } from '../../../shared/types';
 
 export const categoriesRoute = new Hono();
 
 // GET requests
-categoriesRoute.get('/', (c) => c.json(mockCategories));
+categoriesRoute.get('/', async (c) => {
+	const { data: categories, error } = await supabase
+		.from('Category')
+		.select('*');
 
-categoriesRoute.get('/:id', (c) => {
+	if (error) {
+		return c.json({ error: error.message }, 500);
+	}
+
+	return c.json(categories);
+});
+
+categoriesRoute.get('/:id', async (c) => {
 	const id = Number.parseInt(c.req.param('id'));
-	const category = mockCategories.find((category) => category.id === id);
+	const { data: category, error } = await supabase
+		.from('Category')
+		.select('*')
+		.eq('id', id)
+		.single();
 
-	if (!category) {
-		// Built-in function that returns when it is not found
+	if (error || !category) {
 		return c.notFound();
 	}
 
@@ -25,45 +40,56 @@ categoriesRoute.post(
 	'/',
 	zValidator('json', createCategorySchema),
 	async (c) => {
-		// get the data that was posted to this endpoint
-		// const data = await c.req.json();
-
-		// Adding valid here provide the type already in the data because of zValidator
 		const category = await c.req.valid('json');
 
-		// spread task into mockTasks and add an id with the new length
-		mockCategories.push({ ...category, id: mockCategories.length + 1 });
+		const { data, error } = await supabase
+			.from('Category')
+			.insert([{ ...category }]);
 
-		// validate it against the schema create in Zod
-		// const task = taskSchema.parse(data);
+		if (error) {
+			return c.json({ error: error.message }, 500);
+		}
 
-		return c.json(category);
+		return c.json(data, 201);
 	}
 );
 
 // DELETE request
-categoriesRoute.delete('/:id', (c) => {
+categoriesRoute.delete('/:id', async (c) => {
 	const id = Number.parseInt(c.req.param('id'));
 
-	// find the index in the categories array of the category with the id
-	const index = mockCategories.findIndex((category) => category.id === id);
+	const { data: category, error } = await supabase
+		.from('Category')
+		.select('*')
+		.eq('id', id)
+		.single();
 
 	// findIndex returns -1 if the element is not found
-	if (index === -1) {
-		return c.notFound();
+	if (error) {
+		return c.json({ error: error.message }, 500);
 	}
 
-	// splice creates a new array with the deleted element
-	const deletedCategory = mockCategories.splice(index, 1);
+	if (!category) {
+		return c.json({ error: 'Category not found' }, 404);
+	}
 
-	mockCategories.map((category) => category.id === mockCategories.length - 1);
+	const { data, error: deleteError } = await supabase
+		.from('Category')
+		.delete()
+		.eq('id', id);
 
-	// Update the IDs of the remaining categories after deletion
-	mockCategories.map((category, index) => {
-		category.id === index + 1;
-	});
+	if (deleteError) {
+		return c.json({ error: deleteError.message }, 500); // Handle deletion error
+	}
+
+	if (!data) {
+		return c.json({ error: 'No category was deleted' }, 404);
+	}
 
 	// It returns the deleted task in the only position of the array
-	return c.json(deletedCategory[0]);
+	return c.json(
+		{ message: 'Category deleted successfully', deletedCategory: data[0] },
+		200
+	);
 });
 // TODO: put

@@ -1,16 +1,39 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import createTaskSchema from '../schemas/task';
-import { mockCategories, mockTasks } from '../data/_mockData';
+import { mockTasks } from '../data/_mockData';
 import type { Task, TaskWithCategory } from '../../../shared/types';
+import { supabase } from '../app';
 
 export const tasksRoute = new Hono();
 
-const mergeTasksWithCategories = (task: Task): TaskWithCategory => {
-	const category = mockCategories.find(
-		(category) => category.id === task.categoryId
-	);
-	return { ...task, categoryName: category?.name };
+let cachedCategories: { [key: string]: string } = {};
+
+const loadCategories = async () => {
+	if (Object.keys(cachedCategories).length === 0) {
+		const { data: categories, error } = await supabase
+			.from('Category')
+			.select('id, name');
+
+		if (error) {
+			console.error('Error loading categories:', error.message);
+			return;
+		}
+
+		categories?.forEach((category) => {
+			cachedCategories[category.id] = category.name;
+		});
+	}
+};
+
+const mergeTasksWithCategories = async (
+	task: Task
+): Promise<TaskWithCategory> => {
+	await loadCategories();
+
+	const categoryName = cachedCategories[task.categoryId];
+
+	return { ...task, categoryName };
 };
 
 // GET requests

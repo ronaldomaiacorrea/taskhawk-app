@@ -1,5 +1,4 @@
-import { ICON } from '../../../shared/types';
-import type { Task, Category } from '../../../shared/types';
+import type { Task } from '../../../shared/types';
 import { Status } from '../../../shared/types';
 
 export const mockTasks: Task[] = [
@@ -222,78 +221,5 @@ export const mockTasks: Task[] = [
 		priority: 'High',
 		status: Status.OVERDUE,
 		categoryId: 3,
-	},
-];
-
-export const mockCategories: Category[] = [
-	{
-		id: 1,
-		name: 'Work',
-		icon: ICON.Briefcase,
-		description:
-			'Tasks related to your professional work, projects, and office responsibilities.',
-	},
-	{
-		id: 2,
-		name: 'Personal',
-		icon: ICON.User,
-		description:
-			'Personal tasks, hobbies, or goals that are related to self-improvement or leisure.',
-	},
-	{
-		id: 3,
-		name: 'Health',
-		icon: ICON.Heart,
-		description:
-			'Tasks related to fitness, medical appointments, wellness, and general health tracking.',
-	},
-	{
-		id: 4,
-		name: 'Finance',
-		icon: ICON.Money,
-		description:
-			'Tasks involving budgeting, bill payments, savings, and financial planning.',
-	},
-	{
-		id: 5,
-		name: 'Education',
-		icon: ICON.Education,
-		description:
-			'Tasks connected to studies, courses, reading, or learning new skills.',
-	},
-	{
-		id: 6,
-		name: 'Home',
-		icon: ICON.Home,
-		description:
-			'Chores, maintenance, and organization tasks related to household management.',
-	},
-	{
-		id: 7,
-		name: 'Shopping',
-		icon: ICON.ShoppingCart,
-		description:
-			'Tasks involving shopping lists, online purchases, or in-store errands.',
-	},
-	{
-		id: 8,
-		name: 'Travel',
-		icon: ICON.Travel,
-		description:
-			'Planning, booking, or organizing trips, vacations, and travel-related activities.',
-	},
-	{
-		id: 9,
-		name: 'Social',
-		icon: ICON.Social,
-		description:
-			'Tasks related to social activities, gatherings, and staying in touch with friends or family.',
-	},
-	{
-		id: 10,
-		name: 'Other',
-		icon: ICON.QuestionCircle,
-		description:
-			'Tasks that do not fall under any specific category, miscellaneous activities.',
 	},
 ];
