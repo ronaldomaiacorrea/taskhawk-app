@@ -13,7 +13,7 @@ categoriesRoute.get('/', async (c) => {
 		.from('Category')
 		.select('*');
 
-	if (error) {
+	if (!categories || error) {
 		return c.json({ error: error.message }, 500);
 	}
 
@@ -28,8 +28,8 @@ categoriesRoute.get('/:id', async (c) => {
 		.eq('id', id)
 		.single();
 
-	if (error || !category) {
-		return c.notFound();
+	if (!category || error) {
+		return c.json({ error: error?.message }, 500);
 	}
 
 	return c.json(category);
@@ -60,35 +60,19 @@ categoriesRoute.delete('/:id', async (c) => {
 
 	const { data: category, error } = await supabase
 		.from('Category')
-		.select('*')
-		.eq('id', id)
-		.single();
+		.delete()
+		.eq('id', id);
 
-	// findIndex returns -1 if the element is not found
 	if (error) {
 		return c.json({ error: error.message }, 500);
 	}
 
 	if (!category) {
-		return c.json({ error: 'Category not found' }, 404);
+		return c.json({ error: 'Category not found or already deleted' }, 404);
 	}
 
-	const { data, error: deleteError } = await supabase
-		.from('Category')
-		.delete()
-		.eq('id', id);
-
-	if (deleteError) {
-		return c.json({ error: deleteError.message }, 500); // Handle deletion error
-	}
-
-	if (!data) {
-		return c.json({ error: 'No category was deleted' }, 404);
-	}
-
-	// It returns the deleted task in the only position of the array
 	return c.json(
-		{ message: 'Category deleted successfully', deletedCategory: data[0] },
+		{ message: 'Category deleted successfully', category: category[0] },
 		200
 	);
 });
