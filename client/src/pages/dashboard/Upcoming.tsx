@@ -9,6 +9,7 @@ import { Task } from '../../../../shared/types';
 import { Button } from 'primereact/button';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import { Toolbar } from 'primereact/toolbar';
+import EmptyData from '../../components/EmptyData';
 
 const Upcoming = () => {
 	const { tasks = [] } = useContext(TasksContext);
@@ -94,7 +95,9 @@ const Upcoming = () => {
 					value={getUpcomingTasks(tasks)}
 					paginator
 					emptyMessage={
-						<div className="text-center font-bold">No tasks defined.</div>
+						<div className="text-center">
+							<EmptyData message="No tasks defined." />
+						</div>
 					}
 					rows={5}
 					rowsPerPageOptions={[5, 10, 20]}

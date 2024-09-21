@@ -5,6 +5,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 import { TooltipOptions } from 'primereact/tooltip/tooltipoptions';
 import { useContext } from 'react';
 import { TasksContext } from '../../context/TasksProvider';
+import EmptyData from '../../components/EmptyData';
 
 export interface CategoryCardProps extends Category {
 	onDelete: (id: number) => void;
@@ -51,9 +52,7 @@ const CategoryCard = ({
 							<li key={task.id}>{task.title}</li>
 						))
 					) : (
-						<p className="text-center font-thin">
-							No tasks associated with this category.
-						</p>
+						<EmptyData message="No tasks associated with this category." />
 					)}
 				</ul>
 			</ScrollPanel>
