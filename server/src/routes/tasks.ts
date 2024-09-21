@@ -44,8 +44,6 @@ tasksRoute.get('/', async (c) => {
 		return c.json({ error: error.message }, 500);
 	}
 
-	console.log(tasks);
-
 	const tasksWithCategories = tasks.map((task) =>
 		mergeTasksWithCategories(task)
 	);

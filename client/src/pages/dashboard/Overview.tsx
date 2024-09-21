@@ -5,6 +5,7 @@ import { getOverviewChartData } from '../../utils/getOverviewChartData';
 import { TasksContextType } from '../../../../shared/types';
 import { Card } from 'primereact/card';
 import CardTitle from '../../components/CardTitle';
+import EmptyData from '../../components/EmptyData';
 
 const Overview = () => {
 	const { tasks } = useContext<TasksContextType>(TasksContext);
@@ -22,11 +23,17 @@ const Overview = () => {
 					className="w-3/4 h-full"
 					style={{
 						position: 'relative',
-						height: '10vh',
-						minHeight: '300px',
+						// height: '10vh',
+						// minHeight: '300px',
 					}}
 				>
-					<Chart type="pie" data={chartData} options={options} />
+					{chartData?.datasets?.[0]?.data?.some((item) => item !== 0) ? (
+						<Chart type="pie" data={chartData} options={options} />
+					) : (
+						<div className="flex justify-center items-center h-full">
+							<EmptyData message="No tasks defined." />
+						</div>
+					)}
 				</div>
 			</div>
 		</Card>

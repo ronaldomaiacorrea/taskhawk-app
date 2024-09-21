@@ -11,7 +11,7 @@ import ConfirmDialog from '../../components/ConfirmDialog';
 import { Toolbar } from 'primereact/toolbar';
 
 const Upcoming = () => {
-	const { tasks } = useContext(TasksContext);
+	const { tasks = [] } = useContext(TasksContext);
 	const [visible, setVisible] = useState(false);
 	const [selectedTasks, setSelectedTasks] = useState<Task[] | null>(null);
 
@@ -86,11 +86,16 @@ const Upcoming = () => {
 				subTitle="Tasks approaching their due dates."
 			>
 				<div className="border-b border-gray-300 mb-4" />
-				<Toolbar className="mb-4" start={checkButton}></Toolbar>
+				{tasks.length > 0 && (
+					<Toolbar className="mb-4" start={checkButton}></Toolbar>
+				)}
 				<DataTable
 					stripedRows
 					value={getUpcomingTasks(tasks)}
 					paginator
+					emptyMessage={
+						<div className="text-center font-bold">No tasks defined.</div>
+					}
 					rows={5}
 					rowsPerPageOptions={[5, 10, 20]}
 					selection={selectedTasks}
