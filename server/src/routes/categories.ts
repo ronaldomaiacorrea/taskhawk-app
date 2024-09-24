@@ -61,7 +61,8 @@ categoriesRoute.delete('/:id', async (c) => {
 	const { data: category, error } = await supabase
 		.from('Category')
 		.delete()
-		.eq('id', id);
+		.eq('id', id)
+		.select();
 
 	if (error) {
 		return c.json({ error: error.message }, 500);

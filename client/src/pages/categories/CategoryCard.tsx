@@ -6,21 +6,18 @@ import { TooltipOptions } from 'primereact/tooltip/tooltipoptions';
 import { useContext } from 'react';
 import { TasksContext } from '../../context/TasksProvider';
 import EmptyData from '../../components/EmptyData';
+import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 
-export interface CategoryCardProps extends Category {
-	onDelete: (id: number) => void;
-	onEdit: (id: number) => void;
+export interface CategoryCardProps {
+	category: Category;
+	onDelete: (category: Category) => void;
+	onEdit: (category: Category) => void;
 }
 
-const CategoryCard = ({
-	id,
-	name,
-	icon,
-	description,
-	onDelete,
-	onEdit,
-}: CategoryCardProps) => {
+const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
+	const { id, name, description, icon } = category;
 	const { tasks = [] } = useContext(TasksContext);
+
 	const filteredTasks = tasks.filter((task: Task) => task.categoryId === id);
 	const hasTasks = filteredTasks.length > 0;
 
@@ -59,15 +56,28 @@ const CategoryCard = ({
 		</>
 	);
 
+	const confirmDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+		confirmPopup({
+			target: event.currentTarget,
+			message: 'Are you sure you want to delete this category?',
+			icon: 'pi pi-info-circle',
+			defaultFocus: 'reject',
+			visible: !hasTasks,
+			accept: () => onDelete(category),
+			reject: () => {},
+		});
+	};
+
 	const footer = (
 		<div className="flex flex-row items-center justify-end gap-2">
+			<ConfirmPopup />
 			<Button
 				disabled={hasTasks}
 				outlined
 				label="Delete"
 				icon="pi pi-trash"
 				className="text-red-500 border-red-500 dark:text-red-400 dark:border-red-400 "
-				onClick={() => onDelete(id)}
+				onClick={confirmDelete}
 				tooltip={
 					hasTasks
 						? 'Cannot delete category while tasks are assigned.'
@@ -80,7 +90,7 @@ const CategoryCard = ({
 				label="Edit"
 				icon="pi pi-pencil"
 				outlined
-				onClick={() => onEdit(id)}
+				onClick={() => onEdit(category)}
 				className="text-teal-700 border-teal-700 dark:text-teal-400 dark:border-teal-400"
 				tooltip={
 					hasTasks
