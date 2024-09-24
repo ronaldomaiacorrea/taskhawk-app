@@ -86,22 +86,11 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 				tooltipOptions={tooltipOptions}
 			/>
 			<Button
-				disabled={hasTasks}
 				label="Edit"
 				icon="pi pi-pencil"
 				outlined
 				onClick={() => onEdit(category)}
 				className="text-teal-700 border-teal-700 dark:text-teal-400 dark:border-teal-400"
-				tooltip={
-					hasTasks
-						? 'Cannot edit category while tasks are assigned.'
-						: undefined
-				}
-				tooltipOptions={{
-					position: 'top',
-					event: 'hover',
-					showOnDisabled: true,
-				}}
 			/>
 		</div>
 	);

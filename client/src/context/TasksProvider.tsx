@@ -15,7 +15,13 @@ type TasksProviderProps = {
 };
 
 const TasksProvider = ({ children }: TasksProviderProps) => {
-	const { data: tasks, error, isLoading, isFetching, isError } = useTasks();
+	const {
+		data: tasks = [],
+		error,
+		isLoading,
+		isFetching,
+		isError,
+	} = useTasks();
 
 	return (
 		<TasksContext.Provider

@@ -5,14 +5,16 @@ import CategoryCard, {
 	CategoryCardProps,
 } from '../pages/categories/CategoryCard';
 import { TasksContext } from '../context/TasksProvider';
-import { Status, Task } from '../../../shared/types';
+import { ICON, Status, Task } from '../../../shared/types';
 import userEvent from '@testing-library/user-event';
 
 const defaultProps: CategoryCardProps = {
-	id: 1,
-	name: 'Work',
-	icon: 'pi pi-briefcase',
-	description: 'Category for work-related tasks',
+	category: {
+		id: 1,
+		name: 'Work',
+		icon: ICON.Briefcase,
+		description: 'Category for work-related tasks',
+	},
 	onDelete: vi.fn(),
 	onEdit: vi.fn(),
 };
@@ -86,11 +88,10 @@ describe('<CategoryCard />', () => {
 		).toBeInTheDocument();
 	});
 
-	it('should render disabled delete and edit buttons when tasks are assigned', async () => {
+	it('should render disabled delete when tasks are assigned', async () => {
 		renderComponent();
 
 		expect(getDeleteButton()).toBeDisabled();
-		expect(getEditButton()).toBeDisabled();
 	});
 
 	it('should show tooltip when hovering over disabled buttons', async () => {
@@ -138,25 +139,55 @@ describe('<CategoryCard />', () => {
 			.not.toBeInTheDocument;
 	});
 
-	it('should call onDelete or onEdit functions when user clicks on delete or edit', async () => {
+	it('should call onEdit function when user clicks on Edit button', async () => {
 		const onEditSpy = vi.fn();
-		const onDeleteSpy = vi.fn();
 
 		render(
+			<TasksContext.Provider value={{ tasks: mockTasks }}>
+				<CategoryCard {...defaultProps} onEdit={onEditSpy} />
+			</TasksContext.Provider>
+		);
+
+		userEvent.click(getEditButton());
+		await waitFor(() =>
+			expect(onEditSpy).toHaveBeenCalledWith({
+				id: 1,
+				name: 'Work',
+				icon: ICON.Briefcase,
+				description: 'Category for work-related tasks',
+			})
+		);
+	});
+
+	it('should render confirmation popup when user clicks on Delete button', async () => {
+		render(
 			<TasksContext.Provider value={{ tasks: [] }}>
-				<CategoryCard
-					{...defaultProps}
-					onDelete={onDeleteSpy}
-					onEdit={onEditSpy}
-				/>
+				<CategoryCard {...defaultProps} />
 			</TasksContext.Provider>
 		);
 
 		userEvent.click(getDeleteButton());
-		await waitFor(() => expect(onDeleteSpy).toHaveBeenCalledWith(1));
+		await waitFor(() =>
+			expect(
+				screen.getByText('Are you sure you want to delete Work category?')
+			).toBeInTheDocument()
+		);
+	});
 
-		// Click edit button
-		userEvent.click(getEditButton());
-		await waitFor(() => expect(onEditSpy).toHaveBeenCalledWith(1));
+	it('should call onDelete function when user clicks on Yes from the confirmation popup button', async () => {
+		render(
+			<TasksContext.Provider value={{ tasks: [] }}>
+				<CategoryCard {...defaultProps} />
+			</TasksContext.Provider>
+		);
+
+		userEvent.click(getDeleteButton());
+
+		await waitFor(() => expect(screen.getByText('Yes')).toBeInTheDocument());
+
+		userEvent.click(screen.getByText('Yes'));
+		await waitFor(() =>
+			expect(defaultProps.onDelete).toHaveBeenCalledWith(defaultProps.category)
+		);
 	});
 });

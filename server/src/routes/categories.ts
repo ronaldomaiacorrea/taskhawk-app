@@ -3,14 +3,13 @@ import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import createCategorySchema from '../schemas/category';
 import { supabase } from '../app';
-import { Category } from '../../../shared/types';
 
 export const categoriesRoute = new Hono();
 
 // GET requests
 categoriesRoute.get('/', async (c) => {
 	const { data: categories, error } = await supabase
-		.from('Category')
+		.from('categories')
 		.select('*');
 
 	if (!categories || error) {
@@ -23,7 +22,7 @@ categoriesRoute.get('/', async (c) => {
 categoriesRoute.get('/:id', async (c) => {
 	const id = Number.parseInt(c.req.param('id'));
 	const { data: category, error } = await supabase
-		.from('Category')
+		.from('categories')
 		.select('*')
 		.eq('id', id)
 		.single();
@@ -43,7 +42,7 @@ categoriesRoute.post(
 		const category = await c.req.valid('json');
 
 		const { data, error } = await supabase
-			.from('Category')
+			.from('categories')
 			.insert([{ ...category }]);
 
 		if (error) {
@@ -59,7 +58,7 @@ categoriesRoute.delete('/:id', async (c) => {
 	const id = Number.parseInt(c.req.param('id'));
 
 	const { data: category, error } = await supabase
-		.from('Category')
+		.from('categories')
 		.delete()
 		.eq('id', id)
 		.select();

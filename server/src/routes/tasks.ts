@@ -12,7 +12,7 @@ let cachedCategories: { [key: string]: string } = {};
 const loadCategories = async () => {
 	if (Object.keys(cachedCategories).length === 0) {
 		const { data: categories, error } = await supabase
-			.from('Category')
+			.from('categories')
 			.select('id, name');
 
 		if (error) {
@@ -38,7 +38,7 @@ const mergeTasksWithCategories = async (
 
 // GET requests
 tasksRoute.get('/', async (c) => {
-	const { data: tasks, error } = await supabase.from('Task').select('*');
+	const { data: tasks, error } = await supabase.from('tasks').select('*');
 
 	if (!tasks || error) {
 		return c.json({ error: error.message }, 500);
@@ -53,7 +53,7 @@ tasksRoute.get('/', async (c) => {
 tasksRoute.get('/:id', async (c) => {
 	const id = Number.parseInt(c.req.param('id'));
 	const { data: task, error } = await supabase
-		.from('Tasks')
+		.from('tasks')
 		.select('*')
 		.eq('id', id)
 		.single();
@@ -69,7 +69,7 @@ tasksRoute.get('/:id', async (c) => {
 tasksRoute.post('/', zValidator('json', createTaskSchema), async (c) => {
 	const task = await c.req.valid('json');
 
-	const { data, error } = await supabase.from('Task').insert([{ ...task }]);
+	const { data, error } = await supabase.from('tasks').insert([{ ...task }]);
 
 	if (error) {
 		return c.json({ error: error.message }, 500);
@@ -83,7 +83,7 @@ tasksRoute.delete('/:id', async (c) => {
 	const id = Number.parseInt(c.req.param('id'));
 
 	const { data: task, error } = await supabase
-		.from('Task')
+		.from('tasks')
 		.delete()
 		.eq('id', id);
 
