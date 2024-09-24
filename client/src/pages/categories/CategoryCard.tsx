@@ -59,7 +59,7 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 	const confirmDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
 		confirmPopup({
 			target: event.currentTarget,
-			message: 'Are you sure you want to delete this category?',
+			message: `Are you sure you want to delete ${category.name} category?`,
 			icon: 'pi pi-info-circle',
 			defaultFocus: 'reject',
 			visible: !hasTasks,
