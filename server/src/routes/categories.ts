@@ -76,4 +76,28 @@ categoriesRoute.delete('/:id', async (c) => {
 		200
 	);
 });
-// TODO: put
+// PATCH request
+categoriesRoute.patch('/:id', async (c) => {
+	const id = Number.parseInt(c.req.param('id'));
+
+	const updates = await c.req.json();
+
+	const { data: updatedCategory, error } = await supabase
+		.from('categories')
+		.update(updates)
+		.eq('id', id)
+		.select();
+
+	if (error) {
+		return c.json({ error: error.message }, 500);
+	}
+
+	if (!updatedCategory || updatedCategory.length === 0) {
+		return c.json({ error: 'Category not found' }, 404);
+	}
+
+	return c.json(
+		{ message: 'Category updated successfully', category: updatedCategory[0] },
+		200
+	);
+});

@@ -8,7 +8,7 @@ const fetchCategories = async (url: string) => {
 
 		if (!response.ok) {
 			throw new Error(
-				'Failed to fetch categories: ${response.status} ${response.statusText}'
+				`Failed to fetch categories: ${response.status} ${response.statusText}`
 			);
 		}
 
@@ -18,9 +18,25 @@ const fetchCategories = async (url: string) => {
 	}
 };
 
-const deleteCategory = async (category: Category) => {
+const fetchCategory = async (url: string, categoryId: number | null) => {
 	try {
-		const response = await fetch(`${CATEGORIES_API_URL}/${category.id}`, {
+		const response = await fetch(`${url}/${categoryId}`);
+
+		if (!response.ok) {
+			throw new Error(
+				`Failed to fetch category: ${response.status} ${response.statusText}`
+			);
+		}
+
+		return response.json();
+	} catch (error) {
+		throw new Error(`Error occurred: ${error}`);
+	}
+};
+
+const deleteCategory = async (url: string, category: Category) => {
+	try {
+		const response = await fetch(`${url}/${category.id}`, {
 			method: 'DELETE',
 		});
 
@@ -35,20 +51,100 @@ const deleteCategory = async (category: Category) => {
 	}
 };
 
+const updateCategory = async (url: string, category: Category) => {
+	try {
+		const response = await fetch(`${url}/${category.id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(category),
+		});
+
+		if (!response.ok) {
+			throw new Error(
+				`Failed to update categories: ${response.status} ${response.statusText}`
+			);
+		}
+
+		return response.json();
+	} catch (error) {
+		throw new Error(`Error occurred: ${error}`);
+	}
+};
+
+const createCategory = async (url: string, category: Omit<Category, 'id'>) => {
+	try {
+		const response = await fetch(`${url}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(category),
+		});
+
+		if (!response.ok) {
+			throw new Error(
+				`Failed to update categories: ${response.status} ${response.statusText}`
+			);
+		}
+
+		return response.json();
+	} catch (error) {
+		throw new Error(`Error occurred: ${error}`);
+	}
+};
+
 export const useCategories = () =>
 	useQuery<Category[], Error>({
 		queryKey: [TASK_APP_QUERY_KEYS.CATEGORIES],
 		queryFn: () => fetchCategories(CATEGORIES_API_URL),
 	});
 
+export const useCategory = (categoryId: number | null) =>
+	useQuery<Category, Error>({
+		queryKey: [TASK_APP_QUERY_KEYS.CATEGORY, categoryId],
+		queryFn: () => fetchCategory(CATEGORIES_API_URL, categoryId),
+		enabled: !!categoryId,
+	});
+
 export const useDeleteCategory = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation<Category, Error, Category>({
-		mutationFn: (category: Category) => deleteCategory(category),
+		mutationFn: (category: Category) =>
+			deleteCategory(CATEGORIES_API_URL, category),
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: [TASK_APP_QUERY_KEYS.CATEGORIES],
+			});
+		},
+	});
+};
+
+export const useUpdateCategory = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation<Category, Error, Category>({
+		mutationFn: (category: Category) =>
+			updateCategory(CATEGORIES_API_URL, category),
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: [TASK_APP_QUERY_KEYS.CATEGORIES],
+			});
+		},
+	});
+};
+
+export const useCreateCategory = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation<Category, Error, Category>({
+		mutationFn: (category: Omit<Category, 'id'>) =>
+			createCategory(CATEGORIES_API_URL, category),
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: [TASK_APP_QUERY_KEYS.CATEGORIES, TASK_APP_QUERY_KEYS.TASKS],
 			});
 		},
 	});

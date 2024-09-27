@@ -1,41 +1,77 @@
 import { Button } from 'primereact/button';
 import PageTitle from '../../components/PageTitle';
-import { useCategories, useDeleteCategory } from '../../queries/categories';
+import {
+	useCategories,
+	useCreateCategory,
+	useDeleteCategory,
+	useUpdateCategory,
+} from '../../queries/categories';
 import CategoryCard from './CategoryCard';
-// import { Dialog } from 'primereact/dialog';
-// import CreateCategory from './CreateCategory';
-import { useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Toast, ToastMessage } from 'primereact/toast';
 import { Category } from '../../../../shared/types';
 import Spinner from '../../components/Spinner';
 import { Message } from 'primereact/message';
+import EditCategory from './editCategory/EditCategory';
 
 const Categories = () => {
 	const { data: categories = [], isLoading, isError, error } = useCategories();
-	// const [categoryToEdit, setCategoryToEdit] = useState<Category | null>(null);
-	const mutation = useDeleteCategory();
 	const toast = useRef<Toast | null>(null);
 
-	const showToast = (message: string, severity?: ToastMessage['severity']) => {
-		toast.current?.show({
-			severity: severity,
-			summary: 'Action',
-			detail: message,
-			life: 3000,
-		});
-	};
+	// const { mutate: addCategory } = useCreateCategory();
+
+	const [selectedCategory, setSelectedCategory] = useState<
+		Category | undefined
+	>(undefined);
+	const { mutate: updateCategory } = useUpdateCategory();
+	const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
+
+	const { mutate: deleteCategory } = useDeleteCategory();
+
+	const displayToast = useCallback(
+		(message: string, severity?: ToastMessage['severity']) => {
+			toast.current?.show({
+				severity: severity,
+				summary: 'Action',
+				detail: message,
+				life: 3000,
+			});
+		},
+		[]
+	);
 
 	const handleDeleteCategory = (category: Category) => {
 		if (!category) return;
-		mutation.mutate(category, {
-			onSuccess: () => showToast('Category deleted', 'success'),
-			onError: () => showToast('Failed to delete category', 'error'),
+		deleteCategory(category, {
+			onSuccess: () => displayToast('Category deleted', 'success'),
+			onError: () => displayToast('Failed to delete category', 'error'),
 		});
 	};
 
-	// TODO: Implement edit category dialog
-	// const handleEditCategoryDialog = (category: Category) => {
-	// 	setCategoryToEdit(category);
+	const handleEditCategory = (category: Category) => {
+		if (!category) return;
+		setSelectedCategory(category);
+		setIsEditDialogVisible(true);
+	};
+
+	const handleUpdateCategory = (category: Category) => {
+		updateCategory(category, {
+			onSuccess: () => {
+				displayToast('Category updated', 'success');
+				setIsEditDialogVisible(false);
+			},
+			onError: () => displayToast('Failed to update category', 'error'),
+		});
+	};
+	// const createCategory = (newCategory: Omit<Category, 'id'>) => {
+	// 	console.log(newCategory);
+	// 	// addCategory(newCategory, {
+	// 	// 	onSuccess: () => {
+	// 	// 		displayToast('Category updated', 'success');
+	// 	// 		setIsFormVisible(false);
+	// 	// 	},
+	// 	// 	onError: () => displayToast('Failed to update category', 'error'),
+	// 	// });
 	// };
 
 	if (isLoading)
@@ -56,6 +92,7 @@ const Categories = () => {
 				label="Category"
 				outlined
 				className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
+				// onClick={() => setIsFormVisible(true)}
 			/>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{categories.length > 0 ? (
@@ -64,8 +101,7 @@ const Categories = () => {
 							<CategoryCard
 								category={category}
 								onDelete={handleDeleteCategory}
-								//TODO: Implement edit category dialog
-								onEdit={() => {}}
+								onEdit={handleEditCategory}
 							/>
 						</div>
 					))
@@ -77,6 +113,14 @@ const Categories = () => {
 					/>
 				)}
 			</div>
+			{selectedCategory && (
+				<EditCategory
+					category={selectedCategory}
+					isVisible={isEditDialogVisible}
+					closeDialog={() => setIsEditDialogVisible(false)}
+					onUpdateCategory={handleUpdateCategory}
+				/>
+			)}
 		</>
 	);
 };

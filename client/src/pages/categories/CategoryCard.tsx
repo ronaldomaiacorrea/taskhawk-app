@@ -3,7 +3,7 @@ import { Category, Task } from '../../../../shared/types';
 import { Button } from 'primereact/button';
 import { ScrollPanel } from 'primereact/scrollpanel';
 import { TooltipOptions } from 'primereact/tooltip/tooltipoptions';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { TasksContext } from '../../context/TasksProvider';
 import EmptyData from '../../components/EmptyData';
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
@@ -18,14 +18,21 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 	const { id, name, description, icon } = category;
 	const { tasks = [] } = useContext(TasksContext);
 
-	const filteredTasks = tasks.filter((task: Task) => task.categoryId === id);
+	const filteredTasks = useMemo(
+		() => tasks.filter((task: Task) => task.categoryId === id),
+		[tasks, id]
+	);
+
 	const hasTasks = filteredTasks.length > 0;
 
-	const tooltipOptions: TooltipOptions = {
-		position: 'top',
-		event: 'hover',
-		showOnDisabled: true,
-	};
+	const tooltipOptions: TooltipOptions = useMemo(
+		() => ({
+			position: 'top',
+			event: 'hover',
+			showOnDisabled: true,
+		}),
+		[]
+	);
 
 	const header = (
 		<div className="flex flex-col items-center gap-4">
