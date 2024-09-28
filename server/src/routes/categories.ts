@@ -41,15 +41,19 @@ categoriesRoute.post(
 	async (c) => {
 		const category = await c.req.valid('json');
 
-		const { data, error } = await supabase
+		const { data: newCategory, error } = await supabase
 			.from('categories')
-			.insert([{ ...category }]);
+			.insert([{ ...category }])
+			.select();
 
 		if (error) {
 			return c.json({ error: error.message }, 500);
 		}
 
-		return c.json(data, 201);
+		return c.json(
+			{ message: 'Category created successfully', category: newCategory[0] },
+			200
+		);
 	}
 );
 

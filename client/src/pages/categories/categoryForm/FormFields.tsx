@@ -52,6 +52,7 @@ const FormFields = () => {
 								? 'border-red-500 focus:border-red-500'
 								: 'border-gray-300'
 						}`}
+						placeholder="Enter category description"
 					/>
 					{touched?.description && errors?.description && (
 						<small id="description" className="text-red-600">

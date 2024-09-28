@@ -1,25 +1,20 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
-import type { EditCategoryProps } from '../pages/categories/EditCategory';
-import EditCategory from '../pages/categories/EditCategory';
+import type { CreateCategoryProps } from '../pages/categories/CreateCategory';
+import CreateCategory from '../pages/categories/CreateCategory';
 import userEvent from '@testing-library/user-event';
 import { ICON } from '../../../shared/types';
 
-const defaultProps: EditCategoryProps = {
-	category: {
-		id: 1,
-		name: 'Work',
-		icon: ICON.Briefcase,
-		description: 'Category for work-related tasks',
-	},
+const defaultProps: CreateCategoryProps = {
+	category: undefined,
 	isVisible: true,
 	closeDialog: vi.fn(),
-	onUpdateCategory: vi.fn(),
+	onCreateCategory: vi.fn(),
 };
 
-const renderComponent = (props: Partial<EditCategoryProps> = {}) =>
-	render(<EditCategory {...defaultProps} {...props} />);
+const renderComponent = (props: Partial<CreateCategoryProps> = {}) =>
+	render(<CreateCategory {...defaultProps} {...props} />);
 
 const getCancelButton = () => screen.getByRole('button', { name: 'Cancel' });
 const getSaveButton = () => screen.getByRole('button', { name: 'Save' });
@@ -35,17 +30,15 @@ describe('<EditCategory />', () => {
 		expect(getSaveButton()).toBeInTheDocument();
 		expect(
 			screen.getByRole('dialog', {
-				name: `Edit ${defaultProps.category.name} category`,
+				name: 'Add category',
 			})
 		).toBeInTheDocument();
-		expect(getNameField()).toHaveValue(defaultProps.category.name);
+		expect(getNameField()).toHaveValue('');
 
-		expect(getDescriptionField()).toHaveValue(
-			defaultProps.category.description
-		);
+		expect(getDescriptionField()).toHaveValue('');
 
 		expect(screen.queryAllByRole('textbox')[2]).toHaveValue(
-			defaultProps.category.icon
+			ICON.QuestionCircle
 		);
 	});
 
@@ -57,21 +50,19 @@ describe('<EditCategory />', () => {
 		await waitFor(() => expect(defaultProps.closeDialog).toHaveBeenCalled());
 	});
 
-	it('should call onUpdateCategory when clicking save', async () => {
-		renderComponent();
+	it('should call onCreateCategory when clicking save', async () => {
+		const onCreateCategorySpy = vi.fn();
+		renderComponent({ onCreateCategory: onCreateCategorySpy });
 
-		userEvent.clear(getNameField());
-		userEvent.clear(getDescriptionField());
 		await userEvent.type(getNameField(), 'Personal');
-
 		await userEvent.type(getDescriptionField(), 'General personal activities');
+
 		userEvent.click(getSaveButton());
 
 		await waitFor(() =>
-			expect(defaultProps.onUpdateCategory).toHaveBeenCalledWith({
+			expect(onCreateCategorySpy).toHaveBeenCalledWith({
 				description: 'General personal activities',
-				icon: 'pi pi-briefcase',
-				id: 1,
+				icon: ICON.QuestionCircle,
 				name: 'Personal',
 			})
 		);
@@ -80,27 +71,20 @@ describe('<EditCategory />', () => {
 	it('should reset the form when closing the dialog', async () => {
 		renderComponent();
 
-		userEvent.clear(getNameField());
-		userEvent.clear(getDescriptionField());
-
 		await userEvent.type(getNameField(), 'Personal');
 		await userEvent.type(getDescriptionField(), 'General personal activities');
 
 		userEvent.click(getCancelButton());
 
 		await waitFor(() => {
-			expect(getNameField()).toHaveValue(defaultProps.category.name);
-			expect(getDescriptionField()).toHaveValue(
-				defaultProps.category.description
-			);
+			expect(getNameField()).toHaveValue('');
+			expect(getDescriptionField()).toHaveValue('');
 		});
 	});
 
 	it('should render error messages when submitting a form with empty name', async () => {
-		const onUpdateCategorySpy = vi.fn();
-		renderComponent({ onUpdateCategory: onUpdateCategorySpy });
-
-		await userEvent.clear(getNameField());
+		const onCreateCategorySpy = vi.fn();
+		renderComponent({ onCreateCategory: onCreateCategorySpy });
 
 		userEvent.click(getSaveButton());
 
@@ -109,13 +93,13 @@ describe('<EditCategory />', () => {
 				'Please provide a category name.'
 			);
 
-			expect(onUpdateCategorySpy).not.toHaveBeenCalled();
+			expect(onCreateCategorySpy).not.toHaveBeenCalled();
 		});
 	});
 
 	it('should render error message when submitting form with a name field with more than 10 characters', async () => {
-		const onUpdateCategorySpy = vi.fn();
-		renderComponent({ onUpdateCategory: onUpdateCategorySpy });
+		const onCreateCategorySpy = vi.fn();
+		renderComponent({ onCreateCategory: onCreateCategorySpy });
 
 		await userEvent.clear(getNameField());
 		await userEvent.type(getNameField(), 'a'.repeat(11));
@@ -127,13 +111,13 @@ describe('<EditCategory />', () => {
 				'Category name must not exceed 10 characters.'
 			);
 
-			expect(onUpdateCategorySpy).not.toHaveBeenCalled();
+			expect(onCreateCategorySpy).not.toHaveBeenCalled();
 		});
 	});
 
 	it('should render error message when submitting form with a description field with more than 100 characters', async () => {
-		const onUpdateCategorySpy = vi.fn();
-		renderComponent({ onUpdateCategory: onUpdateCategorySpy });
+		const onCreateCategorySpy = vi.fn();
+		renderComponent({ onCreateCategory: onCreateCategorySpy });
 
 		await userEvent.type(getDescriptionField(), 'a'.repeat(101));
 
@@ -144,6 +128,6 @@ describe('<EditCategory />', () => {
 				screen.getByText('Category description must not exceed 100 characters.')
 			).toBeInTheDocument();
 		});
-		expect(onUpdateCategorySpy).not.toHaveBeenCalled();
+		expect(onCreateCategorySpy).not.toHaveBeenCalled();
 	});
 });

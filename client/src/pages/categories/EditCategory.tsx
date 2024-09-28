@@ -1,9 +1,9 @@
 import { Dialog } from 'primereact/dialog';
-import FormFields from '../categoryForm/FormFields';
+import FormFields from './categoryForm/FormFields';
 import { Form, Formik } from 'formik';
-import { categoryValidationSchema } from '../categoryValidation';
-import { Category } from '../../../../../shared/types';
-import ActionButtons from '../../../components/ActionButtons';
+import { categoryValidationSchema } from './categoryValidation';
+import { Category } from '../../../../shared/types';
+import ActionButtons from '../../components/ActionButtons';
 
 export interface EditCategoryProps {
 	category: Category;

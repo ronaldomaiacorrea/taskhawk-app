@@ -139,12 +139,12 @@ export const useUpdateCategory = () => {
 export const useCreateCategory = () => {
 	const queryClient = useQueryClient();
 
-	return useMutation<Category, Error, Category>({
+	return useMutation<Category, Error, Omit<Category, 'id'>>({
 		mutationFn: (category: Omit<Category, 'id'>) =>
 			createCategory(CATEGORIES_API_URL, category),
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [TASK_APP_QUERY_KEYS.CATEGORIES, TASK_APP_QUERY_KEYS.TASKS],
+				queryKey: [TASK_APP_QUERY_KEYS.CATEGORIES],
 			});
 		},
 	});

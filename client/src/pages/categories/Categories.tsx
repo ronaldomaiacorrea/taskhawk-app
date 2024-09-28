@@ -12,13 +12,15 @@ import { Toast, ToastMessage } from 'primereact/toast';
 import { Category } from '../../../../shared/types';
 import Spinner from '../../components/Spinner';
 import { Message } from 'primereact/message';
-import EditCategory from './editCategory/EditCategory';
+import EditCategory from './EditCategory';
+import CreateCategory from './CreateCategory';
 
 const Categories = () => {
 	const { data: categories = [], isLoading, isError, error } = useCategories();
 	const toast = useRef<Toast | null>(null);
 
-	// const { mutate: addCategory } = useCreateCategory();
+	const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
+	const { mutate: addCategory } = useCreateCategory();
 
 	const [selectedCategory, setSelectedCategory] = useState<
 		Category | undefined
@@ -63,16 +65,15 @@ const Categories = () => {
 			onError: () => displayToast('Failed to update category', 'error'),
 		});
 	};
-	// const createCategory = (newCategory: Omit<Category, 'id'>) => {
-	// 	console.log(newCategory);
-	// 	// addCategory(newCategory, {
-	// 	// 	onSuccess: () => {
-	// 	// 		displayToast('Category updated', 'success');
-	// 	// 		setIsFormVisible(false);
-	// 	// 	},
-	// 	// 	onError: () => displayToast('Failed to update category', 'error'),
-	// 	// });
-	// };
+	const handleCreateCategory = (newCategory: Omit<Category, 'id'>) => {
+		addCategory(newCategory, {
+			onSuccess: () => {
+				displayToast('Category added', 'success');
+				setIsCreateDialogVisible(false);
+			},
+			onError: () => displayToast('Failed to add category', 'error'),
+		});
+	};
 
 	if (isLoading)
 		return (
@@ -92,7 +93,7 @@ const Categories = () => {
 				label="Category"
 				outlined
 				className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
-				// onClick={() => setIsFormVisible(true)}
+				onClick={() => setIsCreateDialogVisible(true)}
 			/>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{categories.length > 0 ? (
@@ -121,6 +122,12 @@ const Categories = () => {
 					onUpdateCategory={handleUpdateCategory}
 				/>
 			)}
+			<CreateCategory
+				category={undefined}
+				isVisible={isCreateDialogVisible}
+				closeDialog={() => setIsCreateDialogVisible(false)}
+				onCreateCategory={handleCreateCategory}
+			/>
 		</>
 	);
 };
