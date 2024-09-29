@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Button } from 'primereact/button';
-import { DarkModeContext } from '../context/DarkModeProvider';
+import { DarkModeContext } from '@context/DarkModeProvider';
 
 const Header = () => {
 	const { toggleTheme } = useContext(DarkModeContext);

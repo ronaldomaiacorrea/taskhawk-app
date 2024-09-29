@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { TasksContext } from '../../context/TasksProvider';
+import { TasksContext } from '@context/TasksProvider';
 import { Chart } from 'primereact/chart';
-import { getOverviewChartData } from '../../utils/getOverviewChartData';
-import { TasksContextType } from '../../../../shared/types';
+import { getOverviewChartData } from '@utils/getOverviewChartData';
+import type { TasksContextType } from '@shared/types';
 import { Card } from 'primereact/card';
-import CardTitle from '../../components/CardTitle';
-import EmptyData from '../../components/EmptyData';
+import CardTitle from '@components/CardTitle';
+import EmptyData from '@components/EmptyData';
 
 const Overview = () => {
 	const { tasks } = useContext<TasksContextType>(TasksContext);

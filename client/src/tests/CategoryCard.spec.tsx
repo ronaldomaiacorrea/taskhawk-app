@@ -3,9 +3,10 @@ import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
 import CategoryCard, {
 	CategoryCardProps,
-} from '../pages/categories/CategoryCard';
-import { TasksContext } from '../context/TasksProvider';
-import { ICON, Status, Task } from '../../../shared/types';
+} from '@pages/categories/CategoryCard';
+import { TasksContext } from '@context/TasksProvider';
+import type { Task } from '@shared/types';
+import { ICON, Status } from '@shared/types';
 import userEvent from '@testing-library/user-event';
 
 const defaultProps: CategoryCardProps = {

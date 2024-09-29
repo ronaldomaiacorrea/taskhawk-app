@@ -1,8 +1,14 @@
 import { hexToRgba } from './convertHexToRgba';
-import { Task } from '../../../shared/types';
-import { Status } from '../../../shared/types';
+import { Task, Status } from '@shared/types';
 import { TooltipItem } from 'chart.js';
 
+/**
+ * Generates chart data and configuration options for an overview chart based on task statuses.
+ *
+ * @param {Task[] | undefined} data - An array of tasks or undefined.
+ * @returns {Object} An object containing the chart data and options.
+ *
+ */
 export const getOverviewChartData = (data: Task[] | undefined) => {
 	const labels = Object.values(Status);
 	const dataValues = new Array(7).fill(0);

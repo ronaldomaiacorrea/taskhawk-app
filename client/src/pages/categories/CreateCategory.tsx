@@ -2,8 +2,9 @@ import { Dialog } from 'primereact/dialog';
 import FormFields from './categoryForm/FormFields';
 import { Form, Formik } from 'formik';
 import { categoryValidationSchema } from './categoryValidation';
-import { Category, ICON } from '../../../../shared/types';
-import ActionButtons from '../../components/ActionButtons';
+import type { Category } from '@shared/types';
+import { ICON } from '@shared/types';
+import ActionButtons from '@components/ActionButtons';
 
 export interface CreateCategoryProps {
 	category: Omit<Category, 'id'> | undefined;

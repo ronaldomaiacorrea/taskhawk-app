@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { CATEGORIES_API_URL, TASK_APP_QUERY_KEYS } from './constants';
-import { Category } from '../../../shared/types';
+import type { Category } from '@shared/types';
 
 const fetchCategories = async (url: string) => {
 	try {

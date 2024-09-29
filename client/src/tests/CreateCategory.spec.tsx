@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
-import type { CreateCategoryProps } from '../pages/categories/CreateCategory';
-import CreateCategory from '../pages/categories/CreateCategory';
+import type { CreateCategoryProps } from '@pages/categories/CreateCategory';
+import CreateCategory from '@pages/categories/CreateCategory';
 import userEvent from '@testing-library/user-event';
-import { ICON } from '../../../shared/types';
+import { ICON } from '@shared/types';
 
 const defaultProps: CreateCategoryProps = {
 	category: undefined,

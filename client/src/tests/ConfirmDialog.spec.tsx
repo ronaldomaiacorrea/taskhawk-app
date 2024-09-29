@@ -1,7 +1,7 @@
 import { describe, it, vi, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ConfirmDialog from '../components/ConfirmDialog';
-import type { ConfirmDialogProps } from '../components/ConfirmDialog';
+import ConfirmDialog from '@components/ConfirmDialog';
+import type { ConfirmDialogProps } from '@components/ConfirmDialog';
 
 const mockDefaultProps: ConfirmDialogProps = {
 	visible: true,

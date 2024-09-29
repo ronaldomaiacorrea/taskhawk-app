@@ -1,10 +1,10 @@
 import { Card } from 'primereact/card';
-import CardTitle from '../../components/CardTitle';
+import CardTitle from '@components/CardTitle';
 import { useContext } from 'react';
-import { TasksContext } from '../../context/TasksProvider';
+import { TasksContext } from '@context/TasksProvider';
 import { Chart } from 'primereact/chart';
-import { getTasksPerPriorityChartData } from '../../utils/getTasksPerPriorityChartData';
-import EmptyData from '../../components/EmptyData';
+import { getTasksPerPriorityChartData } from '@utils/getTasksPerPriorityChartData';
+import EmptyData from '@components/EmptyData';
 
 const TasksPerPriority = () => {
 	const { tasks } = useContext(TasksContext);

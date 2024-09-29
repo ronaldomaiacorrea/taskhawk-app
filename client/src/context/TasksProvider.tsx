@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { useTasks } from '../queries/tasks';
-import { TasksContextType } from '../../../shared/types';
+import { useTasks } from '@queries/tasks';
+import type { TasksContextType } from '@shared/types';
 
 export const TasksContext = createContext<TasksContextType>({
 	tasks: [],

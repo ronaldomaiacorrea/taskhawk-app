@@ -1,4 +1,4 @@
-interface ErrorMessageProps {
+export interface ErrorMessageProps {
 	error: Error | null;
 }
 

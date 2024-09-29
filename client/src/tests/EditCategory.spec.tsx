@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
-import type { EditCategoryProps } from '../pages/categories/EditCategory';
-import EditCategory from '../pages/categories/EditCategory';
+import type { EditCategoryProps } from '@pages/categories/EditCategory';
+import EditCategory from '@pages/categories/EditCategory';
 import userEvent from '@testing-library/user-event';
-import { ICON } from '../../../shared/types';
+import { ICON } from '@shared/types';
 
 const defaultProps: EditCategoryProps = {
 	category: {

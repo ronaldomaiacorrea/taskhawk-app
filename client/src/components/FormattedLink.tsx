@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-interface FormattedLinkProps {
+export interface FormattedLinkProps {
 	path: string;
 	pageName: string;
 	icon: string;

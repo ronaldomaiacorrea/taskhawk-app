@@ -1,15 +1,15 @@
 import { useContext, useState } from 'react';
-import CardTitle from '../../components/CardTitle';
+import CardTitle from '@components/CardTitle';
 import { Card } from 'primereact/card';
-import { TasksContext } from '../../context/TasksProvider';
-import { getUpcomingTasks } from '../../utils/getUpcomingTasks';
+import { TasksContext } from '@context/TasksProvider';
+import { getUpcomingTasks } from '@utils/getUpcomingTasks';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Task } from '../../../../shared/types';
+import type { Task } from '@shared/types';
 import { Button } from 'primereact/button';
-import ConfirmDialog from '../../components/ConfirmDialog';
+import ConfirmDialog from '@components/ConfirmDialog';
 import { Toolbar } from 'primereact/toolbar';
-import EmptyData from '../../components/EmptyData';
+import EmptyData from '@components/EmptyData';
 
 const Upcoming = () => {
 	const { tasks = [] } = useContext(TasksContext);

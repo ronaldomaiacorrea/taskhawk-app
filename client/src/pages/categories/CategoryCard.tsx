@@ -1,11 +1,11 @@
 import { Card } from 'primereact/card';
-import { Category, Task } from '../../../../shared/types';
+import type { Category, Task } from '@shared/types';
 import { Button } from 'primereact/button';
 import { ScrollPanel } from 'primereact/scrollpanel';
 import { TooltipOptions } from 'primereact/tooltip/tooltipoptions';
 import { useContext, useMemo } from 'react';
-import { TasksContext } from '../../context/TasksProvider';
-import EmptyData from '../../components/EmptyData';
+import { TasksContext } from '@context/TasksProvider';
+import EmptyData from '@components/EmptyData';
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 
 export interface CategoryCardProps {

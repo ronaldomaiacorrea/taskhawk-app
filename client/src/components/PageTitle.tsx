@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider } from 'primereact/divider';
 
-interface PageTitleProps {
+export interface PageTitleProps {
 	children: React.ReactNode;
 }
 

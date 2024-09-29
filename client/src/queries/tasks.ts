@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { TASK_APP_QUERY_KEYS, TASKS_API_URL } from './constants';
-import { Task } from '../../../shared/types';
+import type { Task } from '@shared/types';
 
 const fetchTasks = async (url: string) => {
 	const response = await fetch(url);

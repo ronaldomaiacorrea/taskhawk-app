@@ -1,5 +1,5 @@
 import { Divider } from 'primereact/divider';
-import PageTitle from '../../components/PageTitle';
+import PageTitle from '@components/PageTitle';
 import Overview from './Overview';
 import Upcoming from './Upcoming';
 import TasksCompletedTime from './TasksCompletedTime';

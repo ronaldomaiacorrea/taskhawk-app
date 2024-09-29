@@ -1,7 +1,8 @@
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
-import { Category, ICON } from '../../../../../shared/types';
+import type { Category } from '@shared/types';
+import { ICON } from '@shared/types';
 import { useFormikContext } from 'formik';
 
 const iconOptions = Object.values(ICON).map((icon) => ({

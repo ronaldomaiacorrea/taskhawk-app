@@ -1,16 +1,16 @@
 import { Button } from 'primereact/button';
-import PageTitle from '../../components/PageTitle';
+import PageTitle from '@components/PageTitle';
 import {
 	useCategories,
 	useCreateCategory,
 	useDeleteCategory,
 	useUpdateCategory,
-} from '../../queries/categories';
+} from '@queries/categories';
 import CategoryCard from './CategoryCard';
 import { useCallback, useRef, useState } from 'react';
 import { Toast, ToastMessage } from 'primereact/toast';
-import { Category } from '../../../../shared/types';
-import Spinner from '../../components/Spinner';
+import type { Category } from '@shared/types';
+import Spinner from '@components/Spinner';
 import { Message } from 'primereact/message';
 import EditCategory from './EditCategory';
 import CreateCategory from './CreateCategory';

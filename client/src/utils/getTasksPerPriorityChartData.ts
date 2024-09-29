@@ -1,5 +1,11 @@
-import { Task } from '../../../shared/types';
+import { Task } from '@shared/types';
 
+/**
+ * Generates chart data for tasks based on their priority.
+ *
+ * @param {Task[] | undefined} tasks - An array of tasks or undefined.
+ * @returns {Object} An object containing the chart data and options.
+ */
 export const getTasksPerPriorityChartData = (tasks: Task[] | undefined) => {
 	const options = {
 		indexAxis: 'y',
