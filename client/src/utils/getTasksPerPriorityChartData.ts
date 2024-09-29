@@ -1,4 +1,4 @@
-import { Task } from '@shared/types';
+import type { Task } from '@shared/types';
 
 /**
  * Generates chart data for tasks based on their priority.

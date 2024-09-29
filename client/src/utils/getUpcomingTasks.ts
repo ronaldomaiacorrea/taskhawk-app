@@ -1,4 +1,5 @@
-import { Status, Task } from '@shared/types';
+import type { Task } from '@shared/types';
+import { Status } from '@shared/types';
 
 /**
  * Filters and sorts a list of tasks to return only the upcoming tasks.

@@ -1,5 +1,6 @@
 import { hexToRgba } from './convertHexToRgba';
-import { Task, Status } from '@shared/types';
+import type { Task } from '@shared/types';
+import { Status } from '@shared/types';
 import { TooltipItem } from 'chart.js';
 
 /**
