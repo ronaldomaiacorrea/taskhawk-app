@@ -23,8 +23,6 @@ const Overview = () => {
 					className="w-3/4 h-full"
 					style={{
 						position: 'relative',
-						// height: '10vh',
-						// minHeight: '300px',
 					}}
 				>
 					{chartData?.datasets?.[0]?.data?.some((item) => item !== 0) ? (
