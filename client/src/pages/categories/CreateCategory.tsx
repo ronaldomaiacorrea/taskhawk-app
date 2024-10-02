@@ -7,7 +7,6 @@ import { ICON } from '@shared/types';
 import ActionButtons from '@components/ActionButtons';
 
 export interface CreateCategoryProps {
-	category: Omit<Category, 'id'> | undefined;
 	isVisible: boolean;
 	closeDialog: () => void;
 	onCreateCategory: (category: Omit<Category, 'id'>) => void;
@@ -20,7 +19,6 @@ const initialCategory: Omit<Category, 'id'> = {
 };
 
 const CreateCategory = ({
-	category,
 	isVisible,
 	closeDialog,
 	onCreateCategory,
@@ -28,10 +26,11 @@ const CreateCategory = ({
 	return (
 		<Formik
 			initialValues={initialCategory}
-			values={category}
-			onSubmit={(values) => onCreateCategory(values)}
+			onSubmit={(values, { resetForm }) => {
+				onCreateCategory(values);
+				resetForm();
+			}}
 			validationSchema={categoryValidationSchema}
-			enableReinitialize
 		>
 			{({ submitForm, resetForm }) => (
 				<Dialog

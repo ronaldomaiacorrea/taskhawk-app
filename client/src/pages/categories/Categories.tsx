@@ -65,6 +65,7 @@ const Categories = () => {
 			onError: () => displayToast('Failed to update category', 'error'),
 		});
 	};
+
 	const handleCreateCategory = (newCategory: Omit<Category, 'id'>) => {
 		addCategory(newCategory, {
 			onSuccess: () => {
@@ -123,7 +124,6 @@ const Categories = () => {
 				/>
 			)}
 			<CreateCategory
-				category={undefined}
 				isVisible={isCreateDialogVisible}
 				closeDialog={() => setIsCreateDialogVisible(false)}
 				onCreateCategory={handleCreateCategory}

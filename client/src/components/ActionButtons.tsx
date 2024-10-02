@@ -17,8 +17,8 @@ const ActionButtons = ({
 				label="Cancel"
 				className="p-button-text"
 				onClick={() => {
-					handleResetForm();
 					handleCloseDialog();
+					handleResetForm();
 				}}
 				text
 				severity="secondary"
