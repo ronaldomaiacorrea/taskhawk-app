@@ -6,7 +6,12 @@ export interface EmptyDataProps {
 
 const EmptyData = ({ message }: EmptyDataProps) => {
 	return (
-		<Message text={message} className="dark:text-white bg-inherit font-bold" />
+		<div className="flex justify-center items-center h-full">
+			<Message
+				text={message}
+				className="dark:text-white bg-inherit font-bold"
+			/>
+		</div>
 	);
 };
 

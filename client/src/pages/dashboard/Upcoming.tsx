@@ -10,31 +10,12 @@ import { Button } from 'primereact/button';
 import ConfirmDialog from '@components/ConfirmDialog';
 import { Toolbar } from 'primereact/toolbar';
 import EmptyData from '@components/EmptyData';
+import { dateTemplate } from '@utils/dateTemplate';
 
 const Upcoming = () => {
 	const { tasks = [] } = useContext(TasksContext);
 	const [visible, setVisible] = useState(false);
 	const [selectedTasks, setSelectedTasks] = useState<Task[] | null>(null);
-
-	const dueDateTemplate = (rowData: Task) => {
-		const date = new Date(rowData.dueDate);
-
-		const dateOptions: Intl.DateTimeFormatOptions = {
-			month: '2-digit',
-			day: '2-digit',
-			year: '2-digit',
-			weekday: 'long',
-		};
-		const timeOptions: Intl.DateTimeFormatOptions = {
-			hour: '2-digit',
-			minute: '2-digit',
-			hour12: true,
-		};
-		const formattedDate = date.toLocaleDateString(undefined, dateOptions);
-		const formattedTime = date.toLocaleTimeString(undefined, timeOptions);
-
-		return `${formattedDate}, ${formattedTime}`;
-	};
 
 	const footerContent = (
 		<>
@@ -80,6 +61,8 @@ const Upcoming = () => {
 		</>
 	);
 
+	const dueDateTemplate = (rowData: Task) => dateTemplate(rowData.dueDate);
+
 	return (
 		<>
 			<Card
@@ -94,11 +77,7 @@ const Upcoming = () => {
 					stripedRows
 					value={getUpcomingTasks(tasks)}
 					paginator
-					emptyMessage={
-						<div className="text-center">
-							<EmptyData message="No tasks defined." />
-						</div>
-					}
+					emptyMessage={<EmptyData message="No tasks defined." />}
 					rows={5}
 					rowsPerPageOptions={[5, 10, 20]}
 					selection={selectedTasks}

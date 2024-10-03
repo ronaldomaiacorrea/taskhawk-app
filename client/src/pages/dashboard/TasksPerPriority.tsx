@@ -21,9 +21,7 @@ const TasksPerPriority = () => {
 				{chartData?.datasets?.[0]?.data?.some((item) => item !== 0) ? (
 					<Chart type="bar" data={chartData} options={options} />
 				) : (
-					<div className="flex justify-center items-center h-full">
-						<EmptyData message="No tasks defined." />
-					</div>
+					<EmptyData message="No tasks defined." />
 				)}
 			</div>
 		</Card>
