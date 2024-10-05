@@ -5,15 +5,31 @@ import type { Category } from '@shared/types';
 import { ICON } from '@shared/types';
 import { useFormikContext } from 'formik';
 
-const iconOptions = Object.values(ICON).map((icon) => ({
-	label: icon.split('pi pi-')[1],
-	value: icon,
-}));
+type IconOption = {
+	label: string;
+	value: string;
+};
+
+const iconOptions = Object.values(ICON).map(
+	(icon): IconOption => ({
+		label: icon.split('pi pi-')[1],
+		value: icon,
+	})
+);
 
 const FormFields = () => {
 	const { values, handleChange, errors, touched } = useFormikContext<
 		Category | Omit<Category, 'id'>
 	>();
+
+	const iconTemplate = (option: IconOption) => {
+		return (
+			<div className="flex gap-3 items-center">
+				<i className={option.value} />
+				{option.label}
+			</div>
+		);
+	};
 
 	return (
 		<div className="flex flex-col gap-6">
@@ -72,13 +88,9 @@ const FormFields = () => {
 						filter
 						options={iconOptions}
 						optionLabel="value"
-						itemTemplate={(option) => (
-							<i className={option?.value}>&nbsp;{option?.label}</i>
-						)}
+						itemTemplate={(option) => iconTemplate(option)}
 						value={values.icon}
-						valueTemplate={(option) => (
-							<i className={option?.value}>&nbsp;{option?.label}</i>
-						)}
+						valueTemplate={(option) => iconTemplate(option)}
 					/>
 				</div>
 			</div>

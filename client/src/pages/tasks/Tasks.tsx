@@ -114,21 +114,33 @@ const Tasks = () => {
 	return (
 		<>
 			<PageTitle>Tasks management</PageTitle>
-			<div className="flex justify-between items-center">
-				<Button
-					icon="pi pi-plus"
-					label="Task"
-					outlined
-					className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
-					onClick={() => setIsCreateDialogVisible(true)}
-				/>
-
-				<div className="relative w-full max-w-xs">
-					<InputText placeholder="Keyword Search" className="pl-10 w-full" />
-					<i className="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+			<div className="lg:space-y-0 space-y-6">
+				<div className="flex flex-col justify-between lg:items-center lg:flex-row lg:space-y-0">
+					<div>
+						<Button
+							icon="pi pi-plus"
+							label="Task"
+							outlined
+							className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
+							onClick={() => setIsCreateDialogVisible(true)}
+						/>
+					</div>
+					<div>
+						<div className="relative w-full max-w-xs">
+							<InputText
+								placeholder="Keyword Search"
+								className="pl-10 w-full"
+							/>
+							<i className="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+						</div>
+					</div>
+				</div>
+				<div className="grid grid-cols-1">
+					<div className="min-w-full">
+						<TasksTable tasks={tasks} categories={categories} />
+					</div>
 				</div>
 			</div>
-			<TasksTable tasks={tasks} categories={categories} />
 		</>
 	);
 };

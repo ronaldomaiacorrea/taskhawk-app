@@ -21,11 +21,11 @@ const TasksTable = ({ tasks, categories }: TasksTableProps) => {
 	const descriptionTemplate = (task: Task) => {
 		return task.description ? (
 			<>
-				<div className="text-xl font-bold p-2">Description</div>
+				<div className="font-bold p-2">Description</div>
 				<div className="pl-2">{task.description}</div>
 			</>
 		) : (
-			<EmptyData message="No description defined." />
+			<EmptyData message="This task has no description." />
 		);
 	};
 
@@ -57,31 +57,44 @@ const TasksTable = ({ tasks, categories }: TasksTableProps) => {
 			onRowToggle={(e) => setExpandedRows(e.data)}
 			dataKey="id"
 			scrollable
-			scrollHeight="600px"
 		>
-			<Column expander={allowExpansion} style={{ width: '5rem' }} />
-			<Column field="title" header="Name" sortable />
+			<Column
+				expander={allowExpansion}
+				style={{ width: '2rem' }}
+				frozen
+				// alignFrozen="right"
+			/>
+			<Column field="title" header="Name" sortable frozen />
 			<Column
 				body={(task: Task) => dateTemplate(task.creationDate)}
 				header="Creation date"
 				sortable
+				style={{ minWidth: '250px' }}
 			/>
 			<Column
 				body={(task: Task) => dateTemplate(task.dueDate)}
 				header="Due date"
 				sortable
+				style={{ minWidth: '250px' }}
 			/>
 			<Column
 				body={(task: Task) => <PriorityBadge task={task} />}
 				header="Priority"
 				sortable
+				style={{ minWidth: '120px' }}
 			/>
 			<Column
 				body={(task: Task) => <StatusBadge task={task} />}
 				header="Status"
 				sortable
+				style={{ minWidth: '150px' }}
 			/>
-			<Column body={categoryTemplate} header="Category" sortable />
+			<Column
+				body={categoryTemplate}
+				header="Category"
+				sortable
+				style={{ minWidth: '150px' }}
+			/>
 		</DataTable>
 	);
 };
