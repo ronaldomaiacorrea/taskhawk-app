@@ -8,9 +8,7 @@ export interface PageTitleProps {
 const PageTitle = ({ children }: PageTitleProps) => {
 	return (
 		<>
-			<h1 className="text-3xl text-black dark:text-white font-bold py-2">
-				{children}
-			</h1>
+			<h1 className="text-3xl font-bold py-2">{children}</h1>
 			<Divider />
 		</>
 	);

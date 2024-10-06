@@ -5,6 +5,8 @@ import { InputText } from 'primereact/inputtext';
 import { Status, Task } from '@shared/types';
 import TasksTable from './TasksTable';
 import { useCategories } from '@queries/categories';
+import Calendar from '../calendar/Calendar';
+import CardTitle from '@components/CardTitle';
 
 const tasks: Task[] = [
 	{
@@ -136,9 +138,7 @@ const Tasks = () => {
 					</div>
 				</div>
 				<div className="grid grid-cols-1">
-					<div className="min-w-full">
-						<TasksTable tasks={tasks} categories={categories} />
-					</div>
+					<TasksTable tasks={tasks} categories={categories} />
 				</div>
 			</div>
 		</>

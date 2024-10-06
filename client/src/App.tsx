@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Categories from './pages/categories/Categories';
 import Tasks from './pages/tasks/Tasks';
 import Settings from './pages/settings/Settings';
+import Calendar from '@pages/calendar/Calendar';
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function App() {
 						<Routes>
 							<Route path="/" element={<Dashboard />} />
 							<Route path="tasks" element={<Tasks />} />
+							<Route path="calendar" element={<Calendar />} />
 							<Route path="settings" element={<Settings />} />
 							<Route path="categories" element={<Categories />} />
 						</Routes>
