@@ -2,6 +2,7 @@ import { hexToRgba } from './convertHexToRgba';
 import type { Task } from '@shared/types';
 import { Status } from '@shared/types';
 import { TooltipItem } from 'chart.js';
+import { backgroundColors } from './constants';
 
 /**
  * Generates chart data and configuration options for an overview chart based on task statuses.
@@ -28,14 +29,6 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
 			dataValues[index]++;
 		}
 	});
-
-	const backgroundColors = [
-		'#808080', // "To do" - Gray
-		'#4CAF50', // "Completed" - Green
-		'#FF5733', // "Blocked" - Orange
-		'#FF0000', // "Overdue" - Red
-		'#2196F3', // "In progress" - Blue
-	];
 
 	const options = {
 		responsive: true,
@@ -70,6 +63,11 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
 		},
 	};
 
+	const chartBackgroundColors = dataValues.map((_, index) => {
+		const taskStatus = labels[index] as Status; // Get the status for each index
+		return backgroundColors[taskStatus]; // Map status to the color from backgroundColors
+	});
+
 	const chartData = {
 		labels,
 		datasets: [
@@ -77,10 +75,12 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
 				data: dataValues,
 				backgroundColor: backgroundColors,
 				borderWidth: 2,
-				hoverBackgroundColor: backgroundColors.map((color) =>
+				hoverBackgroundColor: chartBackgroundColors.map((color) =>
 					hexToRgba(color, 0.8)
 				),
-				hoverBorderColor: backgroundColors.map((color) => hexToRgba(color, 1)),
+				hoverBorderColor: chartBackgroundColors.map((color) =>
+					hexToRgba(color, 1)
+				),
 			},
 		],
 	};

@@ -16,3 +16,10 @@ export const useTasks = () =>
 		queryKey: [TASK_APP_QUERY_KEYS.TASKS],
 		queryFn: () => fetchTasks(TASKS_API_URL),
 	});
+
+export const useMonthTasks = (month: string) => {
+	return useQuery<Task[], Error>({
+		queryKey: [TASK_APP_QUERY_KEYS.TASKS, month],
+		queryFn: () => fetchTasks(`${TASKS_API_URL}?month=${month}`),
+	});
+};

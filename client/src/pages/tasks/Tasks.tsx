@@ -1,12 +1,10 @@
 import PageTitle from '@components/PageTitle';
-import { useContext, useState } from 'react';
+// import { useState } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Status, Task } from '@shared/types';
 import TasksTable from './TasksTable';
 import { useCategories } from '@queries/categories';
-import Calendar from '../calendar/Calendar';
-import CardTitle from '@components/CardTitle';
 
 const tasks: Task[] = [
 	{
@@ -110,7 +108,7 @@ const tasks: Task[] = [
 const Tasks = () => {
 	// const { tasks = [{ description: 'test', title: 'test', id: 1 }] } =
 	// 	useContext(TasksContext);
-	const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
+	// const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
 	const { data: categories = [] } = useCategories();
 
 	return (
@@ -124,7 +122,7 @@ const Tasks = () => {
 							label="Task"
 							outlined
 							className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
-							onClick={() => setIsCreateDialogVisible(true)}
+							// onClick={() => setIsCreateDialogVisible(true)}
 						/>
 					</div>
 					<div>

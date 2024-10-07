@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Button } from 'primereact/button';
 import { DarkModeContext } from '@context/DarkModeProvider';
-import Logo from '../../public/TaskHawk_Logo_Transparent.png';
+import TaskHawkLogo from '../assets/TaskHawk_Logo_Transparent.png';
 
 const Header = () => {
 	const { toggleTheme } = useContext(DarkModeContext);
@@ -11,7 +11,7 @@ const Header = () => {
 			<div className="mx-auto h-auto flex flex-row justify-between items-center text-white">
 				<div className="flex items-center gap-2">
 					<div className="font-bold hidden sm:block">
-						<img src={Logo} width={100} alt="Task Hawk logo"/>
+						<img src={TaskHawkLogo} width={100} alt="Task Hawk logo" />
 					</div>
 					<div className="text-2xl font-bold text-white">Task Hawk</div>
 				</div>
