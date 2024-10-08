@@ -5,6 +5,9 @@ import listPlugin from '@fullcalendar/list';
 import { Status, Task } from '@shared/types';
 import PageTitle from '@components/PageTitle';
 import { backgroundColors } from '@utils/constants';
+import { useEffect, useState } from 'react';
+import { info } from 'console';
+import { Tooltip } from 'primereact/tooltip';
 // import { useMonthTasks } from '@queries/tasks';
 
 const tasks: Task[] = [
@@ -33,9 +36,12 @@ const tasks: Task[] = [
 const Calendar = () => {
 	// const { data: tasks } = useMonthTasks();
 
+	// const [initialView, setInitialView] = useState('dayGridMonth');
+
 	return (
 		<>
 			<PageTitle>Calendar</PageTitle>
+			<Tooltip />
 			<FullCalendar
 				locale={'en'}
 				headerToolbar={{
@@ -50,7 +56,7 @@ const Calendar = () => {
 				}}
 				titleFormat={{ year: 'numeric', month: 'long', day: 'numeric' }}
 				plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
-				initialView="dayGridMonth"
+				initialView={'dayGridMonth'}
 				events={tasks.map((task) => ({
 					title: task.title,
 					start: task.creationDate.toISOString(),
@@ -62,10 +68,16 @@ const Calendar = () => {
 				allDaySlot={false}
 				height={1000}
 				timeZone="local"
-				navLinks={true}
-				dayMaxEvents={true}
-				editable={true}
+				dayMaxEvents
+				editable
 				listDayFormat={{ weekday: 'long' }}
+				displayEventTime
+				eventOrder="start,title"
+				moreLinkClick="popover"
+				navLinks
+				handleWindowResize
+				stickyHeaderDates
+				eventClick={(info) => console.log(info.event.title)}
 			/>
 		</>
 	);
