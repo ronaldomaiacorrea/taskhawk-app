@@ -4,9 +4,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { Status, Task } from '@shared/types';
 import PageTitle from '@components/PageTitle';
-import { backgroundColors } from '@utils/constants';
-import { useEffect, useState } from 'react';
-import { info } from 'console';
+import { backgroundColors } from '@utils/constants'; 
 import { Tooltip } from 'primereact/tooltip';
 // import { useMonthTasks } from '@queries/tasks';
 
@@ -15,8 +13,8 @@ const tasks: Task[] = [
 		id: 1,
 		title: 'Design Homepage',
 		description: 'Create a responsive design for the homepage.',
-		creationDate: new Date(1725177600000),
-		dueDate: new Date('2024-10-12T14:30:00'),
+		creationDate: new Date('2024-10-12T14:30:00'),
+		dueDate: new Date('2024-10-12T19:30:00'),
 		priority: 'High',
 		status: Status.IN_PROGRESS,
 		categoryId: 1,
@@ -25,10 +23,10 @@ const tasks: Task[] = [
 		id: 2,
 		title: 'Home work',
 		description: 'Do the homework',
-		creationDate: new Date(1725177600000),
-		dueDate: new Date('2024-10-12T14:30:00'),
+		creationDate: new Date('2024-10-09T14:30:00'),
+		dueDate: new Date('2024-10-10T14:30:00'),
 		priority: 'Medium',
-		status: Status.TO_DO,
+		status: Status.OVERDUE,
 		categoryId: 1,
 	},
 ];
