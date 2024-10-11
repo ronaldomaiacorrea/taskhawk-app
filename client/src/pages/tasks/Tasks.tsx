@@ -1,10 +1,12 @@
 import PageTitle from '@components/PageTitle';
 // import { useState } from 'react';
 import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
+// import { InputText } from 'primereact/inputtext';
 import { Status, Task } from '@shared/types';
 import TasksTable from './TasksTable';
 import { useCategories } from '@queries/categories';
+import { useState } from 'react';
+import ConfirmDialog from '@components/ConfirmDialog';
 
 const tasks: Task[] = [
 	{
@@ -109,7 +111,45 @@ const Tasks = () => {
 	// const { tasks = [{ description: 'test', title: 'test', id: 1 }] } =
 	// 	useContext(TasksContext);
 	// const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
+	const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
+	const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
 	const { data: categories = [] } = useCategories();
+
+	const confirmDelete = (selectedTasks: Task[]) => {
+		setTasksToDelete(selectedTasks);
+		setIsDeleteDialogVisible(true);
+	};
+
+	const footerContent = (
+		<>
+			<Button
+				label="No"
+				icon="pi pi-times"
+				onClick={() => setIsDeleteDialogVisible(false)}
+				autoFocus
+			/>
+			<Button
+				label="Yes"
+				icon="pi pi-check"
+				text
+				onClick={() => setIsDeleteDialogVisible(false)}
+				severity="danger"
+			/>
+		</>
+	);
+
+	const dialogContent = (
+		<>
+			<p className="py-4">Are you want to delete these tasks?</p>
+			<ul>
+				{tasksToDelete?.map((task) => (
+					<li key={task.id} className="p-1 px-2">
+						{task.title}
+					</li>
+				))}
+			</ul>
+		</>
+	);
 
 	return (
 		<>
@@ -125,19 +165,26 @@ const Tasks = () => {
 							// onClick={() => setIsCreateDialogVisible(true)}
 						/>
 					</div>
-					<div>
-						<div className="relative w-full max-w-xs">
-							<InputText
-								placeholder="Keyword Search"
-								className="pl-10 w-full"
-							/>
-							<i className="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-						</div>
-					</div>
 				</div>
 				<div className="grid grid-cols-1">
-					<TasksTable tasks={tasks} categories={categories} />
+					<TasksTable
+						tasks={tasks}
+						categories={categories}
+						deleteTasks={confirmDelete}
+					/>
 				</div>
+			</div>
+			<div className="w-3/4">
+				<ConfirmDialog
+					header="Confirm tasks deletion"
+					visible={isDeleteDialogVisible}
+					handleHiding={() => {
+						if (!isDeleteDialogVisible) return;
+						setIsDeleteDialogVisible(false);
+					}}
+					content={dialogContent}
+					footer={footerContent}
+				/>
 			</div>
 		</>
 	);

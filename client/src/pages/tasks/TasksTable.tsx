@@ -1,23 +1,26 @@
 import { DataTable } from 'primereact/datatable';
 import { useState } from 'react';
 import type { DataTableExpandedRows } from 'primereact/datatable';
-import { Column, ColumnSortEvent } from 'primereact/column';
+import { Column } from 'primereact/column';
 import EmptyData from '@components/EmptyData';
 import { dateTemplate } from '@utils/dateTemplate';
 import { Category, Task } from '@shared/types';
 import StatusBadge from '@components/StatusBadge';
 import PriorityBadge from '@components/PriorityBadge';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 
 export interface TasksTableProps {
 	tasks: Task[];
 	categories: Category[];
-	selectedTask: Task | null;
+	deleteTasks: (tasks: Task[]) => void;
 }
 
-const TasksTable = ({ tasks, categories, selectedTask }: TasksTableProps) => {
+const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 	const [expandedRows, setExpandedRows] = useState<
-		DataTableExpandedRows | Task[]
-	>([]);
+		DataTableExpandedRows | Task[] | undefined
+	>(undefined);
+	const [selectedTasks, setSelectedTasks] = useState<Task[]>([]);
 
 	const descriptionTemplate = (task: Task) => {
 		return task.description ? (
@@ -31,6 +34,18 @@ const TasksTable = ({ tasks, categories, selectedTask }: TasksTableProps) => {
 	};
 
 	const allowExpansion = () => tasks.length > 0;
+
+	const expandAll = () => {
+		const _expandedRows: DataTableExpandedRows = {};
+
+		tasks.forEach((task) => (_expandedRows[`${task.id}`] = true));
+
+		setExpandedRows(_expandedRows);
+	};
+
+	const collapseAll = () => {
+		setExpandedRows(undefined);
+	};
 
 	// const priorityOptions = [
 	// 	{
@@ -60,6 +75,42 @@ const TasksTable = ({ tasks, categories, selectedTask }: TasksTableProps) => {
 		);
 	};
 
+	const header = (
+		<div className="flex md:flex-row md:justify-end justify-between gap-2 flex-col flex-wrap">
+			<div className="md:flex-auto">
+				<div className="relative w-full ">
+					<InputText placeholder="Keyword Search" className="pl-10 w-full" />
+					<i className="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+				</div>
+			</div>
+			<div className="flex flex-row md:justify-end justify-between gap-2">
+				<div>
+					<Button
+						icon="pi pi-trash"
+						severity="danger"
+						outlined
+						disabled={selectedTasks.length === 0}
+						onClick={() => deleteTasks(selectedTasks)}
+					>
+						<span className="hidden sm:inline mx-2">Delete</span>
+					</Button>
+				</div>
+				<div className="flex flex-row justify-end">
+					<div>
+						<Button icon="pi pi-plus" onClick={expandAll} text>
+							<span className="hidden sm:inline mx-2">Expand All</span>
+						</Button>
+					</div>
+					<div>
+						<Button icon="pi pi-minus" onClick={collapseAll} text>
+							<span className="hidden sm:inline mx-2">Collapse All</span>
+						</Button>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+
 	return (
 		<DataTable
 			value={tasks}
@@ -74,12 +125,13 @@ const TasksTable = ({ tasks, categories, selectedTask }: TasksTableProps) => {
 			onRowToggle={(e) => setExpandedRows(e.data)}
 			dataKey="id"
 			scrollable
-			selectionMode="single"
-			selection={selectedTask}
+			selectionMode="checkbox"
+			selection={selectedTasks}
 			removableSort
-			// onSelectionChange={(e) => selectTask(e.value)}
+			header={header}
+			onSelectionChange={(e) => setSelectedTasks(e.value as Task[])}
 		>
-			<Column selectionMode="single" headerStyle={{ width: '3rem' }} />
+			<Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
 			<Column expander={allowExpansion} style={{ width: '2rem' }} frozen />
 			<Column field="title" header="Name" sortable frozen />
 			<Column
