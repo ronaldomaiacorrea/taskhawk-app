@@ -14,6 +14,7 @@ import Spinner from '@components/Spinner';
 import { Message } from 'primereact/message';
 import EditCategory from './EditCategory';
 import CreateCategory from './CreateCategory';
+import ConfirmDialog from '@components/ConfirmDialog';
 
 const Categories = () => {
 	const { data: categories = [], isLoading, isError, error } = useCategories();
@@ -29,6 +30,7 @@ const Categories = () => {
 	const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
 
 	const { mutate: deleteCategory } = useDeleteCategory();
+	const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
 
 	const displayToast = useCallback(
 		(message: string, severity?: ToastMessage['severity']) => {
@@ -44,8 +46,17 @@ const Categories = () => {
 
 	const handleDeleteCategory = (category: Category) => {
 		if (!category) return;
+		setSelectedCategory(category);
+		setIsDeleteDialogVisible(true);
+	}
+
+	const handleConfirmDeleteCategory = (category: Category) => {
+		if (!category) return;
 		deleteCategory(category, {
-			onSuccess: () => displayToast('Category deleted', 'success'),
+			onSuccess: () => {
+				displayToast('Category deleted', 'success');
+				setIsDeleteDialogVisible(false);
+			},
 			onError: () => displayToast('Failed to delete category', 'error'),
 		});
 	};
@@ -123,6 +134,14 @@ const Categories = () => {
 					onUpdateCategory={handleUpdateCategory}
 				/>
 			)}
+			{selectedCategory && (
+				<ConfirmDialog 
+					visible={isDeleteDialogVisible}
+					handleHiding={() => setIsDeleteDialogVisible(false)}
+					content={`Are you sure you want to delete category ${selectedCategory.name}?`}					
+					onConfirm={() => handleConfirmDeleteCategory(selectedCategory)}					
+					/>
+			)}			
 			<CreateCategory
 				isVisible={isCreateDialogVisible}
 				closeDialog={() => setIsCreateDialogVisible(false)}

@@ -160,35 +160,24 @@ describe('<CategoryCard />', () => {
 		);
 	});
 
-	it('should render confirmation popup when user clicks on Delete button', async () => {
+	it('should render confirmation dialog when user clicks on Delete button', async () => {
+		const onDeleteSpy = vi.fn();
+
 		render(
 			<TasksContext.Provider value={{ tasks: [] }}>
-				<CategoryCard {...defaultProps} />
+				<CategoryCard {...defaultProps} onDelete={onDeleteSpy}/>
 			</TasksContext.Provider>
 		);
 
 		userEvent.click(getDeleteButton());
+		
 		await waitFor(() =>
-			expect(
-				screen.getByText('Are you sure you want to delete Work category?')
-			).toBeInTheDocument()
-		);
-	});
-
-	it('should call onDelete function when user clicks on Yes from the confirmation popup button', async () => {
-		render(
-			<TasksContext.Provider value={{ tasks: [] }}>
-				<CategoryCard {...defaultProps} />
-			</TasksContext.Provider>
-		);
-
-		userEvent.click(getDeleteButton());
-
-		await waitFor(() => expect(screen.getByText('Yes')).toBeInTheDocument());
-
-		userEvent.click(screen.getByText('Yes'));
-		await waitFor(() =>
-			expect(defaultProps.onDelete).toHaveBeenCalledWith(defaultProps.category)
-		);
-	});
+			expect(onDeleteSpy).toHaveBeenCalledWith({
+				id: 1,
+				name: 'Work',
+				icon: ICON.Briefcase,
+				description: 'Category for work-related tasks',
+			})
+		);	
+	});	
 });

@@ -17,24 +17,6 @@ const Upcoming = () => {
 	const [visible, setVisible] = useState(false);
 	const [selectedTasks, setSelectedTasks] = useState<Task[] | null>(null);
 
-	const footerContent = (
-		<>
-			<Button
-				label="No"
-				icon="pi pi-times"
-				onClick={() => setVisible(false)}
-				autoFocus
-			/>
-			<Button
-				label="Yes"
-				icon="pi pi-check"
-				text
-				onClick={() => setVisible(false)}
-				severity="secondary"
-			/>
-		</>
-	);
-
 	const checkButton = (
 		<Button
 			icon="pi pi-check"
@@ -98,9 +80,9 @@ const Upcoming = () => {
 					handleHiding={() => {
 						if (!visible) return;
 						setVisible(false);
-					}}
+					} }
 					content={dialogContent}
-					footer={footerContent}
+					onConfirm={() => setVisible(false)}					
 				/>
 			</div>
 		</>
