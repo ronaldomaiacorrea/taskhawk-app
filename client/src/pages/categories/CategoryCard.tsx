@@ -93,7 +93,7 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 			title={header}
 			footer={footer}
 			subTitle={subTitle}
-			className="bg-white rounded-lg p-4 h-120px items-center justify-between border-2 border-gray-200 dark:border-0"
+			className="bg-white rounded-lg p-4 h-full justify-between border-2 border-gray-200 dark:border-0"
 		>
 			{content}
 		</Card>
