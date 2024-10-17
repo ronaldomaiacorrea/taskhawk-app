@@ -6,8 +6,7 @@ import CreateCategory from '@pages/categories/CreateCategory';
 import userEvent from '@testing-library/user-event';
 import { ICON } from '@shared/types';
 
-const defaultProps: CreateCategoryProps = {
-	category: undefined,
+const defaultProps: CreateCategoryProps = {	
 	isVisible: true,
 	closeDialog: vi.fn(),
 	onCreateCategory: vi.fn(),

@@ -6,7 +6,6 @@ import { TooltipOptions } from 'primereact/tooltip/tooltipoptions';
 import { useContext, useMemo } from 'react';
 import { TasksContext } from '@context/TasksProvider';
 import EmptyData from '@components/EmptyData';
-import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 
 export interface CategoryCardProps {
 	category: Category;
@@ -61,30 +60,17 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 				</ul>
 			</ScrollPanel>
 		</>
-	);
-
-	const confirmDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-		confirmPopup({
-			target: event.currentTarget,
-			message: `Are you sure you want to delete ${category.name} category?`,
-			icon: 'pi pi-info-circle',
-			defaultFocus: 'reject',
-			visible: !hasTasks,
-			accept: () => onDelete(category),
-			reject: () => {},
-		});
-	};
+	);	
 
 	const footer = (
-		<div className="flex flex-row items-center justify-end gap-2">
-			<ConfirmPopup />
+		<div className="flex flex-row items-center justify-end gap-2">			
 			<Button
 				disabled={hasTasks}
 				outlined
 				label="Delete"
 				icon="pi pi-trash"
 				className="text-red-500 border-red-500 dark:text-red-400 dark:border-red-400 "
-				onClick={confirmDelete}
+				onClick={() => onDelete(category)}
 				tooltip={
 					hasTasks
 						? 'Cannot delete category while tasks are assigned.'

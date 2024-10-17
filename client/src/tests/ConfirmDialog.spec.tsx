@@ -2,11 +2,13 @@ import { describe, it, vi, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import ConfirmDialog from '@components/ConfirmDialog';
 import type { ConfirmDialogProps } from '@components/ConfirmDialog';
+import userEvent from '@testing-library/user-event';
 
 const mockDefaultProps: ConfirmDialogProps = {
 	visible: true,
 	handleHiding: vi.fn(),
 	content: 'Are you sure?',
+	onConfirm: vi.fn()
 };
 
 const renderComponent = (props: Partial<ConfirmDialogProps> = {}) =>
@@ -34,9 +36,12 @@ describe('<ConfirmDialog />', () => {
 		).toBeInTheDocument();
 	});
 
-	it('should render footer when it is provided', () => {
-		renderComponent({ footer: <button>Delete</button> });
+	it('should call onConfirm when user confirms operation',  async () => {
+		const onConfirmSpy = vi.fn();
+		renderComponent({ onConfirm: onConfirmSpy })
 
-		expect(screen.getByRole('button', { name: 'Delete' })).toBeInTheDocument();
+		await userEvent.click(screen.getByRole('button', { name: 'Yes' }));
+
+		expect(onConfirmSpy).toHaveBeenCalled();
 	});
 });
