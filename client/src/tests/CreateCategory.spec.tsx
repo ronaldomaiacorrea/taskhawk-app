@@ -96,18 +96,18 @@ describe('<EditCategory />', () => {
 		});
 	});
 
-	it('should render error message when submitting form with a name field with more than 10 characters', async () => {
+	it('should render error message when submitting form with a name field with more than 30 characters', async () => {
 		const onCreateCategorySpy = vi.fn();
 		renderComponent({ onCreateCategory: onCreateCategorySpy });
 
 		await userEvent.clear(getNameField());
-		await userEvent.type(getNameField(), 'a'.repeat(11));
+		await userEvent.type(getNameField(), 'a'.repeat(31));
 
 		userEvent.click(getSaveButton());
 
 		await waitFor(() => {
 			expect(getNameField()).toHaveAccessibleDescription(
-				'Category name must not exceed 10 characters.'
+				'Category name must not exceed 30 characters.'
 			);
 
 			expect(onCreateCategorySpy).not.toHaveBeenCalled();
