@@ -107,7 +107,7 @@ const Categories = () => {
 				className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
 				onClick={() => setIsCreateDialogVisible(true)}
 			/>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{categories.length > 0 ? (
 					categories.map((category) => (
 						<div key={category.id}>
