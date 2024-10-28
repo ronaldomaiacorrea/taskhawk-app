@@ -17,14 +17,6 @@ export interface Task {
 	categoryId: number;
 }
 
-export interface TasksContextType {
-	tasks?: Task[];
-	isLoading?: boolean;
-	isFetching?: boolean;
-	isError?: boolean;
-	error?: Error | null;
-}
-
 export type TaskWithCategory = Task & {
 	categoryName?: string;
 };

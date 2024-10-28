@@ -2,7 +2,7 @@ import { renderWithClient, screen, waitFor } from '@tests/helper';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, Mock, vi } from 'vitest';
-import Categories from '@pages/categories/Categories';
+import Categories from 'src/features/categories/Categories';
 import type { Category } from '@shared/types';
 import { ICON } from '@shared/types';
 import { beforeEach } from 'node:test';
@@ -11,7 +11,7 @@ import {
 	useCreateCategory,
 	useDeleteCategory,
 	useUpdateCategory,
-} from '@queries/categories';
+} from 'src/lib/queries/categories';
 
 const mockCategories: Category[] = [
 	{

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
 import CategoryCard, {
 	CategoryCardProps,
-} from '@pages/categories/CategoryCard';
+} from 'src/features/categories/components/CategoryCard';
 import { TasksContext } from '@context/TasksProvider';
 import type { Task } from '@shared/types';
 import { ICON, Status } from '@shared/types';
@@ -165,12 +165,12 @@ describe('<CategoryCard />', () => {
 
 		render(
 			<TasksContext.Provider value={{ tasks: [] }}>
-				<CategoryCard {...defaultProps} onDelete={onDeleteSpy}/>
+				<CategoryCard {...defaultProps} onDelete={onDeleteSpy} />
 			</TasksContext.Provider>
 		);
 
 		userEvent.click(getDeleteButton());
-		
+
 		await waitFor(() =>
 			expect(onDeleteSpy).toHaveBeenCalledWith({
 				id: 1,
@@ -178,6 +178,6 @@ describe('<CategoryCard />', () => {
 				icon: ICON.Briefcase,
 				description: 'Category for work-related tasks',
 			})
-		);	
-	});	
+		);
+	});
 });
