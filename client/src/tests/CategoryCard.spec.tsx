@@ -1,13 +1,14 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi, Mock } from 'vitest';
 import CategoryCard, {
 	CategoryCardProps,
 } from 'src/features/categories/components/CategoryCard';
-import { TasksContext } from '@context/TasksProvider';
 import type { Task } from '@shared/types';
 import { ICON, Status } from '@shared/types';
 import userEvent from '@testing-library/user-event';
+import { useTasks } from '@queries';
+import { beforeEach } from 'node:test';
 
 const defaultProps: CategoryCardProps = {
 	category: {
@@ -50,18 +51,27 @@ const mockTasks: Task[] = [
 	},
 ];
 
+vi.mock('@queries', async () => {
+	return {
+		useTasks: vi.fn(),
+	};
+});
+
 const renderComponent = (props: Partial<CategoryCardProps> = {}) =>
-	render(
-		<TasksContext.Provider value={{ tasks: mockTasks }}>
-			<CategoryCard {...defaultProps} {...props} />
-		</TasksContext.Provider>
-	);
+	render(<CategoryCard {...defaultProps} {...props} />);
 
 const getDeleteButton = () => screen.getByRole('button', { name: 'Delete' });
 const getEditButton = () => screen.getByRole('button', { name: 'Edit' });
 
 describe('<CategoryCard />', () => {
+	beforeEach(() => {
+		vi.resetAllMocks();
+	});
+
 	it('should render category card with tasks', async () => {
+		(useTasks as Mock).mockReturnValue({
+			data: mockTasks,
+		});
 		renderComponent();
 
 		expect(screen.getByRole('heading', { name: 'Work' })).toBeInTheDocument();
@@ -77,12 +87,11 @@ describe('<CategoryCard />', () => {
 		});
 	});
 
-	it('should render No tasks associated message', async () => {
-		render(
-			<TasksContext.Provider value={{ tasks: [] }}>
-				<CategoryCard {...defaultProps} />
-			</TasksContext.Provider>
-		);
+	it('should render "No tasks associated" message', async () => {
+		(useTasks as Mock).mockReturnValue({
+			data: [],
+		});
+		renderComponent();
 
 		expect(
 			screen.getByText('No tasks associated with this category.')
@@ -90,6 +99,9 @@ describe('<CategoryCard />', () => {
 	});
 
 	it('should render disabled delete when tasks are assigned', async () => {
+		(useTasks as Mock).mockReturnValue({
+			data: mockTasks,
+		});
 		renderComponent();
 
 		expect(getDeleteButton()).toBeDisabled();
@@ -118,11 +130,10 @@ describe('<CategoryCard />', () => {
 	});
 
 	it('should enable delete and edit buttons when no tasks are assigned', async () => {
-		render(
-			<TasksContext.Provider value={{ tasks: [] }}>
-				<CategoryCard {...defaultProps} />
-			</TasksContext.Provider>
-		);
+		(useTasks as Mock).mockReturnValue({
+			data: [],
+		});
+		renderComponent();
 		expect(getDeleteButton()).toBeEnabled();
 		expect(getEditButton()).toBeEnabled();
 	});
@@ -143,11 +154,7 @@ describe('<CategoryCard />', () => {
 	it('should call onEdit function when user clicks on Edit button', async () => {
 		const onEditSpy = vi.fn();
 
-		render(
-			<TasksContext.Provider value={{ tasks: mockTasks }}>
-				<CategoryCard {...defaultProps} onEdit={onEditSpy} />
-			</TasksContext.Provider>
-		);
+		renderComponent({ onEdit: onEditSpy });
 
 		userEvent.click(getEditButton());
 		await waitFor(() =>
@@ -163,11 +170,7 @@ describe('<CategoryCard />', () => {
 	it('should render confirmation dialog when user clicks on Delete button', async () => {
 		const onDeleteSpy = vi.fn();
 
-		render(
-			<TasksContext.Provider value={{ tasks: [] }}>
-				<CategoryCard {...defaultProps} onDelete={onDeleteSpy} />
-			</TasksContext.Provider>
-		);
+		renderComponent({ onDelete: onDeleteSpy });
 
 		userEvent.click(getDeleteButton());
 

@@ -1,6 +1,6 @@
 import { describe, it, vi, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ConfirmDialog from 'src/common/ConfirmDialog';
+import { ConfirmDialog } from '@common';
 import type { ConfirmDialogProps } from 'src/common/ConfirmDialog';
 import userEvent from '@testing-library/user-event';
 

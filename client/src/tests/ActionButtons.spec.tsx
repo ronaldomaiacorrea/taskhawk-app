@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
-import type { ActionButtonsProps } from 'src/common/ActionButtons';
-import ActionButtons from 'src/common/ActionButtons';
+import type { ActionButtonsProps } from '@common';
+import { ActionButtons } from '@common';
 import userEvent from '@testing-library/user-event';
 
 const defaultProps: ActionButtonsProps = {

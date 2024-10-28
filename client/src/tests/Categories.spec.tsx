@@ -1,8 +1,8 @@
-import { renderWithClient, screen, waitFor } from '@tests/helper';
+import { renderWithClient, screen, waitFor } from './helper';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, Mock, vi } from 'vitest';
-import Categories from 'src/features/categories/Categories';
+import Categories from '@features/categories/Categories';
 import type { Category } from '@shared/types';
 import { ICON } from '@shared/types';
 import { beforeEach } from 'node:test';
@@ -11,7 +11,7 @@ import {
 	useCreateCategory,
 	useDeleteCategory,
 	useUpdateCategory,
-} from 'src/lib/queries/categories';
+} from '@queries';
 
 const mockCategories: Category[] = [
 	{
@@ -34,7 +34,7 @@ const mockCategories: Category[] = [
 	},
 ];
 
-vi.mock('@queries/categories', async () => {
+vi.mock('@queries', async () => {
 	return {
 		useCategories: vi.fn(),
 		useCreateCategory: vi.fn(() => ({
@@ -45,6 +45,9 @@ vi.mock('@queries/categories', async () => {
 		})),
 		useDeleteCategory: vi.fn(() => ({
 			mutate: vi.fn(),
+		})),
+		useTasks: vi.fn(() => ({
+			data: [],
 		})),
 	};
 });

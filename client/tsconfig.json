@@ -13,9 +13,10 @@
 			"@constants": ["src/lib/constants"],
 			"@queries": ["src/lib/queries"],
 			"@context/*": ["src/context/*"],
-			"@tests/*": ["src/tests/*"],
+			"@features/*": ["src/features/*"],
 			"@shared/*": ["../shared/*"],
-			"@api/*": ["src/lib/api/*"]
+			"@api/*": ["src/lib/api/*"],
+			"@layout": ["src/layout"]
 		},
 		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
