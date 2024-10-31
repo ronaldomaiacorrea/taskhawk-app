@@ -1,14 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Sidebar from './layout/Sidebar';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
 import { Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/dashboard/Dashboard';
-import Categories from './pages/categories/Categories';
-import Tasks from './pages/tasks/Tasks';
-import Settings from './pages/settings/Settings';
-import Calendar from '@pages/calendar/Calendar';
+import Dashboard from './features/dashboard/Dashboard';
+import Categories from './features/categories/Categories';
+import Tasks from './features/tasks/Tasks';
+import Settings from './features/settings/Settings';
+import Calendar from './features/calendar/Calendar';
 
 const queryClient = new QueryClient();
 

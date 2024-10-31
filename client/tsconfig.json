@@ -7,17 +7,17 @@
 		"skipLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@components/*": ["src/components/*"],
+			"@common": ["src/common"],
 			"@hooks/*": ["src/hooks/*"],
-			"@utils/*": ["src/utils/*"],
+			"@utils": ["src/lib/utils"],
+			"@constants": ["src/lib/constants"],
+			"@queries": ["src/lib/queries"],
 			"@context/*": ["src/context/*"],
-			"@pages/*": ["src/pages/*"],
-			"@queries/*": ["src/queries/*"],
-			"@tests/*": ["src/tests/*"],
-			"@shared/*": ["../shared/*"]
+			"@features/*": ["src/features/*"],
+			"@shared/*": ["../shared/*"],
+			"@api/*": ["src/lib/api/*"],
+			"@layout": ["src/layout"]
 		},
-
-		/* Bundler mode */
 		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
@@ -25,8 +25,6 @@
 		"noEmit": true,
 		"jsx": "react-jsx",
 		"types": ["node", "vitest"],
-
-		/* Linting */
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
