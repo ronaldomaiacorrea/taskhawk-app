@@ -4,6 +4,7 @@ import { logger } from 'hono/logger';
 import { tasksRoute } from './routes/tasks';
 import { categoriesRoute } from './routes/categories';
 import { createClient } from '@supabase/supabase-js';
+import { authRoute } from './routes/auth';
 
 const supabaseUrl = process.env.SUPA_BASE_URL!;
 const supabaseKey = process.env.SUPA_BASE_API_KEY!;
@@ -16,5 +17,6 @@ app.use(logger());
 
 app.route('/api/tasks', tasksRoute);
 app.route('/api/categories', categoriesRoute);
+app.route('/api/auth', authRoute);
 
 export default app;
