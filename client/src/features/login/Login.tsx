@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@context/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
@@ -9,6 +9,7 @@ import LoginFormFields from './components/LoginFormFields';
 const Login = () => {
     const { login, isAuthenticated } = useAuth();
     const navigate = useNavigate();
+    const [error, setError] = useState('');
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -24,12 +25,12 @@ const Login = () => {
     const validationSchema = loginValidationSchema;
 
     const handleSubmit = async (values: { email: string; password: string }) => {
+        setError('');
         try {
             await login(values.email, values.password);
             navigate('/');
         } catch (err) {
-            // Handle error, possibly set a state to show error message
-            console.error('Login failed:', err);
+            setError('Login failed. Please check your credentials.');
         }
     };
 
@@ -48,10 +49,11 @@ const Login = () => {
                             type="submit"
                             icon="pi pi-key"
                             label="Login"
-                            outlined
-                            className="w-full mt-8 text-white border-teal-500 bg-teal-500 hover:bg-teal-600"
+                            raised
+                            className="w-full mt-8 mb-4 text-white border-teal-500 bg-teal-500 hover:bg-teal-600 hover:border-teal-600"
                             disabled={isSubmitting}
                         />
+                        {error && <p className="text-red-500 mb-4">{error}</p>}
                     </Form>
                 )}
             </Formik>
