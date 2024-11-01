@@ -8,6 +8,7 @@ Content-Type: application/json
 }
 
 ### Sign In User
+# @name authSignin
 POST http://localhost:3030/api/auth/signin
 Content-Type: application/json
 
@@ -16,10 +17,8 @@ Content-Type: application/json
     "password": "password123"
 }
 
-### Sign Out User
-POST http://localhost:3030/api/auth/signout
-Content-Type: application/json
-Authorization: Bearer {{authToken}}
+###
+@authToken = {{ authSignin.response.body.data.session.access_token }}
 
 
 ### check user profile
@@ -28,9 +27,14 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 
+### Sign Out User
+POST http://localhost:3030/api/auth/signout
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+
 ### delete user
 DELETE http://localhost:3030/api/auth/delete/{{userId}}
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
-
 
