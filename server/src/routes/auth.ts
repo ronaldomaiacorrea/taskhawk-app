@@ -3,22 +3,19 @@ import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { supabase } from '../app';
 import { z } from 'zod';
+import userSchema from '../schemas/user';
 
 export const authRoute = new Hono();
 
-const signUpSchema = z.object({
-	email: z.string().email(),
-	password: z.string().min(6),
-});
 
 // Sign up route
 authRoute.post(
 	'/signup',
-	zValidator('json', signUpSchema),
+	zValidator('json', userSchema),
 	async (c) => {
 		const { email, password } = await c.req.valid('json');
 
-		const { data: { user, session }, error } = await supabase.auth.signUp({
+		const { data: { user }, error } = await supabase.auth.signUp({
 			email,
 			password,
 		});
@@ -31,15 +28,11 @@ authRoute.post(
 	}
 );
 
-//Sign in route
-const signInSchema = z.object({
-	email: z.string().email(),
-	password: z.string().min(6),
-});
 
+//Sign in route
 authRoute.post(
 	'/signin',
-	zValidator('json', signInSchema),
+	zValidator('json', userSchema),
 	async (c) => {
 		const { email, password } = await c.req.valid('json');
 
@@ -56,6 +49,7 @@ authRoute.post(
 	}
 );
 
+
 //Sign out route
 authRoute.post('/signout', async (c) => {
 	const { error } = await supabase.auth.signOut();
@@ -67,9 +61,10 @@ authRoute.post('/signout', async (c) => {
 	return c.json({ message: 'User signed out successfully' }, 200);
 });
 
+
 // Forgot password route
-const forgotPasswordSchema = z.object({
-	email: z.string().email(),
+const forgotPasswordSchema = userSchema.pick({
+	email: true,
 });
 
 authRoute.post(
@@ -91,7 +86,7 @@ authRoute.post(
 
 // Change password route
 const changePasswordSchema = z.object({
-	newPassword: z.string().min(6),
+	newPassword: userSchema.shape.password,
 });
 
 authRoute.post(
@@ -112,6 +107,7 @@ authRoute.post(
 	}
 );
 
+
 // delete auth user
 authRoute.delete('/delete/:id', async (c) => {
 
@@ -129,6 +125,7 @@ authRoute.delete('/delete/:id', async (c) => {
 
 	return c.json({ message: 'User deleted successfully' }, 200);
 });
+
 
 // Get user profile
 authRoute.get('/profile', async (c) => {

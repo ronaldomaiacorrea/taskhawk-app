@@ -1,0 +1,64 @@
+@authEmail = email@test.com
+
+
+### Sign Up User
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+    "email": "{{authEmail}}",
+    "password": "password"
+}
+
+
+### Sign In User
+# @name authSignin
+POST {{baseUrl}}/auth/signin
+Content-Type: application/json
+
+{
+    "email": "{{authEmail}}",
+    "password": "password123"
+}
+
+###
+@authToken = {{ authSignin.response.body.data.session.access_token }}
+@userId = {{ authSignin.response.body.data.user.id }}
+
+
+### check user profile
+GET {{baseUrl}}/auth/profile
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+
+### forgot-password
+POST {{baseUrl}}/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": "{{authEmail}}"
+}
+
+
+### change-password
+GET {{baseUrl}}/auth/change-password
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "password": "password123"
+}
+
+
+### Sign Out User
+POST {{baseUrl}}/auth/signout
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+
+### delete user
+DELETE {{baseUrl}}/auth/delete/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
