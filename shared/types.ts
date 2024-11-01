@@ -17,6 +17,31 @@ export interface Task {
 	categoryId: number;
 }
 
+export interface IUser {
+	id: string;
+	email: string;
+	displayName: string;
+	access_token: string;
+	refresh_token: string;
+}
+
+export interface IAuthUser {
+	message: string;
+	data: {
+		session: {
+			access_token: string;
+			refresh_token: string;
+			user: {
+				id: string;
+				email: string;
+				user_metadata: {
+					displayName: string;
+				};
+			}
+		}
+	}
+}
+
 export type TaskWithCategory = Task & {
 	categoryName?: string;
 };
