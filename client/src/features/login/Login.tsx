@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '@context/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Formik, Form } from 'formik';

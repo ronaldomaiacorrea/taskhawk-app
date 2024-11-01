@@ -1,2 +1,2 @@
 export * from './AuthContext';
-export * from './useAuth';
+export * from '../hooks/useAuth';
