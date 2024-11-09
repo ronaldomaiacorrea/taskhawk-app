@@ -120,14 +120,14 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 			<Column expander={allowExpansion} style={{ width: '2rem' }} frozen />
 			<Column field="title" header="Name" sortable frozen />
 			<Column
-				body={(task: Task) => dateTemplate(task.creationDate)}
+				body={(task: Task) => dateTemplate(new Date(task.creationDate))}
 				header="Creation date"
 				sortField="creationDate"
 				sortable
 				style={{ minWidth: '250px' }}
 			/>
 			<Column
-				body={(task: Task) => dateTemplate(task.dueDate)}
+				body={(task: Task) => dateTemplate(task?.dueDate)}
 				header="Due date"
 				sortField="dueDate"
 				sortable

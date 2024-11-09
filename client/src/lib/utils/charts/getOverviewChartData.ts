@@ -16,11 +16,11 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
 	const dataValues = new Array(7).fill(0);
 
 	const statusIndexMap: Record<Status, number> = {
-		[Status.COMPLETED]: 0,
-		[Status.TO_DO]: 1,
+		[Status.TO_DO]: 0,
+		[Status.COMPLETED]: 1,
 		[Status.BLOCKED]: 2,
-		[Status.IN_PROGRESS]: 3,
-		[Status.OVERDUE]: 4,
+		[Status.OVERDUE]: 3,
+		[Status.IN_PROGRESS]: 4,
 	};
 
 	data?.forEach((task) => {
@@ -65,7 +65,7 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
 
 	const chartBackgroundColors = dataValues.map((_, index) => {
 		const taskStatus = labels[index] as Status;
-		return backgroundColors[taskStatus]; 
+		return backgroundColors[taskStatus];
 	});
 
 	const chartData = {
