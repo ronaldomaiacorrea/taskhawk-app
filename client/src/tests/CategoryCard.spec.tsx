@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi, Mock } from 'vitest';
 import CategoryCard, {
@@ -60,15 +60,17 @@ vi.mock('@queries', async () => {
 const renderComponent = (props: Partial<CategoryCardProps> = {}) =>
 	render(<CategoryCard {...defaultProps} {...props} />);
 
-const getDeleteButton = () => screen.getByRole('button', { name: 'Delete' });
-const getEditButton = () => screen.getByRole('button', { name: 'Edit' });
+const getOptions = () => screen.getByLabelText('Options');
+const getEditButton = () => screen.getByText('Edit');
+const getDeleteButton = () => screen.getByText('Delete');
+const getTasksButton = () => screen.getByText('Tasks');
 
 describe('<CategoryCard />', () => {
 	beforeEach(() => {
 		vi.resetAllMocks();
 	});
 
-	it('should render category card with tasks', async () => {
+	it('should render category card', async () => {
 		(useTasks as Mock).mockReturnValue({
 			data: mockTasks,
 		});
@@ -78,85 +80,94 @@ describe('<CategoryCard />', () => {
 		expect(
 			screen.getByText('Category for work-related tasks')
 		).toBeInTheDocument();
-
-		const listItems = screen.getAllByRole('listitem');
-		const expectedTasks = ['Task 1', 'Task 2', 'Task 3'];
-
-		listItems.forEach((item, index) => {
-			expect(item).toHaveTextContent(expectedTasks[index]);
-		});
 	});
 
-	it('should render "No tasks associated" message', async () => {
-		(useTasks as Mock).mockReturnValue({
-			data: [],
-		});
-		renderComponent();
-
-		expect(
-			screen.getByText('No tasks associated with this category.')
-		).toBeInTheDocument();
-	});
-
-	it('should render disabled delete when tasks are assigned', async () => {
+	it('should render overlay with delete, edit and tasks when user clicks on options button', async () => {
 		(useTasks as Mock).mockReturnValue({
 			data: mockTasks,
 		});
 		renderComponent();
 
-		expect(getDeleteButton()).toBeDisabled();
+		userEvent.click(getOptions());
+
+		await waitFor(() => {
+			expect(getDeleteButton()).toBeInTheDocument();
+		});
+		expect(getEditButton()).toBeInTheDocument();
+		expect(getTasksButton()).toBeInTheDocument();
 	});
 
-	it('should show tooltip when hovering over disabled buttons', async () => {
+	it('should disable delete and edit buttons when there are tasks assigned', async () => {
+		(useTasks as Mock).mockReturnValue({
+			data: mockTasks,
+		});
 		renderComponent();
+		userEvent.click(getOptions());
 
-		fireEvent.mouseOver(getDeleteButton());
-		await waitFor(() =>
-			expect(
-				screen.queryAllByAltText(
-					'Cannot delete category while tasks are assigned.'
-				)
-			).toHaveLength(0)
-		);
-
-		fireEvent.mouseOver(getEditButton());
-		await waitFor(() =>
-			expect(
-				screen.queryAllByAltText(
-					'Cannot edit category while tasks are assigned.'
-				)
-			).toHaveLength(0)
-		);
+		await waitFor(() => {
+			const editButtonContainer = screen.getByText('Edit').closest('div');
+			const deleteButtonContainer = screen.getByText('Delete').closest('div');
+			expect(editButtonContainer).toHaveClass('cursor-not-allowed opacity-50');
+			expect(deleteButtonContainer).toHaveClass(
+				'cursor-not-allowed opacity-50'
+			);
+		});
 	});
 
-	it('should enable delete and edit buttons when no tasks are assigned', async () => {
+	it('should not disable delete and edit buttons when there are not tasks assigned', async () => {
 		(useTasks as Mock).mockReturnValue({
 			data: [],
 		});
 		renderComponent();
-		expect(getDeleteButton()).toBeEnabled();
-		expect(getEditButton()).toBeEnabled();
+		userEvent.click(getOptions());
+
+		await waitFor(() => {
+			const editButtonContainer = screen.getByText('Edit').closest('div');
+			const deleteButtonContainer = screen.getByText('Delete').closest('div');
+			expect(editButtonContainer).not.toHaveClass(
+				'cursor-not-allowed opacity-50'
+			);
+			expect(deleteButtonContainer).not.toHaveClass(
+				'cursor-not-allowed opacity-50'
+			);
+		});
 	});
 
-	it('should not show tooltip when hovering over enabled buttons', async () => {
+	it('should render tooltip when user hovers over delete and edit when tasks are assigned to the category', async () => {
+		(useTasks as Mock).mockReturnValue({
+			data: mockTasks,
+		});
 		renderComponent();
 
-		fireEvent.mouseOver(getDeleteButton());
-		expect(
-			screen.queryByText('Cannot delete category while tasks are assigned.')
-		).not.toBeInTheDocument();
+		userEvent.click(getOptions());
 
-		fireEvent.mouseOver(getEditButton());
-		expect(screen.queryByText('Cannot edit category while tasks are assigned.'))
-			.not.toBeInTheDocument;
+		await waitFor(() => {
+			userEvent.hover(getDeleteButton());
+		});
+
+		await waitFor(() =>
+			expect(
+				screen.getByText(
+					'Categories with assigned tasks cannot be edited or deleted.'
+				)
+			).toBeInTheDocument()
+		);
 	});
 
 	it('should call onEdit function when user clicks on Edit button', async () => {
 		const onEditSpy = vi.fn();
+		(useTasks as Mock).mockReturnValue({
+			data: [],
+		});
 
 		renderComponent({ onEdit: onEditSpy });
 
+		userEvent.click(getOptions());
+
+		await waitFor(() => expect(getEditButton()).toBeInTheDocument());
+
 		userEvent.click(getEditButton());
+
 		await waitFor(() =>
 			expect(onEditSpy).toHaveBeenCalledWith({
 				id: 1,
@@ -167,20 +178,67 @@ describe('<CategoryCard />', () => {
 		);
 	});
 
-	it('should render confirmation dialog when user clicks on Delete button', async () => {
+	it('should call onDelete function when user clicks on Delete button', async () => {
 		const onDeleteSpy = vi.fn();
+		(useTasks as Mock).mockReturnValue({
+			data: [],
+		});
 
 		renderComponent({ onDelete: onDeleteSpy });
 
+		userEvent.click(getOptions());
+
+		await waitFor(() => expect(getDeleteButton()).toBeInTheDocument());
+
 		userEvent.click(getDeleteButton());
 
+		await waitFor(() => expect(onDeleteSpy).toHaveBeenCalled());
+	});
+
+	it('should render dialog box when user clicks on Tasks option', async () => {
+		(useTasks as Mock).mockReturnValue({
+			data: mockTasks,
+		});
+
+		renderComponent();
+
+		userEvent.click(getOptions());
+
+		await waitFor(() => expect(getTasksButton()).toBeInTheDocument());
+
+		userEvent.click(getTasksButton());
+
 		await waitFor(() =>
-			expect(onDeleteSpy).toHaveBeenCalledWith({
-				id: 1,
-				name: 'Work',
-				icon: ICON.Briefcase,
-				description: 'Category for work-related tasks',
-			})
+			expect(screen.getByRole('dialog', { name: 'Tasks' })).toBeInTheDocument()
 		);
+
+		const listItems = screen.getAllByRole('listitem');
+		const expectedTasks = ['Task 1', 'Task 2', 'Task 3'];
+
+		listItems.forEach((item, index) => {
+			expect(item).toHaveTextContent(expectedTasks[index]);
+		});
+	});
+
+	it('should render dialog box with empty message when there are no tasks assigned', async () => {
+		(useTasks as Mock).mockReturnValue({
+			data: [],
+		});
+
+		renderComponent();
+
+		userEvent.click(getOptions());
+
+		await waitFor(() => expect(getTasksButton()).toBeInTheDocument());
+
+		userEvent.click(getTasksButton());
+
+		await waitFor(() =>
+			expect(screen.getByRole('dialog', { name: 'Tasks' })).toBeInTheDocument()
+		);
+
+		expect(
+			screen.getByText('No tasks associated with this category.')
+		).toBeInTheDocument();
 	});
 });
