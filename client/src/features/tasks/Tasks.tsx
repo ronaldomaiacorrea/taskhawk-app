@@ -15,8 +15,6 @@ const Tasks = () => {
 	const { data: categories = [] } = useCategories();
 	const { data: tasks = [] } = useTasks();
 
-	console.log('tasks in tasks', tasks);
-
 	const confirmDelete = (selectedTasks: Task[]) => {
 		setTasksToDelete(selectedTasks);
 		setIsDeleteDialogVisible(true);

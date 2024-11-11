@@ -151,7 +151,13 @@ describe('<Categories />', () => {
 
 		renderComponent();
 
-		await userEvent.click(screen.getAllByRole('button', { name: 'Edit' })[0]);
+		userEvent.click(screen.queryAllByLabelText('Options')[0]);
+
+		await waitFor(() => {
+			expect(screen.getByText('Edit')).toBeInTheDocument();
+		});
+
+		await userEvent.click(screen.getByText('Edit'));
 
 		expect(
 			screen.getByRole('dialog', { name: 'Edit Work category' })
@@ -179,8 +185,13 @@ describe('<Categories />', () => {
 
 		renderComponent();
 
-		await userEvent.click(screen.getAllByRole('button', { name: 'Delete' })[0]);
+		userEvent.click(screen.queryAllByLabelText('Options')[0]);
 
+		await waitFor(() => {
+			expect(screen.getByText('Delete')).toBeInTheDocument();
+		});
+
+		await userEvent.click(screen.getByText('Delete'));
 		await userEvent.click(screen.getByRole('button', { name: 'Yes' }));
 
 		await waitFor(() => expect(deleteCategory).toHaveBeenCalled());
