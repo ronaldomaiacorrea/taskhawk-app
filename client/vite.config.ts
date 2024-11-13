@@ -20,4 +20,7 @@ export default defineConfig({
 		environment: 'jsdom',
 		setupFiles: ['src/tests/setupTests/setupTests.ts'],
 	},
+	optimizeDeps: {
+		include: ['i18next', 'react-i18next'],
+	},
 } as UserConfigExport);

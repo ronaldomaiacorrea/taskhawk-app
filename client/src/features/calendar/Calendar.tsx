@@ -6,6 +6,7 @@ import { Status, Task } from '@shared/types';
 import PageTitle from 'src/common/PageTitle';
 import { backgroundColors } from '@constants';
 import { Tooltip } from 'primereact/tooltip';
+import { useTranslations } from '@hooks/useTranslations';
 // import { useMonthTasks } from '@queries/tasks';
 
 const tasks: Task[] = [
@@ -32,13 +33,14 @@ const tasks: Task[] = [
 ];
 
 const Calendar = () => {
+	const { t } = useTranslations();
 	// const { data: tasks } = useMonthTasks();
 
 	// const [initialView, setInitialView] = useState('dayGridMonth');
 
 	return (
 		<>
-			<PageTitle>Calendar</PageTitle>
+			<PageTitle>{t('common.calendar')}</PageTitle>
 			<Tooltip />
 			<FullCalendar
 				locale={'en'}

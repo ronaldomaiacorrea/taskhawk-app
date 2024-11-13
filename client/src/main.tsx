@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter } from 'react-router-dom';
 import DarkModeProvider from './context/DarkModeProvider.tsx';
+import './i18n.js';
 
 const queryClient = new QueryClient();
 
