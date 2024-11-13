@@ -1,3 +1,13 @@
 {
-	"cSpell.words": ["Hono"]
+  "cSpell.words": ["Hono"],
+
+  "rest-client.environmentVariables": {
+    "$shared": {},
+    "development": {
+      "baseUrl": "http://localhost:3030/api"
+    },
+    "production": {
+      "baseUrl": "http://localhost:3030/api"
+    }
+  }
 }

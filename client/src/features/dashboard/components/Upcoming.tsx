@@ -43,7 +43,7 @@ const Upcoming = ({ tasks }: UpcomingProps) => {
 		</>
 	);
 
-	const dueDateTemplate = (rowData: Task) => dateTemplate(rowData.dueDate);
+	const dueDateTemplate = (rowData: Task) => dateTemplate(rowData?.dueDate);
 
 	return (
 		<>

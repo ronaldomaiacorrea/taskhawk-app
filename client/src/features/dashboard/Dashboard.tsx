@@ -10,7 +10,12 @@ import { useTasks } from '@queries';
 const Dashboard = () => {
 	const { data: tasks = [], isError, error, isLoading } = useTasks();
 
-	if (isLoading) return <Spinner />;
+	if (isLoading)
+		return (
+			<div className="flex flex-row justify-center items-center min-h-screen">
+				<Spinner />
+			</div>
+		);
 
 	if (isError) return <Message severity="error" text={error?.message} />;
 

@@ -1,16 +1,15 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import createTaskSchema from '../schemas/task';
-import { mockTasks } from '../data/_mockData';
 import type { Task, TaskWithCategory } from '../../../shared/types';
 import { supabase } from '../app';
 
 export const tasksRoute = new Hono();
 
-let cachedCategories: { [key: string]: string } = {};
+let categoriesCache: Record<number, string> | null = null;
 
 const loadCategories = async () => {
-	if (Object.keys(cachedCategories).length === 0) {
+	if (!categoriesCache) {
 		const { data: categories, error } = await supabase
 			.from('categories')
 			.select('id, name');
@@ -20,18 +19,24 @@ const loadCategories = async () => {
 			return;
 		}
 
-		categories?.forEach((category) => {
-			cachedCategories[category.id] = category.name;
-		});
+		categoriesCache = categories.reduce((acc, category) => {
+			acc[category.id] = category.name;
+			return acc;
+		}, {} as Record<number, string>);
 	}
+	return categoriesCache;
 };
 
 const mergeTasksWithCategories = async (
 	task: Task
 ): Promise<TaskWithCategory> => {
-	await loadCategories();
+	const categories = await loadCategories();
 
-	const categoryName = cachedCategories[task.categoryId];
+	if (!categories) {
+		throw new Error('Failed to load categories');
+	}
+
+	const categoryName = categories[task.categoryId];
 
 	return { ...task, categoryName };
 };
@@ -40,14 +45,22 @@ const mergeTasksWithCategories = async (
 tasksRoute.get('/', async (c) => {
 	const { data: tasks, error } = await supabase.from('tasks').select('*');
 
-	if (!tasks || error) {
+	if (error) {
 		return c.json({ error: error.message }, 500);
 	}
 
-	const tasksWithCategories = tasks.map((task) =>
-		mergeTasksWithCategories(task)
-	);
-	return c.json(tasksWithCategories);
+	if (!tasks) {
+		return c.json({ error: 'No tasks found' }, 404);
+	}
+
+	try {
+		const tasksWithCategories = await Promise.all(
+			tasks.map((task) => mergeTasksWithCategories(task))
+		);
+		return c.json(tasksWithCategories);
+	} catch (err) {
+		return c.json({ error: 'Error processing tasks' }, 500);
+	}
 });
 
 tasksRoute.get('/:id', async (c) => {
@@ -58,24 +71,42 @@ tasksRoute.get('/:id', async (c) => {
 		.eq('id', id)
 		.single();
 
-	if (!task || error) {
-		return c.json({ error: error?.message }, 500);
+	if (error) {
+		return c.json({ error: error.message }, 500);
 	}
 
-	return c.json(task);
+	if (!task) {
+		return c.json({ error: 'Task not found' }, 404);
+	}
+
+	try {
+		const taskWithCategory = await mergeTasksWithCategories(task);
+		return c.json(taskWithCategory);
+	} catch (err) {
+		return c.json({ error: 'Error processing task' }, 500);
+	}
 });
 
 // POST request
 tasksRoute.post('/', zValidator('json', createTaskSchema), async (c) => {
 	const task = await c.req.valid('json');
 
-	const { data, error } = await supabase.from('tasks').insert([{ ...task }]);
+	const { data, error } = await supabase.from('tasks').insert([task]).select();
 
 	if (error) {
 		return c.json({ error: error.message }, 500);
 	}
 
-	return c.json(data, 201);
+	if (!data || data.length === 0) {
+		return c.json({ error: 'Failed to create task' }, 500);
+	}
+
+	try {
+		const taskWithCategory = await mergeTasksWithCategories(data[0]);
+		return c.json(taskWithCategory, 201);
+	} catch (err) {
+		return c.json({ error: 'Error processing created task' }, 500);
+	}
 });
 
 // DELETE request
@@ -85,20 +116,17 @@ tasksRoute.delete('/:id', async (c) => {
 	const { data: task, error } = await supabase
 		.from('tasks')
 		.delete()
-		.eq('id', id);
+		.eq('id', id)
+		.select();
 
 	if (error) {
 		return c.json({ error: error.message }, 500);
 	}
 
-	if (!task) {
+	if (!task || task.length === 0) {
 		return c.json({ error: 'Task not found or already deleted' }, 404);
 	}
 
-	return c.json(
-		{ message: 'Category deleted successfully', task: task[0] },
-		200
-	);
+	return c.json({ message: 'Task deleted successfully', task: task[0] }, 200);
 });
-
 // TODO: put
