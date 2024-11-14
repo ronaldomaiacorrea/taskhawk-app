@@ -8,12 +8,14 @@ import { Button } from 'primereact/button';
 import { ConfirmDialog } from '@common';
 import { Toolbar } from 'primereact/toolbar';
 import EmptyData from 'src/common/EmptyData';
+import { useTranslations } from '@hooks/useTranslations';
 
 interface UpcomingProps {
 	tasks: Task[];
 }
 
 const Upcoming = ({ tasks }: UpcomingProps) => {
+	const { t } = useTranslations();
 	const [visible, setVisible] = useState(false);
 	const [selectedTasks, setSelectedTasks] = useState<Task[] | null>(null);
 
@@ -32,7 +34,7 @@ const Upcoming = ({ tasks }: UpcomingProps) => {
 
 	const dialogContent = (
 		<>
-			<p className="py-4">Are you want to mark these tasks as completed?</p>
+			<p className="py-4">{t('dashboard.markCompletedMessage')}</p>
 			<ul>
 				{selectedTasks?.map((task) => (
 					<li key={task.id} className="p-1 px-2">
@@ -48,8 +50,8 @@ const Upcoming = ({ tasks }: UpcomingProps) => {
 	return (
 		<>
 			<Card
-				title="Upcoming deadlines"
-				subTitle="Tasks approaching their due dates."
+				title={t('dashboard.upComingDeadlinesTitle')}
+				subTitle={t('dashboard.upComingDeadlinesDescription')}
 			>
 				<div className="border-b border-gray-300 mb-4" />
 				{tasks.length > 0 && (
@@ -59,7 +61,7 @@ const Upcoming = ({ tasks }: UpcomingProps) => {
 					stripedRows
 					value={getUpcomingTasks(tasks)}
 					paginator
-					emptyMessage={<EmptyData message="No tasks defined." />}
+					emptyMessage={<EmptyData message={t('tasks.notDefined')} />}
 					rows={5}
 					rowsPerPageOptions={[5, 10, 20]}
 					selection={selectedTasks}
@@ -69,13 +71,13 @@ const Upcoming = ({ tasks }: UpcomingProps) => {
 						selectionMode="multiple"
 						headerStyle={{ width: '3rem' }}
 					></Column>
-					<Column field="title" header="Title"></Column>
-					<Column body={dueDateTemplate} header="Due Date"></Column>
+					<Column field="title" header={t('common.title')}></Column>
+					<Column body={dueDateTemplate} header={t('tasks.dueDate')}></Column>
 				</DataTable>
 			</Card>
 			<div className="w-3/4">
 				<ConfirmDialog
-					header="Confirm task completion"
+					header={t('tasks.confirmCompletion')}
 					visible={visible}
 					handleHiding={() => {
 						if (!visible) return;

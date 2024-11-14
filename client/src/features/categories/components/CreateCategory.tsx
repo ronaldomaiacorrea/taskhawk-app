@@ -5,6 +5,7 @@ import { categoryValidationSchema } from '../validations/categoryFormValidations
 import type { Category } from '@shared/types';
 import { ICON } from '@shared/types';
 import ActionButtons from 'src/common/ActionButtons';
+import { useTranslations } from '@hooks/useTranslations';
 
 export interface CreateCategoryProps {
 	isVisible: boolean;
@@ -23,6 +24,8 @@ const CreateCategory = ({
 	closeDialog,
 	onCreateCategory,
 }: CreateCategoryProps) => {
+	const { t } = useTranslations();
+
 	return (
 		<Formik
 			initialValues={initialCategory}
@@ -34,7 +37,7 @@ const CreateCategory = ({
 		>
 			{({ submitForm, resetForm }) => (
 				<Dialog
-					header={'Add category'}
+					header={t('categories.addCategory')}
 					visible={isVisible}
 					className="max-w-3xl w-full mx-auto px-4"
 					onHide={() => {

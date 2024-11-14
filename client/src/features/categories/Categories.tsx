@@ -13,8 +13,11 @@ import type { Category } from '@shared/types';
 import { Message } from 'primereact/message';
 import EditCategory from './components/EditCategory';
 import CreateCategory from './components/CreateCategory';
+import { useTranslations } from '@hooks/useTranslations';
 
 const Categories = () => {
+	const { t } = useTranslations();
+
 	const { data: categories = [], isLoading, isError, error } = useCategories();
 	const toast = useRef<Toast | null>(null);
 
@@ -34,7 +37,7 @@ const Categories = () => {
 		(message: string, severity?: ToastMessage['severity']) => {
 			toast.current?.show({
 				severity: severity,
-				summary: 'Action',
+				summary: t('common.action'),
 				detail: message,
 				life: 3000,
 			});
@@ -52,10 +55,11 @@ const Categories = () => {
 		if (!category) return;
 		deleteCategory(category, {
 			onSuccess: () => {
-				displayToast('Category deleted', 'success');
+				displayToast(t('categories.deletedCategory'), 'success');
 				setIsDeleteDialogVisible(false);
 			},
-			onError: () => displayToast('Failed to delete category', 'error'),
+			onError: () =>
+				displayToast(t('categories.failedDeleteCategory'), 'error'),
 		});
 	};
 
@@ -68,20 +72,22 @@ const Categories = () => {
 	const handleUpdateCategory = (category: Category) => {
 		updateCategory(category, {
 			onSuccess: () => {
-				displayToast('Category updated', 'success');
+				displayToast(t('categories.updatedCategory'), 'success');
 				setIsEditDialogVisible(false);
 			},
-			onError: () => displayToast('Failed to update category', 'error'),
+			onError: () =>
+				displayToast(t('categories.failedUpdateCategory'), 'error'),
 		});
 	};
 
 	const handleCreateCategory = (newCategory: Omit<Category, 'id'>) => {
 		addCategory(newCategory, {
 			onSuccess: () => {
-				displayToast('Category added', 'success');
+				displayToast(t('categories.createdCategory'), 'success');
 				setIsCreateDialogVisible(false);
 			},
-			onError: () => displayToast('Failed to add category', 'error'),
+			onError: () =>
+				displayToast(t('categories.failedCreateCategory'), 'error'),
 		});
 	};
 
@@ -97,7 +103,7 @@ const Categories = () => {
 	return (
 		<>
 			<Toast ref={toast} />
-			<PageTitle>Categories</PageTitle>
+			<PageTitle>{t('common.categories')}</PageTitle>
 			<Button
 				icon="pi pi-plus"
 				label="Category"
@@ -119,7 +125,7 @@ const Categories = () => {
 				) : (
 					<Message
 						severity="info"
-						text="No categories found."
+						text={t('categories.notFound')}
 						className="text-left text-xl"
 					/>
 				)}
@@ -136,7 +142,9 @@ const Categories = () => {
 				<ConfirmDialog
 					visible={isDeleteDialogVisible}
 					handleHiding={() => setIsDeleteDialogVisible(false)}
-					content={`Are you sure you want to delete category ${selectedCategory.name}?`}
+					content={t('categories.confirmDelete', {
+						name: selectedCategory.name,
+					})}
 					onConfirm={() => handleConfirmDeleteCategory(selectedCategory)}
 				/>
 			)}

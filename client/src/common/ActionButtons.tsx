@@ -1,3 +1,4 @@
+import { useTranslations } from '@hooks/useTranslations';
 import { Button } from 'primereact/button';
 
 export interface ActionButtonsProps {
@@ -11,10 +12,11 @@ const ActionButtons = ({
 	handleSubmit,
 	handleResetForm,
 }: ActionButtonsProps) => {
+	const { t } = useTranslations();
 	return (
 		<>
 			<Button
-				label="Cancel"
+				label={t('common.cancel')}
 				className="p-button-text"
 				onClick={() => {
 					handleCloseDialog();
@@ -24,7 +26,7 @@ const ActionButtons = ({
 				severity="secondary"
 			/>
 			<Button
-				label="Save"
+				label={t('common.save')}
 				className="p-button-primary"
 				onClick={handleSubmit}
 			/>

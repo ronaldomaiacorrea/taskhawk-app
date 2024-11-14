@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 import { categoryValidationSchema } from '../validations/categoryFormValidations';
 import type { Category } from '@shared/types';
 import ActionButtons from 'src/common/ActionButtons';
+import { useTranslations } from '@hooks/useTranslations';
 
 export interface EditCategoryProps {
 	category: Category;
@@ -18,6 +19,8 @@ const EditCategory = ({
 	closeDialog,
 	onUpdateCategory,
 }: EditCategoryProps) => {
+	const { t } = useTranslations();
+
 	return (
 		<Formik
 			initialValues={category}
@@ -28,7 +31,7 @@ const EditCategory = ({
 		>
 			{({ submitForm, resetForm }) => (
 				<Dialog
-					header={`Edit ${category.name} category`}
+					header={t('categories.editCategory', { name: category.name })}
 					visible={isVisible}
 					className="max-w-3xl w-full mx-auto px-4"
 					onHide={() => {

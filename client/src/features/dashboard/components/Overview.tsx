@@ -3,19 +3,21 @@ import { getOverviewChartData } from '@utils';
 import { Card } from 'primereact/card';
 import EmptyData from 'src/common/EmptyData';
 import { Task } from '@shared/types';
+import { useTranslations } from '@hooks/useTranslations';
 
 interface OverviewProps {
 	tasks: Task[];
 }
 
 const Overview = ({ tasks }: OverviewProps) => {
+	const { t } = useTranslations();
 	const { chartData, options } = getOverviewChartData(tasks);
 
 	return (
 		<Card
-			title="Status overview"
+			title={t('dashboard.statusOverviewTitle')}
 			className="rounded-none"
-			subTitle="Breakdown of tasks by status categories."
+			subTitle={t('dashboard.statusOverviewDescription')}
 		>
 			<div className="border-b border-gray-300 mb-4" />
 			<div className="flex flex-row justify-center items-center">
@@ -31,7 +33,7 @@ const Overview = ({ tasks }: OverviewProps) => {
 						<Chart type="pie" data={chartData} options={options} />
 					) : (
 						<div className="flex justify-center items-center h-full">
-							<EmptyData message="No tasks defined." />
+							<EmptyData message={t('tasks.notDefined')} />
 						</div>
 					)}
 				</div>

@@ -7,6 +7,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
+import { useTranslations } from '@hooks/useTranslations';
 
 export interface CategoryCardProps {
 	category: Category;
@@ -15,6 +16,7 @@ export interface CategoryCardProps {
 }
 
 const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
+	const { t } = useTranslations();
 	const { id, name, description, icon } = category;
 	const { data: tasks = [] } = useTasks();
 	const [showTasksDialog, setShowTasksDialog] = useState(false);
@@ -37,7 +39,7 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 			<i
 				className="pi pi-ellipsis-v cursor-pointer text-2xl hover:text-teal-400"
 				onClick={(e) => menuRef.current?.toggle(e)}
-				aria-label="Options"
+				aria-label={t('common.options')}
 			></i>
 			<OverlayPanel ref={menuRef} dismissable>
 				<div className="flex flex-col gap-2">
@@ -47,12 +49,14 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 						aria-disabled={hasTasks}
 					>
 						<i className="pi pi-list-check text-black dark:text-white"></i>
-						<span className="text-black dark:text-white">Tasks</span>
+						<span className="text-black dark:text-white">
+							{t('common.tasks')}
+						</span>
 					</div>
 					{hasTasks && (
 						<Tooltip
 							target="#editDeleteTooltipContainer"
-							content="Categories with assigned tasks cannot be edited or deleted."
+							content={t('categories.tasksAssociatedWarning')}
 						/>
 					)}
 					<div id="editDeleteTooltipContainer" className="flex flex-col gap-2">
@@ -65,7 +69,9 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 							onClick={!hasTasks ? () => onEdit(category) : undefined}
 						>
 							<i className="pi pi-pencil text-teal-700 dark:text-teal-400"></i>
-							<span className="text-teal-700 dark:text-teal-400">Edit</span>
+							<span className="text-teal-700 dark:text-teal-400">
+								{t('common.edit')}
+							</span>
 						</div>
 						<div
 							className={`flex items-center gap-2 p-2 rounded ${
@@ -76,7 +82,9 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 							onClick={!hasTasks ? () => onDelete(category) : undefined}
 						>
 							<i className="pi pi-trash text-red-500 dark:text-red-400"></i>
-							<span className="text-red-500 dark:text-red-400">Delete</span>
+							<span className="text-red-500 dark:text-red-400">
+								{t('common.delete')}
+							</span>
 						</div>
 					</div>
 				</div>
@@ -94,10 +102,15 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 				<p className="text-xl text-center">{description}</p>
 			</Card>
 			<Dialog
-				header="Tasks"
+				header={t('common.tasks')}
 				visible={showTasksDialog}
 				onHide={() => setShowTasksDialog(false)}
-				footer={<Button label="Ok" onClick={() => setShowTasksDialog(false)} />}
+				footer={
+					<Button
+						label={t('common.ok')}
+						onClick={() => setShowTasksDialog(false)}
+					/>
+				}
 			>
 				<ul className="px-2 py-1">
 					{hasTasks ? (
@@ -110,7 +123,7 @@ const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
 							</li>
 						))
 					) : (
-						<EmptyData message="No tasks associated with this category." />
+						<EmptyData message={t('categories.emptyTasksWarning')} />
 					)}
 				</ul>
 			</Dialog>

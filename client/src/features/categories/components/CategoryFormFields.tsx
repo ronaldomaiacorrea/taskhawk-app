@@ -4,6 +4,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import type { Category } from '@shared/types';
 import { ICON } from '@shared/types';
 import { useFormikContext } from 'formik';
+import { useTranslations } from '@hooks/useTranslations';
 
 type IconOption = {
 	label: string;
@@ -18,6 +19,7 @@ const iconOptions = Object.values(ICON).map(
 );
 
 const FormFields = () => {
+	const { t } = useTranslations();
 	const { values, handleChange, errors, touched } = useFormikContext<
 		Category | Omit<Category, 'id'>
 	>();
@@ -35,7 +37,7 @@ const FormFields = () => {
 		<div className="flex flex-col gap-6">
 			<div className="flex-1">
 				<div className="flex flex-col gap-1">
-					<label htmlFor="name">Name</label>
+					<label htmlFor="name">{t('common.name')}</label>
 					<InputText
 						id="name"
 						aria-describedby="name-help"
@@ -46,7 +48,7 @@ const FormFields = () => {
 								? 'border-red-500 focus:border-red-500'
 								: 'border-gray-300'
 						}`}
-						placeholder="Enter category name"
+						placeholder={t('categories.namePlaceHolder')}
 					/>
 					{touched.name && errors.name && (
 						<small id="name-help" className="text-red-600">
@@ -57,7 +59,7 @@ const FormFields = () => {
 			</div>
 			<div className="flex-1">
 				<div className="flex flex-col gap-2">
-					<label htmlFor="description">Description</label>
+					<label htmlFor="description">{t('tasks.description')}</label>
 					<InputTextarea
 						rows={2}
 						id="description"
@@ -69,7 +71,7 @@ const FormFields = () => {
 								? 'border-red-500 focus:border-red-500'
 								: 'border-gray-300'
 						}`}
-						placeholder="Enter category description"
+						placeholder={t('categories.descriptionPlaceHolder')}
 					/>
 					{touched?.description && errors?.description && (
 						<small id="description" className="text-red-600">
@@ -80,10 +82,10 @@ const FormFields = () => {
 			</div>
 			<div className="flex-1">
 				<div className="flex flex-col gap-2">
-					<label htmlFor="icon">Icon</label>
+					<label htmlFor="icon">{t('categories.iconLabel')}</label>
 					<Dropdown
 						id="icon"
-						placeholder="Select an icon"
+						placeholder={t('categories.iconPlaceHolder')}
 						onChange={handleChange}
 						filter
 						options={iconOptions}

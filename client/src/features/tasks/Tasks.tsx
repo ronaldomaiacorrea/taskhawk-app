@@ -7,8 +7,10 @@ import TasksTable from './components/TasksTable';
 import { useCategories, useTasks } from '@queries';
 import { useState } from 'react';
 import { ConfirmDialog } from '@common';
+import { useTranslations } from '@hooks/useTranslations';
 
 const Tasks = () => {
+	const { t } = useTranslations();
 	// const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
 	const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
 	const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
@@ -22,7 +24,7 @@ const Tasks = () => {
 
 	const dialogContent = (
 		<>
-			<p className="py-4">Are you want to delete these tasks?</p>
+			<p className="py-4">{t('tasks.confirmDelete')}</p>
 			<ul>
 				{tasksToDelete?.map((task) => (
 					<li key={task.id} className="p-1 px-2">
@@ -35,7 +37,7 @@ const Tasks = () => {
 
 	return (
 		<>
-			<PageTitle>Tasks management</PageTitle>
+			<PageTitle>{t('tasks.tasksManagementTitle')}</PageTitle>
 			<div className="lg:space-y-0 space-y-6">
 				<div className="flex flex-col justify-between lg:items-center lg:flex-row lg:space-y-0">
 					<div>
@@ -58,7 +60,7 @@ const Tasks = () => {
 			</div>
 			<div className="w-3/4">
 				<ConfirmDialog
-					header="Confirm tasks deletion"
+					header={t('tasks.confirmDeletionTitle')}
 					visible={isDeleteDialogVisible}
 					handleHiding={() => {
 						if (!isDeleteDialogVisible) return;

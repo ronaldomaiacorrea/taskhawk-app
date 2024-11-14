@@ -6,9 +6,11 @@ import TasksCompletedTime from './components/TasksCompletedTime';
 import TasksPerPriority from './components/TasksPerPriority';
 import { Message } from 'primereact/message';
 import { useTasks } from '@queries';
+import { useTranslations } from '@hooks/useTranslations';
 
 const Dashboard = () => {
 	const { data: tasks = [], isError, error, isLoading } = useTasks();
+	const { t } = useTranslations();
 
 	if (isLoading)
 		return (
@@ -21,7 +23,7 @@ const Dashboard = () => {
 
 	return (
 		<>
-			<PageTitle>Dashboard</PageTitle>
+			<PageTitle>{t('common.dashboard')}</PageTitle>
 			<div className="flex flex-col gap-6">
 				<div className="flex flex-col space-y-8 align-center justify-evenly space-x-0 lg:flex-row lg:space-y-0 lg:space-x-8">
 					<div className="flex-1">

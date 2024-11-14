@@ -34,9 +34,15 @@
 		"expandAll": "Expand all",
 		"collapseAll": "Collapse all",
 		"keywordSearch": "Keyword search",
-		"ok": "Ok"
+		"ok": "Ok",
+		"options": "Options",
+		"no": "No",
+		"yes": "Yes",
+		"action": "Action",
+		"category": "Category"
 	},
 	"dashboard": {
+		"markCompletedMessage": "Do you want to mark these tasks as completed?",
 		"upComingDeadlinesTitle": "Upcoming deadlines",
 		"upComingDeadlinesDescription": "Tasks approaching their due dates.",
 		"statusOverviewTitle": "Status overview",
@@ -47,6 +53,9 @@
 		"tasksPerPriorityDescription": "Number of tasks per priority."
 	},
 	"tasks": {
+		"tasksManagementTitle": "Tasks management",
+		"notDefined": "No tasks defined",
+		"confirmCompletion": "Confirm task completion",
 		"dueDate": "Due date",
 		"creationDate": "Creation date",
 		"priority": "Priority",
@@ -66,10 +75,27 @@
 		"thursday": "Thursday",
 		"friday": "Friday",
 		"saturday": "Saturday",
-		"sunday": "Sunday"
+		"sunday": "Sunday",
+		"noDescription": "This task has no description.",
+		"confirmDelete": "Are you sure you want to delete these tasks?",
+		"confirmDeletionTitle": "Confirm tasks deletion"
 	},
 	"categories": {
 		"emptyTasksWarning": "No tasks associated with this category.",
-		"tasksAssociatedWarning": "Categories with assigned tasks cannot be edited or deleted."
+		"tasksAssociatedWarning": "Categories with assigned tasks cannot be edited or deleted.",
+		"namePlaceHolder": "Enter category name",
+		"descriptionPlaceHolder": "Enter category description",
+		"iconLabel": "Icon",
+		"iconPlaceHolder": "Select icon",
+		"addCategory": "Add category",
+		"editCategory": "Edit {{name}} category",
+		"deletedCategory": "Category deleted successfully.",
+		"failedDeleteCategory": "Failed to delete category.",
+		"updatedCategory": "Category updated successfully.",
+		"failedUpdateCategory": "Failed to update category.",
+		"createdCategory": "Category created successfully.",
+		"failedCreateCategory": "Failed to create category.",
+		"notFound": "Category not found.",
+		"confirmDelete": "Are you sure you want to delete category {{name}}?"
 	}
 }

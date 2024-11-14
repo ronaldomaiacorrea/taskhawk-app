@@ -9,6 +9,7 @@ import StatusBadge from 'src/common/StatusBadge';
 import PriorityBadge from 'src/common/PriorityBadge';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { useTranslations } from '@hooks/useTranslations';
 
 export interface TasksTableProps {
 	tasks: Task[];
@@ -17,6 +18,7 @@ export interface TasksTableProps {
 }
 
 const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
+	const { t } = useTranslations();
 	const [expandedRows, setExpandedRows] = useState<
 		DataTableExpandedRows | Task[] | undefined
 	>(undefined);
@@ -25,11 +27,11 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 	const descriptionTemplate = (task: Task) => {
 		return task.description ? (
 			<>
-				<div className="font-bold p-2">Description</div>
+				<div className="font-bold p-2">{t('tasks.description')}</div>
 				<div className="pl-2">{task.description}</div>
 			</>
 		) : (
-			<EmptyData message="This task has no description." />
+			<EmptyData message={t('tasks.noDescription')} />
 		);
 	};
 
@@ -64,7 +66,10 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 		<div className="flex md:flex-row md:justify-end justify-between gap-2 flex-col flex-wrap">
 			<div className="md:flex-auto">
 				<div className="relative w-full ">
-					<InputText placeholder="Keyword Search" className="pl-10 w-full" />
+					<InputText
+						placeholder={t('common.keywordSearch')}
+						className="pl-10 w-full"
+					/>
 					<i className="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
 				</div>
 			</div>
@@ -77,18 +82,22 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 						disabled={selectedTasks.length === 0}
 						onClick={() => deleteTasks(selectedTasks)}
 					>
-						<span className="hidden sm:inline mx-2">Delete</span>
+						<span className="hidden sm:inline mx-2">{t('common.delete')}</span>
 					</Button>
 				</div>
 				<div className="flex flex-row justify-end">
 					<div>
 						<Button icon="pi pi-plus" onClick={expandAll} text>
-							<span className="hidden sm:inline mx-2">Expand All</span>
+							<span className="hidden sm:inline mx-2">
+								{t('common.expandAll')}
+							</span>
 						</Button>
 					</div>
 					<div>
 						<Button icon="pi pi-minus" onClick={collapseAll} text>
-							<span className="hidden sm:inline mx-2">Collapse All</span>
+							<span className="hidden sm:inline mx-2">
+								{t('common.expandAll')}
+							</span>
 						</Button>
 					</div>
 				</div>
@@ -99,7 +108,7 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 	return (
 		<DataTable
 			value={tasks}
-			emptyMessage={<EmptyData message="No tasks defined." />}
+			emptyMessage={<EmptyData message={t('tasks.notDefined')} />}
 			paginator
 			onRowExpand={(e) => setExpandedRows(e.data)}
 			rows={5}
@@ -118,38 +127,38 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 		>
 			<Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
 			<Column expander={allowExpansion} style={{ width: '2rem' }} frozen />
-			<Column field="title" header="Name" sortable frozen />
+			<Column field="title" header={t('common.name')} sortable frozen />
 			<Column
 				body={(task: Task) => dateTemplate(new Date(task.creationDate))}
-				header="Creation date"
+				header={t('tasks.creationDate')}
 				sortField="creationDate"
 				sortable
 				style={{ minWidth: '250px' }}
 			/>
 			<Column
 				body={(task: Task) => dateTemplate(task?.dueDate)}
-				header="Due date"
+				header={t('tasks.dueDate')}
 				sortField="dueDate"
 				sortable
 				style={{ minWidth: '250px' }}
 			/>
 			<Column
 				body={(task: Task) => <PriorityBadge task={task} />}
-				header="Priority"
+				header={t('tasks.priority')}
 				style={{ minWidth: '120px' }}
 				sortable
 				sortField="priority"
 			/>
 			<Column
 				body={(task: Task) => <StatusBadge task={task} />}
-				header="Status"
+				header={t('tasks.status')}
 				sortable
 				sortField="status"
 				style={{ minWidth: '150px' }}
 			/>
 			<Column
 				body={categoryTemplate}
-				header="Category"
+				header={t('common.category')}
 				sortable
 				sortField="categoryId"
 				style={{ minWidth: '150px' }}

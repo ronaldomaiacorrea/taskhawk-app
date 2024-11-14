@@ -1,9 +1,10 @@
 import React from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
+import { useTranslations } from '@hooks/useTranslations';
 
 export interface ConfirmDialogProps {
-	header?: string;	
+	header?: string;
 	visible: boolean;
 	handleHiding: () => void;
 	content: React.ReactNode;
@@ -15,19 +16,20 @@ const ConfirmDialog = ({
 	visible = false,
 	content,
 	handleHiding,
-	onConfirm
+	onConfirm,
 }: ConfirmDialogProps) => {
+	const { t } = useTranslations();
 
 	const footerContent = (
 		<>
 			<Button
-				label="No"
+				label={t('common.no')}
 				icon="pi pi-times"
 				onClick={handleHiding}
 				autoFocus
 			/>
 			<Button
-				label="Yes"
+				label={t('common.yes')}
 				icon="pi pi-check"
 				text
 				onClick={onConfirm}
