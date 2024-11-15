@@ -1,0 +1,29 @@
+# @baseUrl = http://localhost:3030/api
+@userId = eeb14e97-89cc-4634-b884-4946769fe0b1
+
+### Get user settings
+GET {{baseUrl}}/settings/{{userId}}
+Content-Type: application/json
+
+### Create new settings
+POST {{baseUrl}}/settings
+Content-Type: application/json
+
+{
+    "user_id": "{{userId}}",
+    "language": "en",
+    "mode": "dark"
+}
+
+### Update settings
+PATCH {{baseUrl}}/settings/{{userId}}
+Content-Type: application/json
+
+{
+    "language": "es",
+    "mode": "light"
+}
+
+### Delete settings
+DELETE {{baseUrl}}/settings/{{userId}}
+Content-Type: application/json
