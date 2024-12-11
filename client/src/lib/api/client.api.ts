@@ -1,12 +1,6 @@
 import type { Category, Task } from '@shared/types';
 import { CATEGORIES_API_URL, TASKS_API_URL } from '@constants';
-
-async function handleResponse<T>(response: Response): Promise<T> {
-	if (!response.ok) {
-		throw new Error(`API Error: ${response.status} ${response.statusText}`);
-	}
-	return response.json();
-}
+import { handleResponse } from './general.api';
 
 export const categoryApi = {
 	getAll: async () => {

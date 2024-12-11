@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { TASK_APP_QUERY_KEYS } from '@constants';
 import type { Task } from '@shared/types';
-import { taskApi } from '@api/client';
+import { taskApi } from '@api/client.api';
 
 export const useTasks = () =>
 	useQuery<Task[], Error>({
