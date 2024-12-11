@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { TASK_APP_QUERY_KEYS } from '@constants';
-import { categoryApi } from '@api/client';
+import { categoryApi } from '@api/client.api';
 import type { Category } from '@shared/types';
 
 export const useCategories = () =>
