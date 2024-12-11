@@ -1,1 +1,1 @@
-export * from './convertHexToRgba';
+export * from "./convertHexToRgba";

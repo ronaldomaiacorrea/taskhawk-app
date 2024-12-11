@@ -1,35 +1,35 @@
 {
-	"compilerOptions": {
-		"target": "ES2020",
-		"useDefineForClassFields": true,
-		"lib": ["ES2020", "DOM", "DOM.Iterable"],
-		"module": "ESNext",
-		"skipLibCheck": true,
-		"baseUrl": ".",
-		"paths": {
-			"@common": ["src/common"],
-			"@hooks/*": ["src/hooks/*"],
-			"@utils": ["src/lib/utils"],
-			"@constants": ["src/lib/constants"],
-			"@queries": ["src/lib/queries"],
-			"@context/*": ["src/context/*"],
-			"@features/*": ["src/features/*"],
-			"@shared/*": ["../shared/*"],
-			"@api/*": ["src/lib/api/*"],
-			"@layout": ["src/layout"]
-		},
-		"moduleResolution": "bundler",
-		"allowImportingTsExtensions": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"noEmit": true,
-		"jsx": "react-jsx",
-		"types": ["node", "vitest"],
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
-	},
-	"include": ["src", "../shared/types.ts"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@common": ["src/common"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils": ["src/lib/utils"],
+      "@constants": ["src/lib/constants"],
+      "@queries": ["src/lib/queries"],
+      "@context/*": ["src/context/*"],
+      "@features/*": ["src/features/*"],
+      "@shared/*": ["../shared/*"],
+      "@api/*": ["src/lib/api/*"],
+      "@layout": ["src/layout"]
+    },
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["node", "vitest"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "../shared/types.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
