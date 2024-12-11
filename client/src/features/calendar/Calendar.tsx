@@ -7,6 +7,10 @@ import PageTitle from 'src/common/PageTitle';
 import { backgroundColors } from '@constants';
 import { Tooltip } from 'primereact/tooltip';
 import { useTranslations } from '@hooks/useTranslations';
+import ptLocale from '@fullcalendar/core/locales/pt-br';
+import frLocale from '@fullcalendar/core/locales/fr-ca';
+import zhLocale from '@fullcalendar/core/locales/zh-cn';
+
 // import { useMonthTasks } from '@queries/tasks';
 
 const tasks: Task[] = [
@@ -33,7 +37,7 @@ const tasks: Task[] = [
 ];
 
 const Calendar = () => {
-	const { t } = useTranslations();
+	const { t, i18n } = useTranslations();
 	// const { data: tasks } = useMonthTasks();
 
 	// const [initialView, setInitialView] = useState('dayGridMonth');
@@ -43,7 +47,8 @@ const Calendar = () => {
 			<PageTitle>{t('common.calendar')}</PageTitle>
 			<Tooltip />
 			<FullCalendar
-				locale={'en'}
+				locale={i18n.language}
+				locales={[ptLocale, zhLocale, frLocale]}
 				headerToolbar={{
 					left: 'prev,next today',
 					center: 'title',
