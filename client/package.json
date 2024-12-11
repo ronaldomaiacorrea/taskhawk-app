@@ -12,6 +12,9 @@
     "coverage": "vitest run --coverage",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "dependencies": {
     "@date-fns/tz": "^1.1.2",
     "@emotion/react": "^11.13.3",
