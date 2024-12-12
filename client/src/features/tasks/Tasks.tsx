@@ -4,7 +4,7 @@ import { Button } from 'primereact/button';
 import { useState } from 'react';
 import PageTitle from 'src/common/PageTitle';
 import { useTranslations } from '@hooks/useTranslations';
-import { Task } from '@shared/types';
+import type { Task } from '@shared/types';
 // Import { useState } from 'react';
 // Import { InputText } from 'primereact/inputtext';
 
@@ -15,8 +15,8 @@ const Tasks = () => {
   // Const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
-  const { data: categories = []} = useCategories();
-  const { data: tasks = []} = useTasks();
+  const { data: categories = [] } = useCategories();
+  const { data: tasks = [] } = useTasks();
 
   const confirmDelete = (selectedTasks: Task[]) => {
     setTasksToDelete(selectedTasks);

@@ -1,6 +1,6 @@
 import { Card } from 'primereact/card';
 import { useTranslations } from '@hooks/useTranslations';
-// Import { Task } from '@shared/types';
+// Import type { Task } from '@shared/types';
 // Import { Chart } from 'primereact/chart';
 
 // interface TasksCompletedTimeProps {

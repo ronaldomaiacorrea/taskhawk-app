@@ -9,7 +9,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { Tooltip } from 'primereact/tooltip';
 import PageTitle from 'src/common/PageTitle';
 import { useTranslations } from '@hooks/useTranslations';
-import { Status, Task } from '@shared/types';
+import { Status } from '@shared/types';
+import type { Task } from '@shared/types';
 
 // Import { useMonthTasks } from '@queries/tasks';
 

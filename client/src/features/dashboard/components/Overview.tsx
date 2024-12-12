@@ -1,9 +1,9 @@
-import { getOverviewChartData } from "@utils";
-import { Card } from "primereact/card";
-import { Chart } from "primereact/chart";
-import EmptyData from "src/common/EmptyData";
-import { useTranslations } from "@hooks/useTranslations";
-import { Task } from "@shared/types";
+import { getOverviewChartData } from '@utils';
+import { Card } from 'primereact/card';
+import { Chart } from 'primereact/chart';
+import EmptyData from 'src/common/EmptyData';
+import { useTranslations } from '@hooks/useTranslations';
+import type { Task } from '@shared/types';
 
 interface OverviewProps {
   tasks: Task[];
@@ -15,16 +15,16 @@ const Overview = ({ tasks }: OverviewProps) => {
 
   return (
     <Card
-      title={t("dashboard.statusOverviewTitle")}
+      title={t('dashboard.statusOverviewTitle')}
       className="rounded-none"
-      subTitle={t("dashboard.statusOverviewDescription")}
+      subTitle={t('dashboard.statusOverviewDescription')}
     >
       <div className="border-b border-gray-300 mb-4" />
       <div className="flex flex-row justify-center items-center">
         <div
           className="w-3/4 h-full"
           style={{
-            position: "relative",
+            position: 'relative',
           }}
         >
           {chartData?.datasets?.[0]?.data?.some(
@@ -33,7 +33,7 @@ const Overview = ({ tasks }: OverviewProps) => {
             <Chart type="pie" data={chartData} options={options} />
           ) : (
             <div className="flex justify-center items-center h-full">
-              <EmptyData message={t("tasks.notDefined")} />
+              <EmptyData message={t('tasks.notDefined')} />
             </div>
           )}
         </div>

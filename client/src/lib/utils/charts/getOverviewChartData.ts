@@ -1,8 +1,8 @@
-import { backgroundColors } from "@constants";
-import { hexToRgba } from "@utils";
-import { TooltipItem } from "chart.js";
-import type { Task } from "@shared/types";
-import { Status } from "@shared/types";
+import { backgroundColors } from '@constants';
+import { hexToRgba } from '@utils';
+import type { TooltipItem } from 'chart.js';
+import type { Task } from '@shared/types';
+import { Status } from '@shared/types';
 
 /**
  * Generates chart data and configuration options for an overview chart based on task statuses.
@@ -36,8 +36,8 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
     plugins: {
       legend: {
         display: true,
-        position: "bottom" as const,
-        text: "Status",
+        position: 'bottom' as const,
+        text: 'Status',
         borderRadius: 10,
         labels: {
           usePointStyle: true,
@@ -46,7 +46,7 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
       tooltip: {
         boxPadding: 5,
         callbacks: {
-          label: function (tooltipItem: TooltipItem<"pie">) {
+          label: function (tooltipItem: TooltipItem<'pie'>) {
             const data = tooltipItem.dataset.data as number[];
             const currentValue = data[tooltipItem.dataIndex as number];
 

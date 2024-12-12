@@ -1,21 +1,20 @@
-import { ConfirmDialog, PageTitle, Spinner } from "@common";
+import { ConfirmDialog, PageTitle, Spinner } from '@common';
 import {
   useCategories,
   useCreateCategory,
   useDeleteCategory,
   useUpdateCategory,
-} from "@queries";
-import { Button } from "primereact/button";
-import { Message } from "primereact/message";
-import { Toast, ToastMessage } from "primereact/toast";
-import { useCallback, useRef, useState } from "react";
-import { useTranslations } from "@hooks/useTranslations";
-import type { Category } from "@shared/types";
-import CategoryCard from "./components/CategoryCard";
-import CreateCategory from "./components/CreateCategory";
-import EditCategory from "./components/EditCategory";
-
-
+} from '@queries';
+import { Button } from 'primereact/button';
+import { Message } from 'primereact/message';
+import { Toast } from 'primereact/toast';
+import type { ToastMessage } from 'primereact/toast';
+import { useCallback, useRef, useState } from 'react';
+import { useTranslations } from '@hooks/useTranslations';
+import type { Category } from '@shared/types';
+import CategoryCard from './components/CategoryCard';
+import CreateCategory from './components/CreateCategory';
+import EditCategory from './components/EditCategory';
 
 const Categories = () => {
   const { t } = useTranslations();
@@ -36,10 +35,10 @@ const Categories = () => {
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
 
   const displayToast = useCallback(
-    (message: string, severity?: ToastMessage["severity"]) => {
+    (message: string, severity?: ToastMessage['severity']) => {
       toast.current?.show({
         severity: severity,
-        summary: t("common.action"),
+        summary: t('common.action'),
         detail: message,
         life: 3000,
       });
@@ -48,25 +47,31 @@ const Categories = () => {
   );
 
   const handleDeleteCategory = (category: Category) => {
-    if (!category) {return;}
+    if (!category) {
+      return;
+    }
     setSelectedCategory(category);
     setIsDeleteDialogVisible(true);
   };
 
   const handleConfirmDeleteCategory = (category: Category) => {
-    if (!category) {return;}
+    if (!category) {
+      return;
+    }
     deleteCategory(category, {
       onSuccess: () => {
-        displayToast(t("categories.deletedCategory"), "success");
+        displayToast(t('categories.deletedCategory'), 'success');
         setIsDeleteDialogVisible(false);
       },
       onError: () =>
-        displayToast(t("categories.failedDeleteCategory"), "error"),
+        displayToast(t('categories.failedDeleteCategory'), 'error'),
     });
   };
 
   const handleEditCategory = (category: Category) => {
-    if (!category) {return;}
+    if (!category) {
+      return;
+    }
     setSelectedCategory(category);
     setIsEditDialogVisible(true);
   };
@@ -74,38 +79,41 @@ const Categories = () => {
   const handleUpdateCategory = (category: Category) => {
     updateCategory(category, {
       onSuccess: () => {
-        displayToast(t("categories.updatedCategory"), "success");
+        displayToast(t('categories.updatedCategory'), 'success');
         setIsEditDialogVisible(false);
       },
       onError: () =>
-        displayToast(t("categories.failedUpdateCategory"), "error"),
+        displayToast(t('categories.failedUpdateCategory'), 'error'),
     });
   };
 
-  const handleCreateCategory = (newCategory: Omit<Category, "id">) => {
+  const handleCreateCategory = (newCategory: Omit<Category, 'id'>) => {
     addCategory(newCategory, {
       onSuccess: () => {
-        displayToast(t("categories.createdCategory"), "success");
+        displayToast(t('categories.createdCategory'), 'success');
         setIsCreateDialogVisible(false);
       },
       onError: () =>
-        displayToast(t("categories.failedCreateCategory"), "error"),
+        displayToast(t('categories.failedCreateCategory'), 'error'),
     });
   };
 
-  if (isLoading)
-    {return (
+  if (isLoading) {
+    return (
       <div className="flex flex-row justify-center items-center min-h-screen">
         <Spinner />
       </div>
-    );}
+    );
+  }
 
-  if (isError) {return <Message severity="error" text={error?.message} />;}
+  if (isError) {
+    return <Message severity="error" text={error?.message} />;
+  }
 
   return (
     <>
       <Toast ref={toast} />
-      <PageTitle>{t("common.categories")}</PageTitle>
+      <PageTitle>{t('common.categories')}</PageTitle>
       <Button
         icon="pi pi-plus"
         label="Category"
@@ -127,7 +135,7 @@ const Categories = () => {
         ) : (
           <Message
             severity="info"
-            text={t("categories.notFound")}
+            text={t('categories.notFound')}
             className="text-left text-xl"
           />
         )}
@@ -144,7 +152,7 @@ const Categories = () => {
         <ConfirmDialog
           visible={isDeleteDialogVisible}
           handleHiding={() => setIsDeleteDialogVisible(false)}
-          content={t("categories.confirmDelete", {
+          content={t('categories.confirmDelete', {
             name: selectedCategory.name,
           })}
           onConfirm={() => handleConfirmDeleteCategory(selectedCategory)}

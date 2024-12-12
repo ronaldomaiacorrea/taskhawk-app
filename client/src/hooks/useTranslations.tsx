@@ -1,4 +1,4 @@
-import { i18n as I18nType } from "i18next";
+import type { i18n as I18nType } from "i18next";
 import { useTranslation as useI18NextTranslation } from "react-i18next";
 import type enTranslations from "../locales/en.json";
 
