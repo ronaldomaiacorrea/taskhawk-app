@@ -1,16 +1,16 @@
-import "./App.css";
-import Sidebar from "./layout/Sidebar";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import { Route, Routes } from "react-router-dom";
-import Dashboard from "./features/dashboard/Dashboard";
-import Categories from "./features/categories/Categories";
-import Tasks from "./features/tasks/Tasks";
-import Settings from "./features/settings/Settings";
-import Calendar from "./features/calendar/Calendar";
-import { AuthProvider } from "@context/AuthContext";
-import PrivateRoute from "./components/PrivateRoute";
-import Login from "./features/login/Login"; // Updated import path
+import './App.css';
+import Sidebar from './layout/Sidebar';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+import { Route, Routes } from 'react-router-dom';
+import Dashboard from './features/dashboard/Dashboard';
+import Categories from './features/categories/Categories';
+import Tasks from './features/tasks/Tasks';
+import Settings from './features/settings/Settings';
+import Calendar from './features/calendar/Calendar';
+import { AuthProvider } from '@context/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './features/login/Login'; // Updated import path
 
 function App() {
   return (

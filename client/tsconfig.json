@@ -30,6 +30,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "../shared/types.ts"],
+  "include": [
+    "src",
+    "../shared/types.ts",
+    "eslint.config.js",
+    "postcss.config.js",
+    "tailwind.config.js",
+    "i18n.js"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,36 +1,36 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "@hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { Button } from "primereact/button";
-import { Formik, Form } from "formik";
-import { loginValidationSchema } from "./validations/loginFormValidations";
-import LoginFormFields from "./components/LoginFormFields";
+import { useEffect, useState } from 'react';
+import { useAuth } from '@hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'primereact/button';
+import { Formik, Form } from 'formik';
+import { loginValidationSchema } from './validations/loginFormValidations';
+import LoginFormFields from './components/LoginFormFields';
 
 const Login = () => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate('/');
     }
   }, [isAuthenticated, navigate]);
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   };
 
   const validationSchema = loginValidationSchema;
 
   const handleSubmit = async (values: { email: string; password: string }) => {
-    setError("");
+    setError('');
     try {
       await login(values.email, values.password);
-      navigate("/");
-    } catch (err) {
-      setError("Login failed. Please check your credentials.");
+      navigate('/');
+    } catch (error) {
+      setError(`Login failed. Please check your credentials: ${error}`);
     }
   };
 

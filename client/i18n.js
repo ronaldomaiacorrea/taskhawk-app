@@ -1,10 +1,11 @@
-import i18n from "i18next";
-import detector from "i18next-browser-languagedetector";
-import { initReactI18next } from "react-i18next";
-import en from "./locales/en.json";
-import fr from "./locales/fr.json";
-import zh from "./locales/zh.json";
-import pt from "./locales/pt-br.json";
+import i18n from 'i18next';
+import detector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
+
+import en from './src/locales/en.json';
+import fr from './src/locales/fr.json';
+import pt from './src/locales/pt-br.json';
+import zh from './src/locales/zh.json';
 
 const resources = {
   en: {
@@ -30,7 +31,7 @@ i18n
       escapeValue: false,
     },
     debug: import.meta.env.DEV,
-    fallBackLng: "en",
+    fallBackLng: 'en',
   });
 
 export default i18n;
