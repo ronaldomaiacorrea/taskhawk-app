@@ -124,9 +124,9 @@ const Settings = () => {
 
                   <div className="flex-1">
                     <div className="flex flex-col gap-2">
-                      <label htmlFor="username">Username</label>
+                      <label htmlFor="new-username">Username</label>
                       <InputText
-                        id="username"
+                        id="new-username"
                         name="username"
                         value={values.username}
                         onChange={handleChange}

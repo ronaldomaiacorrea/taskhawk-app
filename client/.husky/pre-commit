@@ -1,1 +1,8 @@
-bunx lint-staged
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run full type check
+bun tsc --noEmit
+
+# If tsc passes, run lint-staged
+npx lint-staged
