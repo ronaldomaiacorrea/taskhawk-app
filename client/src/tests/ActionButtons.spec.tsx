@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { describe, expect, it, vi } from "vitest";
-import type { ActionButtonsProps } from "@common";
-import { ActionButtons } from "@common";
-import userEvent from "@testing-library/user-event";
+import { ActionButtons } from '@common';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+import { describe, expect, it, vi } from 'vitest';
+import type { ActionButtonsProps } from '@common';
 
 const defaultProps: ActionButtonsProps = {
   handleCloseDialog: vi.fn(),
@@ -14,17 +14,17 @@ const defaultProps: ActionButtonsProps = {
 const renderComponent = (props: Partial<ActionButtonsProps> = {}) =>
   render(<ActionButtons {...defaultProps} {...props} />);
 
-const getCancelButton = () => screen.getByRole("button", { name: "Cancel" });
-const getSaveButton = () => screen.getByRole("button", { name: "Save" });
+const getCancelButton = () => screen.getByRole('button', { name: 'Cancel' });
+const getSaveButton = () => screen.getByRole('button', { name: 'Save' });
 
-describe("<ActionButtons />", () => {
-  it("should render the component", () => {
+describe('<ActionButtons />', () => {
+  it('should render the component', () => {
     renderComponent();
     expect(getCancelButton()).toBeInTheDocument();
     expect(getSaveButton()).toBeInTheDocument();
   });
 
-  it("should call handleCloseDialog and handleResetForm when clicking cancel", async () => {
+  it('should call handleCloseDialog and handleResetForm when clicking cancel', async () => {
     const handleCloseDialog = vi.fn();
     const handleResetForm = vi.fn();
     renderComponent({ handleCloseDialog, handleResetForm });
@@ -35,7 +35,7 @@ describe("<ActionButtons />", () => {
     expect(handleResetForm).toHaveBeenCalled();
   });
 
-  it("should call handleSubmit when clicking save", async () => {
+  it('should call handleSubmit when clicking save', async () => {
     const handleSubmit = vi.fn();
 
     renderComponent({ handleSubmit });

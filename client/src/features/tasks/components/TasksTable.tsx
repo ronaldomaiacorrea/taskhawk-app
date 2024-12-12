@@ -1,15 +1,15 @@
-import { DataTable } from "primereact/datatable";
-import { useState } from "react";
-import type { DataTableExpandedRows } from "primereact/datatable";
-import { Column } from "primereact/column";
-import EmptyData from "src/common/EmptyData";
 import { dateTemplate } from "@utils";
-import { Category, Task } from "@shared/types";
-import StatusBadge from "src/common/StatusBadge";
-import PriorityBadge from "src/common/PriorityBadge";
 import { Button } from "primereact/button";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
+import { useState } from "react";
+import EmptyData from "src/common/EmptyData";
+import PriorityBadge from "src/common/PriorityBadge";
+import StatusBadge from "src/common/StatusBadge";
 import { useTranslations } from "@hooks/useTranslations";
+import { Category, Task } from "@shared/types";
+import type { DataTableExpandedRows } from "primereact/datatable";
 
 export interface TasksTableProps {
   tasks: Task[];
@@ -24,8 +24,7 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
   >(undefined);
   const [selectedTasks, setSelectedTasks] = useState<Task[]>([]);
 
-  const descriptionTemplate = (task: Task) => {
-    return task.description ? (
+  const descriptionTemplate = (task: Task) => task.description ? (
       <>
         <div className="font-bold p-2">{t("tasks.description")}</div>
         <div className="pl-2">{task.description}</div>
@@ -33,7 +32,6 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
     ) : (
       <EmptyData message={t("tasks.noDescription")} />
     );
-  };
 
   const allowExpansion = () => tasks.length > 0;
 

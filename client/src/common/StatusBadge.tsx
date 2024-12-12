@@ -44,7 +44,7 @@ const StatusBadge = ({ task }: StatusBadgeProps) => {
   };
   const statusInfo = statusMapping[task.status] || {};
   const { text, color, icon } = statusInfo;
-  if (!statusInfo) return null;
+  if (!statusInfo) {return null;}
 
   return (
     <div className={color}>

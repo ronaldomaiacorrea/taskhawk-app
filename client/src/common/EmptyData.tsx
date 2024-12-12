@@ -4,8 +4,7 @@ export interface EmptyDataProps {
   message: string;
 }
 
-const EmptyData = ({ message }: EmptyDataProps) => {
-  return (
+const EmptyData = ({ message }: EmptyDataProps) => (
     <div className="flex justify-center items-center h-full">
       <Message
         text={message}
@@ -13,6 +12,5 @@ const EmptyData = ({ message }: EmptyDataProps) => {
       />
     </div>
   );
-};
 
 export default EmptyData;

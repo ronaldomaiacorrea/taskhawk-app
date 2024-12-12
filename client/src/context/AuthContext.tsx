@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { createContext, useEffect, useState } from "react";
 import { TASK_APP_QUERY_KEYS } from "../lib/constants/queryKeys";
 import { useSignIn } from "../lib/queries/auth";
 
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = () => {
     setIsAuthenticated(false);
-    queryClient.removeQueries({ queryKey: [TASK_APP_QUERY_KEYS.AUTH] });
+    queryClient.removeQueries({ queryKey: [TASK_APP_QUERY_KEYS.AUTH]});
   };
 
   return (

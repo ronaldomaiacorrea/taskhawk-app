@@ -1,5 +1,5 @@
-import type { Category, Task } from "@shared/types";
 import { CATEGORIES_API_URL, TASKS_API_URL } from "@constants";
+import type { Category, Task } from "@shared/types";
 import { handleResponse } from "./general.api";
 
 export const categoryApi = {

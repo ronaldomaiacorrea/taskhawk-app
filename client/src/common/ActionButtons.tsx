@@ -1,5 +1,5 @@
-import { useTranslations } from "@hooks/useTranslations";
 import { Button } from "primereact/button";
+import { useTranslations } from "@hooks/useTranslations";
 
 export interface ActionButtonsProps {
   handleCloseDialog: () => void;

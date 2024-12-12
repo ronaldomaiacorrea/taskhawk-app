@@ -1,16 +1,16 @@
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom/client';
-import 'primeicons/primeicons.css';
-import App from './App.tsx';
-import './index.css';
-import { PrimeReactProvider } from 'primereact/api';
-import Tailwind from 'primereact/passthrough/tailwind';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { BrowserRouter } from 'react-router-dom';
-import DarkModeProvider from './context/DarkModeProvider.tsx';
-import '../i18n.js';
-import { Spinner } from '@common';
+import { Spinner } from '@common';  
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';  
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';  
+import { PrimeReactProvider } from 'primereact/api';  
+import Tailwind from 'primereact/passthrough/tailwind';  
+import 'primeicons/primeicons.css';  
+import React, { Suspense } from 'react';  
+import ReactDOM from 'react-dom/client';  
+import { BrowserRouter } from 'react-router-dom'; 
+import '../i18n.js';  
+import App from './App.tsx';  
+import DarkModeProvider from './context/DarkModeProvider.tsx';  
+import './index.css'; 
 
 const queryClient = new QueryClient();
 

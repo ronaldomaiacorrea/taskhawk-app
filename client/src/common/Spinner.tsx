@@ -1,7 +1,6 @@
 import { ProgressSpinner } from "primereact/progressspinner";
 
-const Spinner = () => {
-  return (
+const Spinner = () => (
     <ProgressSpinner
       style={{ width: "100px", height: "100px" }}
       strokeWidth="8"
@@ -9,6 +8,5 @@ const Spinner = () => {
       aria-label="Loading"
     />
   );
-};
 
 export default Spinner;

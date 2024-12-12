@@ -1,25 +1,26 @@
-import { Divider } from "primereact/divider";
 import { PageTitle, Spinner } from "@common";
+import { useTasks } from "@queries";
+import { Divider } from "primereact/divider";
+import { Message } from "primereact/message";
+import { useTranslations } from "@hooks/useTranslations";
 import Overview from "./components/Overview";
-import Upcoming from "./components/Upcoming";
 import TasksCompletedTime from "./components/TasksCompletedTime";
 import TasksPerPriority from "./components/TasksPerPriority";
-import { Message } from "primereact/message";
-import { useTasks } from "@queries";
-import { useTranslations } from "@hooks/useTranslations";
+import Upcoming from "./components/Upcoming";
+
 
 const Dashboard = () => {
   const { data: tasks = [], isError, error, isLoading } = useTasks();
   const { t } = useTranslations();
 
   if (isLoading)
-    return (
+    {return (
       <div className="flex flex-row justify-center items-center min-h-screen">
         <Spinner />
       </div>
-    );
+    );}
 
-  if (isError) return <Message severity="error" text={error?.message} />;
+  if (isError) {return <Message severity="error" text={error?.message} />;}
 
   return (
     <>

@@ -1,19 +1,19 @@
-import { useTranslations } from "@hooks/useTranslations";
-import { Task } from "@shared/types";
-import { Card } from "primereact/card";
-// import { Chart } from 'primereact/chart';
+import { Card } from 'primereact/card';
+import { useTranslations } from '@hooks/useTranslations';
+// Import { Task } from '@shared/types';
+// Import { Chart } from 'primereact/chart';
 
-interface TasksCompletedTimeProps {
-  tasks: Task[];
-}
+// interface TasksCompletedTimeProps {
+//   tasks: Task[];
+// }
 
-const TasksCompletedTime = ({ tasks }: TasksCompletedTimeProps) => {
+const TasksCompletedTime = () => {
   const { t } = useTranslations();
-  console.log(tasks);
+
   return (
     <Card
-      title={t("dashboard.completedTasksTitle")}
-      subTitle={t("dashboard.completedTasksDescription")}
+      title={t('dashboard.completedTasksTitle')}
+      subTitle={t('dashboard.completedTasksDescription')}
       className="rounded-none"
     >
       <div className="border-b border-gray-300 mb-4"></div>

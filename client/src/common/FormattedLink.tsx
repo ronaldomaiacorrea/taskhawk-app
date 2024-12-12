@@ -6,8 +6,7 @@ export interface FormattedLinkProps {
   icon: string;
 }
 
-const FormattedLink = ({ path, pageName, icon }: FormattedLinkProps) => {
-  return (
+const FormattedLink = ({ path, pageName, icon }: FormattedLinkProps) => (
     <li className="flex items-center">
       <Link
         to={path}
@@ -18,6 +17,5 @@ const FormattedLink = ({ path, pageName, icon }: FormattedLinkProps) => {
       </Link>
     </li>
   );
-};
 
 export default FormattedLink;

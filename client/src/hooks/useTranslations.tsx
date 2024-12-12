@@ -1,5 +1,5 @@
-import { useTranslation as useI18NextTranslation } from "react-i18next";
 import { i18n as I18nType } from "i18next";
+import { useTranslation as useI18NextTranslation } from "react-i18next";
 import type enTranslations from "../locales/en.json";
 
 type RecursiveKeyOf<TObj extends object> = {
@@ -12,7 +12,7 @@ export type TranslationKeys = RecursiveKeyOf<typeof enTranslations>;
 
 export type TFunction = (
   _key: TranslationKeys,
-  _params?: { [key: string]: string | number },
+  _params?: {[key: string]: string | number },
 ) => string;
 
 export const useTranslations = (): {
@@ -23,10 +23,8 @@ export const useTranslations = (): {
 
   const t: TFunction = (
     key: TranslationKeys,
-    params?: { [key: string]: string | number },
-  ) => {
-    return originalT(key, params);
-  };
+    params?: {[key: string]: string | number },
+  ) => originalT(key, params);
 
   return { t, i18n };
 };

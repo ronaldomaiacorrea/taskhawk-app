@@ -1,11 +1,12 @@
-import { Dialog } from "primereact/dialog";
-import CategoryFormFields from "./CategoryFormFields";
 import { Form, Formik } from "formik";
-import { categoryValidationSchema } from "../validations/categoryFormValidations";
-import type { Category } from "@shared/types";
-import { ICON } from "@shared/types";
+import { Dialog } from "primereact/dialog";
 import ActionButtons from "src/common/ActionButtons";
 import { useTranslations } from "@hooks/useTranslations";
+import { ICON } from "@shared/types";
+import type { Category } from "@shared/types";
+import CategoryFormFields from "./CategoryFormFields";
+import { categoryValidationSchema } from "../validations/categoryFormValidations";
+
 
 export interface CreateCategoryProps {
   isVisible: boolean;

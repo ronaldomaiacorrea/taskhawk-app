@@ -31,7 +31,7 @@ export interface PriorityBadgeProps {
 const PriorityBadge = ({ task }: PriorityBadgeProps) => {
   const priorityInfo = priorityMapping[task.priority] || {};
   const { text, icon, textColor } = priorityInfo;
-  if (!priorityInfo) return null;
+  if (!priorityInfo) {return null;}
 
   return (
     <div className={textColor}>

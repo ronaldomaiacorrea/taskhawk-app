@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useAuth } from '@hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { Form, Formik } from 'formik';
 import { Button } from 'primereact/button';
-import { Formik, Form } from 'formik';
-import { loginValidationSchema } from './validations/loginFormValidations';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@hooks/useAuth';
 import LoginFormFields from './components/LoginFormFields';
+import { loginValidationSchema } from './validations/loginFormValidations';
 
 const Login = () => {
   const { login, isAuthenticated } = useAuth();

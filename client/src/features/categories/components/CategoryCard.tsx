@@ -1,13 +1,13 @@
+import { useTasks } from "@queries";
+import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import type { Category, Task } from "@shared/types";
+import { Dialog } from "primereact/dialog";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { Tooltip } from "primereact/tooltip";
 import { useMemo, useRef, useState } from "react";
 import EmptyData from "src/common/EmptyData";
-import { useTasks } from "@queries";
-import { OverlayPanel } from "primereact/overlaypanel";
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { Tooltip } from "primereact/tooltip";
 import { useTranslations } from "@hooks/useTranslations";
+import type { Category, Task } from "@shared/types";
 
 export interface CategoryCardProps {
   category: Category;
@@ -18,7 +18,7 @@ export interface CategoryCardProps {
 const CategoryCard = ({ category, onDelete, onEdit }: CategoryCardProps) => {
   const { t } = useTranslations();
   const { id, name, description, icon } = category;
-  const { data: tasks = [] } = useTasks();
+  const { data: tasks = []} = useTasks();
   const [showTasksDialog, setShowTasksDialog] = useState(false);
   const menuRef = useRef<OverlayPanel>(null);
 

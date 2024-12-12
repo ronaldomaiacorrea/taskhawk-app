@@ -1,6 +1,6 @@
-import React from "react";
-import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+import React from "react";
 import { useTranslations } from "@hooks/useTranslations";
 
 export interface ConfirmDialogProps {

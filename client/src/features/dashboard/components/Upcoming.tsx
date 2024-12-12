@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { Card } from "primereact/card";
-import { getUpcomingTasks, dateTemplate } from "@utils";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import type { Task } from "@shared/types";
-import { Button } from "primereact/button";
 import { ConfirmDialog } from "@common";
+import { dateTemplate, getUpcomingTasks } from "@utils";
+import { Button } from "primereact/button";
+import { Card } from "primereact/card";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { Toolbar } from "primereact/toolbar";
+import { useState } from "react";
 import EmptyData from "src/common/EmptyData";
 import { useTranslations } from "@hooks/useTranslations";
+import type { Task } from "@shared/types";
+
 
 interface UpcomingProps {
   tasks: Task[];
@@ -26,7 +27,7 @@ const Upcoming = ({ tasks }: UpcomingProps) => {
       outlined
       disabled={!selectedTasks || selectedTasks.length === 0}
       onClick={() => {
-        if (!selectedTasks) return;
+        if (!selectedTasks) {return;}
         setVisible(true);
       }}
     />
@@ -80,7 +81,7 @@ const Upcoming = ({ tasks }: UpcomingProps) => {
           header={t("tasks.confirmCompletion")}
           visible={visible}
           handleHiding={() => {
-            if (!visible) return;
+            if (!visible) {return;}
             setVisible(false);
           }}
           content={dialogContent}

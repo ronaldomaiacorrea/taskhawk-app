@@ -1,10 +1,10 @@
-import { PageTitle, ActionButtons } from "@common";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useDarkMode } from "@hooks/useDarkMode";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
-import { Dropdown } from "primereact/dropdown";
+import { ActionButtons, PageTitle } from '@common';
+import { Form, Formik } from 'formik';
+import { Dropdown } from 'primereact/dropdown';
+import { InputText } from 'primereact/inputtext';
+import { Password } from 'primereact/password';
+import * as Yup from 'yup';
+import { useDarkMode } from '@hooks/useDarkMode';
 
 interface SettingsFormValues {
   theme: string;
@@ -15,31 +15,31 @@ interface SettingsFormValues {
 }
 
 const languages = [
-  { label: "English", value: "en" },
-  { label: "Spanish", value: "es" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
+  { label: 'English', value: 'en' },
+  { label: 'Spanish', value: 'es' },
+  { label: 'French', value: 'fr' },
+  { label: 'German', value: 'de' },
 ];
 
 const themes = [
-  { label: "Light", value: "light" },
-  { label: "Dark", value: "dark" },
+  { label: 'Light', value: 'light' },
+  { label: 'Dark', value: 'dark' },
 ];
 
 const settingsValidationSchema = Yup.object().shape({
-  theme: Yup.string().required("Theme setting is required"),
+  theme: Yup.string().required('Theme setting is required'),
   username: Yup.string()
-    .required("Username is required")
-    .min(3, "Username must be at least 3 characters"),
+    .required('Username is required')
+    .min(3, 'Username must be at least 3 characters'),
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(/[0-9]/, "Password must contain at least one number")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter"),
+    .min(8, 'Password must be at least 8 characters')
+    .matches(/[0-9]/, 'Password must contain at least one number')
+    .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter'),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Confirm Password is required"),
-  language: Yup.string().required("Language is required"),
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+    .required('Confirm Password is required'),
+  language: Yup.string().required('Language is required'),
 });
 
 const Settings = () => {
@@ -47,10 +47,10 @@ const Settings = () => {
 
   const initialValues: SettingsFormValues = {
     theme,
-    username: "",
-    password: "",
-    confirmPassword: "",
-    language: "en",
+    username: '',
+    password: '',
+    confirmPassword: '',
+    language: 'en',
   };
 
   const handleSubmit = (values: SettingsFormValues) => {
@@ -58,7 +58,6 @@ const Settings = () => {
       toggleTheme();
     }
     // Handle other settings updates here
-    console.log("Settings updated:", values);
   };
 
   return (
@@ -93,10 +92,10 @@ const Settings = () => {
                         value={theme}
                         options={themes}
                         onChange={(e) => {
-                          setFieldValue("theme", e.value);
+                          setFieldValue('theme', e.value);
                           toggleTheme();
                         }}
-                        className={`w-full ${touched.theme && errors.theme ? "p-invalid" : ""}`}
+                        className={`w-full ${touched.theme && errors.theme ? 'p-invalid' : ''}`}
                       />
                       {touched.theme && errors.theme && (
                         <small className="text-red-600">{errors.theme}</small>
@@ -112,7 +111,7 @@ const Settings = () => {
                         name="username"
                         value={values.username}
                         onChange={handleChange}
-                        className={`w-full ${touched.username && errors.username ? "border-red-500" : "border-gray-300"}`}
+                        className={`w-full ${touched.username && errors.username ? 'border-red-500' : 'border-gray-300'}`}
                         placeholder="Enter username"
                       />
                       {touched.username && errors.username && (
@@ -131,7 +130,7 @@ const Settings = () => {
                         name="username"
                         value={values.username}
                         onChange={handleChange}
-                        className={`w-full ${touched.username && errors.username ? "border-red-500" : "border-gray-300"}`}
+                        className={`w-full ${touched.username && errors.username ? 'border-red-500' : 'border-gray-300'}`}
                         placeholder="Enter username"
                       />
                       {touched.username && errors.username && (
@@ -146,7 +145,7 @@ const Settings = () => {
                     <div className="flex flex-col gap-2">
                       <label htmlFor="password">Password</label>
                       <span
-                        className={`p-input-icon-right w-full ${touched.password && errors.password ? "border-red-500" : "border-gray-300"}`}
+                        className={`p-input-icon-right w-full ${touched.password && errors.password ? 'border-red-500' : 'border-gray-300'}`}
                       >
                         <Password
                           id="password"
@@ -159,8 +158,8 @@ const Settings = () => {
                           feedback={false}
                           placeholder="Enter password"
                           pt={{
-                            input: { className: "w-full" },
-                            // showIcon: { className: 'h-full flex items-center' },
+                            input: { className: 'w-full' },
+                            // ShowIcon: { className: 'h-full flex items-center' },
                             // hideIcon: { className: 'h-full flex items-center' }
                           }}
                         />
@@ -177,7 +176,7 @@ const Settings = () => {
                     <div className="flex flex-col gap-2">
                       <label htmlFor="confirmPassword">Confirm Password</label>
                       <span
-                        className={`p-input-icon-right w-full ${touched.confirmPassword && errors.confirmPassword ? "border-red-500" : "border-gray-300"}`}
+                        className={`p-input-icon-right w-full ${touched.confirmPassword && errors.confirmPassword ? 'border-red-500' : 'border-gray-300'}`}
                       >
                         <Password
                           id="confirmPassword"
@@ -190,8 +189,8 @@ const Settings = () => {
                           feedback={false}
                           placeholder="Confirm password"
                           pt={{
-                            input: { className: "w-full" },
-                            // showIcon: { className: 'h-full flex items-center' },
+                            input: { className: 'w-full' },
+                            // ShowIcon: { className: 'h-full flex items-center' },
                             // hideIcon: { className: 'h-full flex items-center' }
                           }}
                         />
@@ -212,8 +211,8 @@ const Settings = () => {
                         name="language"
                         value={values.language}
                         options={languages}
-                        onChange={(e) => setFieldValue("language", e.value)}
-                        className={`w-full ${touched.language && errors.language ? "border-red-500" : "border-gray-300"}`}
+                        onChange={(e) => setFieldValue('language', e.value)}
+                        className={`w-full ${touched.language && errors.language ? 'border-red-500' : 'border-gray-300'}`}
                         placeholder="Select language"
                       />
                       {touched.language && errors.language && (

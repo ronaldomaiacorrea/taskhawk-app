@@ -1,19 +1,21 @@
-import { Button } from "primereact/button";
-import { PageTitle, Spinner, ConfirmDialog } from "@common";
+import { ConfirmDialog, PageTitle, Spinner } from "@common";
 import {
   useCategories,
   useCreateCategory,
   useDeleteCategory,
   useUpdateCategory,
 } from "@queries";
-import CategoryCard from "./components/CategoryCard";
-import { useCallback, useRef, useState } from "react";
-import { Toast, ToastMessage } from "primereact/toast";
-import type { Category } from "@shared/types";
+import { Button } from "primereact/button";
 import { Message } from "primereact/message";
-import EditCategory from "./components/EditCategory";
-import CreateCategory from "./components/CreateCategory";
+import { Toast, ToastMessage } from "primereact/toast";
+import { useCallback, useRef, useState } from "react";
 import { useTranslations } from "@hooks/useTranslations";
+import type { Category } from "@shared/types";
+import CategoryCard from "./components/CategoryCard";
+import CreateCategory from "./components/CreateCategory";
+import EditCategory from "./components/EditCategory";
+
+
 
 const Categories = () => {
   const { t } = useTranslations();
@@ -46,13 +48,13 @@ const Categories = () => {
   );
 
   const handleDeleteCategory = (category: Category) => {
-    if (!category) return;
+    if (!category) {return;}
     setSelectedCategory(category);
     setIsDeleteDialogVisible(true);
   };
 
   const handleConfirmDeleteCategory = (category: Category) => {
-    if (!category) return;
+    if (!category) {return;}
     deleteCategory(category, {
       onSuccess: () => {
         displayToast(t("categories.deletedCategory"), "success");
@@ -64,7 +66,7 @@ const Categories = () => {
   };
 
   const handleEditCategory = (category: Category) => {
-    if (!category) return;
+    if (!category) {return;}
     setSelectedCategory(category);
     setIsEditDialogVisible(true);
   };
@@ -92,13 +94,13 @@ const Categories = () => {
   };
 
   if (isLoading)
-    return (
+    {return (
       <div className="flex flex-row justify-center items-center min-h-screen">
         <Spinner />
       </div>
-    );
+    );}
 
-  if (isError) return <Message severity="error" text={error?.message} />;
+  if (isError) {return <Message severity="error" text={error?.message} />;}
 
   return (
     <>

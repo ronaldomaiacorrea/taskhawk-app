@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { Footer } from "@layout";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Footer } from "@layout";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 
 const renderComponent = () => render(<Footer />);
 

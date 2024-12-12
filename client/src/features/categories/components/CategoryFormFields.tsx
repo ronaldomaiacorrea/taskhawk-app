@@ -1,10 +1,10 @@
+import { useFormikContext } from "formik";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
-import type { Category } from "@shared/types";
-import { ICON } from "@shared/types";
-import { useFormikContext } from "formik";
 import { useTranslations } from "@hooks/useTranslations";
+import { ICON } from "@shared/types";
+import type { Category } from "@shared/types";
 
 type IconOption = {
   label: string;
@@ -24,14 +24,12 @@ const FormFields = () => {
     Category | Omit<Category, "id">
   >();
 
-  const iconTemplate = (option: IconOption) => {
-    return (
+  const iconTemplate = (option: IconOption) => (
       <div className="flex gap-3 items-center">
         <i className={option.value} />
         {option.label}
       </div>
     );
-  };
 
   return (
     <div className="flex flex-col gap-6">

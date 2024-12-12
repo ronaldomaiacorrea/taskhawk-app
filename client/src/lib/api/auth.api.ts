@@ -1,6 +1,6 @@
 import { AUTH_API_URL } from "@constants";
-import { handleResponse } from "./general.api";
 import { IAuthUser } from "@shared/types";
+import { handleResponse } from "./general.api";
 
 export const authApi = {
   signUp: async (email: string, password: string, displayName: string) => {

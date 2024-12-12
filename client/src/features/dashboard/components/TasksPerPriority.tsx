@@ -1,9 +1,9 @@
+import { getTasksPerPriorityChartData } from "@utils";
 import { Card } from "primereact/card";
 import { Chart } from "primereact/chart";
-import { getTasksPerPriorityChartData } from "@utils";
 import EmptyData from "src/common/EmptyData";
-import { Task } from "@shared/types";
 import { useTranslations } from "@hooks/useTranslations";
+import { Task } from "@shared/types";
 
 interface TasksPerPriorityProps {
   tasks: Task[];
