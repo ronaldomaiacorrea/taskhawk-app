@@ -6,8 +6,8 @@ import {
   useUpdateCategory,
 } from '@queries';
 import userEvent from '@testing-library/user-event';
-import { beforeEach } from 'node:test';
-import { Mock, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { Mock } from 'vitest';
 import Categories from '@features/categories/Categories';
 import { ICON } from '@shared/types';
 import type { Category } from '@shared/types';

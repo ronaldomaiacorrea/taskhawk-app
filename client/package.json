@@ -4,20 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bunx vite --host",
-    "build": "bunx --bun vite build",
+    "dev": "vite --host",
+    "build": "vite build",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "prepare": "husky",
-    "clean": "rm -rf dist && rm -rf node_modules && echo 'Done.'"
+    "clean": "rm -rf dist && rm -rf node_modules && echo 'Done cleaning.'"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --max-warnings=0",
-      "prettier --write"
+      "eslint --fix",
+      "prettier --write",
+      "tsc --noEmit"
     ],
     "*.{json,css,scss,md}": [
       "prettier --write"
@@ -56,7 +57,6 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/bun": "^1.1.14",
     "@types/eslint__js": "^8.42.3",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
@@ -66,7 +66,7 @@
     "@vitest/coverage-v8": "^2.1.4",
     "autoprefixer": "^10.4.20",
     "chart.js": "^4.4.4",
-    "eslint": "^8.56.0",
+    "eslint": "^9.16.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.1.0",
@@ -74,6 +74,7 @@
     "globals": "^15.13.0",
     "husky": "^9.1.7",
     "jsdom": "^25.0.0",
+    "lint-staged": "^15.2.11",
     "postcss": "^8.4.44",
     "prettier": "3.4.2",
     "tailwindcss": "^3.4.10",
