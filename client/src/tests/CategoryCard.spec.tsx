@@ -1,4 +1,6 @@
 import { useTasks } from '@queries';
+import type { Task } from '@shared/types';
+import { ICON, Status } from '@shared/types';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
@@ -6,8 +8,6 @@ import CategoryCard from 'src/features/categories/components/CategoryCard';
 import type { CategoryCardProps } from 'src/features/categories/components/CategoryCard';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Mock } from 'vitest';
-import type { Task } from '@shared/types';
-import { ICON, Status } from '@shared/types';
 
 const defaultProps: CategoryCardProps = {
   category: {

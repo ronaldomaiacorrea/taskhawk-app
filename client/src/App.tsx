@@ -1,6 +1,6 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '@context/AuthContext';
+import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import Calendar from './features/calendar/Calendar';
 import Categories from './features/categories/Categories';

@@ -1,7 +1,7 @@
-import { TASK_APP_QUERY_KEYS } from "@constants";
-import { useQuery } from "@tanstack/react-query";
-import type { Task } from "@shared/types";
 import { taskApi } from "@api/client.api";
+import { TASK_APP_QUERY_KEYS } from "@constants";
+import type { Task } from "@shared/types";
+import { useQuery } from "@tanstack/react-query";
 
 
 export const useTasks = () =>

@@ -1,4 +1,6 @@
+import { useTranslations } from "@hooks/useTranslations";
 import { useTasks } from "@queries";
+import type { Category, Task } from "@shared/types";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { Dialog } from "primereact/dialog";
@@ -6,8 +8,6 @@ import { OverlayPanel } from "primereact/overlaypanel";
 import { Tooltip } from "primereact/tooltip";
 import { useMemo, useRef, useState } from "react";
 import EmptyData from "src/common/EmptyData";
-import { useTranslations } from "@hooks/useTranslations";
-import type { Category, Task } from "@shared/types";
 
 export interface CategoryCardProps {
   category: Category;

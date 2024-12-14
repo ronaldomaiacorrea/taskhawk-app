@@ -1,10 +1,10 @@
 import { ActionButtons, PageTitle } from '@common';
+import { useDarkMode } from '@hooks/useDarkMode';
 import { Form, Formik } from 'formik';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import * as Yup from 'yup';
-import { useDarkMode } from '@hooks/useDarkMode';
 
 interface SettingsFormValues {
   theme: string;

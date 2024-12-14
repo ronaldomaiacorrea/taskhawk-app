@@ -1,17 +1,17 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
-import type { EditCategoryProps } from "@features/categories/components/EditCategory";
-import EditCategory from "@features/categories/components/EditCategory";
-import { ICON } from "@shared/types";
+import type { EditCategoryProps } from '@features/categories/components/EditCategory';
+import EditCategory from '@features/categories/components/EditCategory';
+import { ICON } from '@shared/types';
+import { render, screen, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
 
 const defaultProps: EditCategoryProps = {
   category: {
     id: 1,
-    name: "Work",
+    name: 'Work',
     icon: ICON.Briefcase,
-    description: "Category for work-related tasks",
+    description: 'Category for work-related tasks',
   },
   isVisible: true,
   closeDialog: vi.fn(),
@@ -21,20 +21,20 @@ const defaultProps: EditCategoryProps = {
 const renderComponent = (props: Partial<EditCategoryProps> = {}) =>
   render(<EditCategory {...defaultProps} {...props} />);
 
-const getCancelButton = () => screen.getByRole("button", { name: "Cancel" });
-const getSaveButton = () => screen.getByRole("button", { name: "Save" });
-const getNameField = () => screen.getByRole("textbox", { name: "Name" });
+const getCancelButton = () => screen.getByRole('button', { name: 'Cancel' });
+const getSaveButton = () => screen.getByRole('button', { name: 'Save' });
+const getNameField = () => screen.getByRole('textbox', { name: 'Name' });
 const getDescriptionField = () =>
-  screen.getByRole("textbox", { name: "Description" });
+  screen.getByRole('textbox', { name: 'Description' });
 
-describe("<EditCategory />", () => {
-  it("should render the component with fields", async () => {
+describe('<EditCategory />', () => {
+  it('should render the component with fields', async () => {
     renderComponent();
 
     expect(getCancelButton()).toBeInTheDocument();
     expect(getSaveButton()).toBeInTheDocument();
     expect(
-      screen.getByRole("dialog", {
+      screen.getByRole('dialog', {
         name: `Edit ${defaultProps.category.name} category`,
       }),
     ).toBeInTheDocument();
@@ -44,12 +44,12 @@ describe("<EditCategory />", () => {
       defaultProps.category.description,
     );
 
-    expect(screen.queryAllByRole("textbox")[2]).toHaveValue(
+    expect(screen.queryAllByRole('textbox')[2]).toHaveValue(
       defaultProps.category.icon,
     );
   });
 
-  it("should call closeDialog when clicking cancel", async () => {
+  it('should call closeDialog when clicking cancel', async () => {
     renderComponent();
 
     userEvent.click(getCancelButton());
@@ -57,34 +57,34 @@ describe("<EditCategory />", () => {
     await waitFor(() => expect(defaultProps.closeDialog).toHaveBeenCalled());
   });
 
-  it("should call onUpdateCategory when clicking save", async () => {
+  it('should call onUpdateCategory when clicking save', async () => {
     renderComponent();
 
     userEvent.clear(getNameField());
     userEvent.clear(getDescriptionField());
-    await userEvent.type(getNameField(), "Personal");
+    await userEvent.type(getNameField(), 'Personal');
 
-    await userEvent.type(getDescriptionField(), "General personal activities");
+    await userEvent.type(getDescriptionField(), 'General personal activities');
     userEvent.click(getSaveButton());
 
     await waitFor(() =>
       expect(defaultProps.onUpdateCategory).toHaveBeenCalledWith({
-        description: "General personal activities",
-        icon: "pi pi-briefcase",
+        description: 'General personal activities',
+        icon: 'pi pi-briefcase',
         id: 1,
-        name: "Personal",
+        name: 'Personal',
       }),
     );
   });
 
-  it("should reset the form when closing the dialog", async () => {
+  it('should reset the form when closing the dialog', async () => {
     renderComponent();
 
     userEvent.clear(getNameField());
     userEvent.clear(getDescriptionField());
 
-    await userEvent.type(getNameField(), "Personal");
-    await userEvent.type(getDescriptionField(), "General personal activities");
+    await userEvent.type(getNameField(), 'Personal');
+    await userEvent.type(getDescriptionField(), 'General personal activities');
 
     userEvent.click(getCancelButton());
 
@@ -96,7 +96,7 @@ describe("<EditCategory />", () => {
     });
   });
 
-  it("should render error messages when submitting a form with empty name", async () => {
+  it('should render error messages when submitting a form with empty name', async () => {
     const onUpdateCategorySpy = vi.fn();
     renderComponent({ onUpdateCategory: onUpdateCategorySpy });
 
@@ -106,43 +106,43 @@ describe("<EditCategory />", () => {
 
     await waitFor(() => {
       expect(getNameField()).toHaveAccessibleDescription(
-        "Please provide a category name.",
+        'Please provide a category name.',
       );
 
       expect(onUpdateCategorySpy).not.toHaveBeenCalled();
     });
   });
 
-  it("should render error message when submitting form with a name field with more than 30 characters", async () => {
+  it('should render error message when submitting form with a name field with more than 30 characters', async () => {
     const onUpdateCategorySpy = vi.fn();
     renderComponent({ onUpdateCategory: onUpdateCategorySpy });
 
     await userEvent.clear(getNameField());
-    await userEvent.type(getNameField(), "a".repeat(31));
+    await userEvent.type(getNameField(), 'a'.repeat(31));
 
     userEvent.click(getSaveButton());
 
     await waitFor(() => {
       expect(getNameField()).toHaveAccessibleDescription(
-        "Category name must not exceed 30 characters.",
+        'Category name must not exceed 30 characters.',
       );
 
       expect(onUpdateCategorySpy).not.toHaveBeenCalled();
     });
   });
 
-  it("should render error message when submitting form with a description field with more than 100 characters", async () => {
+  it('should render error message when submitting form with a description field with more than 100 characters', async () => {
     const onUpdateCategorySpy = vi.fn();
     renderComponent({ onUpdateCategory: onUpdateCategorySpy });
 
-    await userEvent.type(getDescriptionField(), "a".repeat(101));
+    await userEvent.type(getDescriptionField(), 'a'.repeat(101));
 
     userEvent.click(getSaveButton());
 
     await waitFor(() => {
       expect(
         screen.getByText(
-          "Category description must not exceed 100 characters.",
+          'Category description must not exceed 100 characters.',
         ),
       ).toBeInTheDocument();
     });

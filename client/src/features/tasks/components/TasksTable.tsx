@@ -1,15 +1,15 @@
+import { useTranslations } from '@hooks/useTranslations';
+import type { Category, Task } from '@shared/types';
 import { dateTemplate } from '@utils';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
+import type { DataTableExpandedRows } from 'primereact/datatable';
 import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import EmptyData from 'src/common/EmptyData';
 import PriorityBadge from 'src/common/PriorityBadge';
 import StatusBadge from 'src/common/StatusBadge';
-import { useTranslations } from '@hooks/useTranslations';
-import type { Category, Task } from '@shared/types';
-import type { DataTableExpandedRows } from 'primereact/datatable';
 
 export interface TasksTableProps {
   tasks: Task[];

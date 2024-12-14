@@ -1,8 +1,8 @@
 import { backgroundColors } from '@constants';
-import { hexToRgba } from '@utils';
-import type { TooltipItem } from 'chart.js';
 import type { Task } from '@shared/types';
 import { Status } from '@shared/types';
+import { hexToRgba } from '@utils';
+import type { TooltipItem } from 'chart.js';
 
 /**
  * Generates chart data and configuration options for an overview chart based on task statuses.

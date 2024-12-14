@@ -1,9 +1,9 @@
 import { ActionButtons } from '@common';
+import type { ActionButtonsProps } from '@common';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
-import type { ActionButtonsProps } from '@common';
 
 const defaultProps: ActionButtonsProps = {
   handleCloseDialog: vi.fn(),

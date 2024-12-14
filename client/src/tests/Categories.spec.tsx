@@ -1,16 +1,16 @@
 import '@testing-library/jest-dom';
+import Categories from '@features/categories/Categories';
 import {
   useCategories,
   useCreateCategory,
   useDeleteCategory,
   useUpdateCategory,
 } from '@queries';
+import { ICON } from '@shared/types';
+import type { Category } from '@shared/types';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Mock } from 'vitest';
-import Categories from '@features/categories/Categories';
-import { ICON } from '@shared/types';
-import type { Category } from '@shared/types';
 import { renderWithClient, screen, waitFor } from './helper';
 
 const mockCategories: Category[] = [

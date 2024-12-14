@@ -1,9 +1,9 @@
+import { useTranslations } from '@hooks/useTranslations';
+import type { Task } from '@shared/types';
 import { getOverviewChartData } from '@utils';
 import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';
 import EmptyData from 'src/common/EmptyData';
-import { useTranslations } from '@hooks/useTranslations';
-import type { Task } from '@shared/types';
 
 interface OverviewProps {
   tasks: Task[];

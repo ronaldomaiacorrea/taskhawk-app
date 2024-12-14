@@ -1,8 +1,8 @@
 import { PageTitle, Spinner } from '@common';
+import { useTranslations } from '@hooks/useTranslations';
 import { useTasks } from '@queries';
 import { Divider } from 'primereact/divider';
 import { Message } from 'primereact/message';
-import { useTranslations } from '@hooks/useTranslations';
 import Overview from './components/Overview';
 import TasksCompletedTime from './components/TasksCompletedTime';
 import TasksPerPriority from './components/TasksPerPriority';

@@ -1,17 +1,17 @@
 import { ConfirmDialog, PageTitle, Spinner } from '@common';
+import { useTranslations } from '@hooks/useTranslations';
 import {
   useCategories,
   useCreateCategory,
   useDeleteCategory,
   useUpdateCategory,
 } from '@queries';
+import type { Category } from '@shared/types';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { Toast } from 'primereact/toast';
 import type { ToastMessage } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
-import { useTranslations } from '@hooks/useTranslations';
-import type { Category } from '@shared/types';
 import CategoryCard from './components/CategoryCard';
 import CreateCategory from './components/CreateCategory';
 import EditCategory from './components/EditCategory';

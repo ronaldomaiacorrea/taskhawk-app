@@ -1,6 +1,6 @@
+import { DarkModeContext } from "@context/DarkModeProvider";
 import { Button } from "primereact/button";
 import { useContext } from "react";
-import { DarkModeContext } from "@context/DarkModeProvider";
 import TaskHawkLogo from "../assets/TaskHawk_Logo_Transparent.png";
 
 const Header = () => {

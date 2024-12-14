@@ -1,10 +1,10 @@
+import { useTranslations } from "@hooks/useTranslations";
+import { ICON } from "@shared/types";
+import type { Category } from "@shared/types";
 import { useFormikContext } from "formik";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
-import { useTranslations } from "@hooks/useTranslations";
-import { ICON } from "@shared/types";
-import type { Category } from "@shared/types";
 
 type IconOption = {
   label: string;

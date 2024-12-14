@@ -30,8 +30,29 @@ export default [
       curly: 'error',
       'default-case': 'error',
       'no-console': ['error', { allow: ['error'] }],
-      'sort-imports': 'off',
       'sort-vars': ['error', { ignoreCase: true }],
+      'import/named': 'error',
+      'import/default': 'error',
+      'import/export': 'error',
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin', // Node.js built-in modules
+            'external', // External modules (node_modules)
+            'internal', // Internal modules (your own modules)
+            'parent', // Parent modules
+            'sibling', // Sibling modules
+            'index', // Index files
+          ],
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
+    },
+  },
+  {
+    settings: {
+      'import/extensions': ['.js', '.ts', '.tsx'],
     },
   },
 ];

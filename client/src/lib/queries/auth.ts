@@ -1,6 +1,6 @@
+import { authApi } from "@api/auth.api";
 import { TASK_APP_QUERY_KEYS } from "@constants";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { authApi } from "@api/auth.api";
 
 export const useSignUp = () => {
   const queryClient = useQueryClient();
