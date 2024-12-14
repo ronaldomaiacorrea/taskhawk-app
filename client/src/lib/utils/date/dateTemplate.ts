@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 /**
  * Formats a UTC date into "weekday, MM/DD/YY, hh:mm AM/PM" in the user's local timezone.
@@ -7,8 +7,8 @@ import { format } from 'date-fns';
  * @returns The formatted date string.
  */
 export const dateTemplate = (date: Date) => {
-	const formattedDate = format(date, 'EEEE, MM/dd/yy');
-	const formattedTime = format(date, 'hh:mm a');
+  const formattedDate = format(date, "EEEE, MM/dd/yy");
+  const formattedTime = format(date, "hh:mm a");
 
-	return `${formattedDate}, ${formattedTime}`;
+  return `${formattedDate}, ${formattedTime}`;
 };

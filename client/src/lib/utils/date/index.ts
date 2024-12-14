@@ -1,1 +1,1 @@
-export * from './dateTemplate';
+export * from "./dateTemplate";

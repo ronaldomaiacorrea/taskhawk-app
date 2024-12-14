@@ -1,60 +1,60 @@
 /* calendar.css */
 
 .dark {
-	--fc-list-event-hover-bg-color: #1f2937; /* Dark mode background color */
+  --fc-list-event-hover-bg-color: #1f2937; /* Dark mode background color */
 }
 
 /* Default styles for FullCalendar */
 .fc-day-header {
-	@apply bg-white text-gray-800; /* Light background and dark text color */
+  @apply bg-white text-gray-800; /* Light background and dark text color */
 }
 
 /* Dark mode styles */
 .dark .fc-day-header {
-	@apply bg-gray-800 text-white; /* Dark gray background and white text color */
+  @apply bg-gray-800 text-white; /* Dark gray background and white text color */
 }
 
 .fc-day {
-	@apply bg-white text-gray-800; /* Light background for days */
+  @apply bg-white text-gray-800; /* Light background for days */
 }
 
 /* Dark mode for days */
 .dark .fc-day {
-	@apply bg-gray-800 text-white; /* Dark gray background for days */
+  @apply bg-gray-800 text-white; /* Dark gray background for days */
 }
 
 /* Customize day cells to have teal border when selected or active */
 .fc-day.fc-day-selected,
 .fc-day.fc-day-today {
-	@apply border-teal-500; /* Teal border for selected or today */
+  @apply border-teal-500; /* Teal border for selected or today */
 }
 
 /* Additional styles for events if needed */
 .fc-event {
-	@apply text-gray-900; /* Dark text for events */
+  @apply text-gray-900; /* Dark text for events */
 }
 
 .dark .fc-event {
-	@apply text-white; /* Light text for events in dark mode */
+  @apply text-white; /* Light text for events in dark mode */
 }
 
 .fc-list-day-cushion {
-	@apply bg-white text-gray-800; /* Light background and dark text for List view headers */
+  @apply bg-white text-gray-800; /* Light background and dark text for List view headers */
 }
 
 /* Dark mode styles for List view headers */
 .dark .fc-list-day-cushion {
-	@apply bg-gray-800 text-white; /* Dark gray background and white text for List view headers */
+  @apply bg-gray-800 text-white; /* Dark gray background and white text for List view headers */
 }
 
 .dark .fc-timegrid-axis {
-	@apply bg-gray-800 text-white; /* Dark gray background and white text for time grid axis */
+  @apply bg-gray-800 text-white; /* Dark gray background and white text for time grid axis */
 }
 
 .dark .fc-list-day-cushion {
-	@apply bg-gray-600 text-white; /* Dark gray background and white text for List view headers */
+  @apply bg-gray-600 text-white; /* Dark gray background and white text for List view headers */
 }
 
 .dark .fc-list-event:hover {
-	@apply bg-gray-600 text-white; /* Light text for List view event titles */
+  @apply bg-gray-600 text-white; /* Light text for List view event titles */
 }

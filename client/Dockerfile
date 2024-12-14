@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["bun", "run", "dev", "--host"]
+CMD ["bun", "run", "dev"]

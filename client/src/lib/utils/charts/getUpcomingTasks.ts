@@ -1,5 +1,5 @@
-import type { Task } from '@shared/types';
-import { Status } from '@shared/types';
+import { Status } from "@shared/types";
+import type { Task } from "@shared/types";
 
 /**
  * Filters and sorts a list of tasks to return only the upcoming tasks.
@@ -8,11 +8,11 @@ import { Status } from '@shared/types';
  * @returns {Task[]} - An array of tasks that are not completed or overdue, sorted by due date in ascending order.
  */
 export const getUpcomingTasks = (tasks: Task[]) =>
-	tasks
-		?.filter(
-			(task) =>
-				task.status !== Status.COMPLETED && task.status !== Status.OVERDUE
-		)
-		.sort(
-			(a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
-		);
+  tasks
+    ?.filter(
+      (task) =>
+        task.status !== Status.COMPLETED && task.status !== Status.OVERDUE,
+    )
+    .sort(
+      (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime(),
+    );
