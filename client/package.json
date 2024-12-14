@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "prepare": "husky",
+    "prepare": "cd .. && husky client/.husky",
     "clean": "rm -rf dist && rm -rf node_modules && echo 'Done cleaning.'"
   },
   "lint-staged": {
@@ -84,5 +84,8 @@
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.1.1"
   },
-  "module": "index.ts"
+  "module": "index.ts",
+  "husky": {
+    "pre-commit": "yarn lint-staged"
+  }
 }
