@@ -1,7 +1,9 @@
-import { useFormikContext } from "formik";
-import { InputText } from "primereact/inputtext";
+import { useTranslations } from '@hooks/useTranslations';
+import { useFormikContext } from 'formik';
+import { InputText } from 'primereact/inputtext';
 
 const LoginFormFields = () => {
+  const { t } = useTranslations();
   const { values, handleChange, errors, touched } = useFormikContext<{
     email: string;
     password: string;
@@ -11,7 +13,7 @@ const LoginFormFields = () => {
     <div className="flex flex-col gap-6">
       <div className="flex-1">
         <div className="flex flex-col gap-1">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t('common.email')}</label>
           <InputText
             id="email"
             aria-describedby="email-help"
@@ -19,10 +21,10 @@ const LoginFormFields = () => {
             value={values.email}
             className={`${
               touched.email && errors.email
-                ? "border-red-500 focus:border-red-500"
-                : "border-gray-300"
+                ? 'border-red-500 focus:border-red-500'
+                : 'border-gray-300'
             }`}
-            placeholder="Enter your email"
+            placeholder={t('login.emailPlaceHolder')}
           />
           {touched.email && errors.email && (
             <small id="email-help" className="text-red-600">
@@ -33,7 +35,7 @@ const LoginFormFields = () => {
       </div>
       <div className="flex-1">
         <div className="flex flex-col gap-2">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t('common.password')}</label>
           <InputText
             id="password"
             type="password"
@@ -42,10 +44,10 @@ const LoginFormFields = () => {
             value={values.password}
             className={`${
               touched.password && errors.password
-                ? "border-red-500 focus:border-red-500"
-                : "border-gray-300"
+                ? 'border-red-500 focus:border-red-500'
+                : 'border-gray-300'
             }`}
-            placeholder="Enter your password"
+            placeholder={t('login.passwordPlaceHolder')}
           />
           {touched.password && errors.password && (
             <small id="password-help" className="text-red-600">

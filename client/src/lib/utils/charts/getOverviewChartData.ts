@@ -1,4 +1,5 @@
 import { backgroundColors } from '@constants';
+import { useTranslations } from '@hooks/useTranslations';
 import type { Task } from '@shared/types';
 import { Status } from '@shared/types';
 import { hexToRgba } from '@utils';
@@ -7,12 +8,22 @@ import type { TooltipItem } from 'chart.js';
 /**
  * Generates chart data and configuration options for an overview chart based on task statuses.
  *
- * @param {Task[] | undefined} data - An array of tasks or undefined.
+ * @param {Task[] | undefined} tasks - An array of tasks or undefined.
  * @returns {Object} An object containing the chart data and options.
  *
  */
-export const getOverviewChartData = (data: Task[] | undefined) => {
-  const labels = Object.values(Status);
+export const getOverviewChartData = (tasks: Task[] | undefined) => {
+  const { t } = useTranslations();
+
+  const statusTranslated: Record<Status, string> = {
+    [Status.TO_DO]: t('tasks.toDo'),
+    [Status.COMPLETED]: t('tasks.completed'),
+    [Status.BLOCKED]: t('tasks.blocked'),
+    [Status.OVERDUE]: t('tasks.overdue'),
+    [Status.IN_PROGRESS]: t('tasks.inProgress'),
+  };
+
+  const labels = Object.values(Status).map((label) => statusTranslated[label]);
   const dataValues = new Array(7).fill(0);
 
   const statusIndexMap: Record<Status, number> = {
@@ -23,7 +34,7 @@ export const getOverviewChartData = (data: Task[] | undefined) => {
     [Status.IN_PROGRESS]: 4,
   };
 
-  data?.forEach((task) => {
+  tasks?.forEach((task) => {
     const index = statusIndexMap[task.status];
     if (index !== undefined) {
       dataValues[index]++;

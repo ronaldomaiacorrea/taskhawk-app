@@ -1,11 +1,10 @@
-import { useTranslations } from "@hooks/useTranslations";
-import type { Category } from "@shared/types";
-import { Form, Formik } from "formik";
-import { Dialog } from "primereact/dialog";
-import ActionButtons from "src/common/ActionButtons";
-import { categoryValidationSchema } from "../validations/categoryFormValidations";
-import CategoryFormFields from "./CategoryFormFields";
-
+import { useTranslations } from '@hooks/useTranslations';
+import type { Category } from '@shared/types';
+import { Form, Formik } from 'formik';
+import { Dialog } from 'primereact/dialog';
+import ActionButtons from 'src/common/ActionButtons';
+import { useCategoryFormValidation } from '../validations/useCategoryFormValidations';
+import CategoryFormFields from './CategoryFormFields';
 
 export interface EditCategoryProps {
   category: Category;
@@ -21,6 +20,7 @@ const EditCategory = ({
   onUpdateCategory,
 }: EditCategoryProps) => {
   const { t } = useTranslations();
+  const categoryValidationSchema = useCategoryFormValidation();
 
   return (
     <Formik
@@ -32,7 +32,7 @@ const EditCategory = ({
     >
       {({ submitForm, resetForm }) => (
         <Dialog
-          header={t("categories.editCategory", { name: category.name })}
+          header={t('categories.editCategory', { name: category.name })}
           visible={isVisible}
           className="max-w-3xl w-full mx-auto px-4"
           onHide={() => {

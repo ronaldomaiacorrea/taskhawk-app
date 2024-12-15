@@ -1,12 +1,16 @@
-import { ProgressSpinner } from "primereact/progressspinner";
+import { useTranslations } from '@hooks/useTranslations';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
-const Spinner = () => (
+const Spinner = () => {
+  const { t } = useTranslations();
+  return (
     <ProgressSpinner
-      style={{ width: "100px", height: "100px" }}
+      style={{ width: '100px', height: '100px' }}
       strokeWidth="8"
       animationDuration=".5s"
-      aria-label="Loading"
+      aria-label={t('common.loading')}
     />
   );
+};
 
 export default Spinner;
