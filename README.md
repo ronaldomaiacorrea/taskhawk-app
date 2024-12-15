@@ -31,9 +31,18 @@ TaskHawk is a cutting-edge task management application built with React and Type
   - Task status color coding
 
 - 🌓 Dark Mode Support
+  
   - Automatic theme detection
   - Manual theme toggle
   - Consistent styling across themes
+    
+- 🌍 Localization
+  
+  - Supported Languages:
+    - English: en
+    - Canadian French: fr-ca
+    - Portuguese-Brazil: pt-br
+    - Simplified Chinese: zn
 
 ## Tech Stack
 
