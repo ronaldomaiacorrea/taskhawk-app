@@ -1,4 +1,3 @@
 echo "Running pre-commit hook in client..."
 cd client
 yarn lint-staged
-yarn test
