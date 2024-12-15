@@ -2,7 +2,7 @@
   "compilerOptions": {
     // Enable latest features
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ESNext",
+    "target": "ES2020",
     "module": "ESNext",
     "moduleDetection": "force",
     "jsx": "react-jsx",
@@ -18,6 +18,9 @@
     "strict": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
 
     // Paths
     "baseUrl": ".",
@@ -41,7 +44,10 @@
     "eslint.config.js",
     "postcss.config.js",
     "tailwind.config.js",
-    "i18n.js"
+    "i18n.js",
+    "dist",
+    "build",
+    "node_modules"
   ],
   "include": ["src", "../shared/types.ts"]
 }

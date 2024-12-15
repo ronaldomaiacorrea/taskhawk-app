@@ -11,6 +11,7 @@
     "kanBan": "KanBan",
     "logout": "Logout",
     "login": "Login",
+    "loading": "Loading",
     "register": "Register",
     "email": "Email",
     "password": "Password",
@@ -96,6 +97,19 @@
     "createdCategory": "Category created successfully.",
     "failedCreateCategory": "Failed to create category.",
     "notFound": "Category not found.",
-    "confirmDelete": "Are you sure you want to delete category {{name}}?"
+    "confirmDelete": "Are you sure you want to delete category {{name}}?",
+    "validations": {
+      "nameIsRequired": "Please provide a category name.",
+      "nameMaxLength": "Name must not exceed 30 characters.",
+      "descriptionMaxLength": "Description must not exceed 100 characters."
+    }
+  },
+  "login": {
+    "emailPlaceHolder": "Enter your email",
+    "emailInvalid": "Invalid email address",
+    "emailRequired": "Email is required",
+    "passwordPlaceHolder": "Enter your password",
+    "passwordRequired": "Password is required",
+    "failedErrorMessage": "Login failed. Please check your credentials"
   }
 }
