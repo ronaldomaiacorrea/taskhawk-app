@@ -21,6 +21,9 @@
     ],
     "*.{json,css,scss,md}": [
       "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "tsc --noEmit"
     ]
   },
   "dependencies": {
