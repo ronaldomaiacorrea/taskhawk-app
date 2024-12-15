@@ -88,7 +88,7 @@ src/
    ```bash
    # Install frontend dependencies
    cd client
-   npm install
+   yarn install
 
    # Install backend dependencies
    cd ../server
@@ -121,12 +121,14 @@ src/
 
 In the client directory:
 
-- `bun run dev` - Start development server
-- `bun run build` - Build for production
-- `bun run preview` - Preview production build
-- `bun run test` - Run tests
-- `bun run lint` - Lint the codebase
-- `bun run coverage` - Run tests with coverage report
+- `yarn dev` - Start development server
+- `yarn build` - Build for production
+- `yarn preview` - Preview production build
+- `yarn test` - Run tests
+- `yarn lint` - Lint the codebase
+- `yarn lint:fix` - Lint and fix lint errors
+- `yarn coverage` - Run tests with coverage report
+- 'yarn clean` - Delete dist, node_modules, nuke the project
 
 In the server directory:
 
