@@ -70,16 +70,18 @@ src/
 ├── common/            # Shared components
 ├── context/           # React context providers
 ├── features/          # Feature-based modules
-│   ├── calendar/
-│   ├── categories/
-│   ├── dashboard/
-│   ├── settings/
-│   └── tasks/
+│   ├── calendar/        # Calendar
+│   ├── categories/      # Categories management
+│   ├── dashboard/       # Dashboard with supervising charts
+│   ├── login/           # Login
+│   ├── settings/        # User settings
+│   └── tasks/           # Tasks Management
 ├── hooks/             # Custom React hooks
 ├── lib/               # Core utilities
-│   ├── api/           # API client
-│   ├── constants/     # App constants
-│   └── utils/         # Utility functions
+│   ├── api/             # API client
+│   ├── constants/       # App constants
+│   ├── queries/         # API queries
+│   └── utils/           # Utility functions
 └── tests/             # Test files
 ```
 
