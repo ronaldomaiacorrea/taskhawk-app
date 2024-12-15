@@ -1,3 +1,8 @@
 echo "Running pre-commit hook in client..."
 cd client
+
+echo "Running eslint and prettier..."
 yarn lint-staged
+
+echo "Running tsc..."
+yarn tsc

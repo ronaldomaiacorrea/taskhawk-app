@@ -12,7 +12,8 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "prepare": "husky",
-    "clean": "rm -rf dist && rm -rf node_modules && echo 'Done cleaning.'"
+    "clean": "rm -rf dist && rm -rf node_modules && echo 'Done cleaning.'",
+    "tsc": "tsc -p tsconfig.json"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -21,9 +22,6 @@
     ],
     "*.{json,css,scss,md}": [
       "prettier --write"
-    ],
-    "*.{ts,tsx}": [
-      "tsc --noEmit"
     ]
   },
   "dependencies": {
@@ -61,8 +59,8 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^22.10.2",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "@vitejs/plugin-react": "^4.3.1",
