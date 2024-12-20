@@ -95,7 +95,7 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
           <div>
             <Button icon="pi pi-minus" onClick={collapseAll} text>
               <span className="hidden sm:inline mx-2">
-                {t('common.expandAll')}
+                {t('common.collapseAll')}
               </span>
             </Button>
           </div>
