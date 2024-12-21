@@ -1,8 +1,11 @@
 echo "Running pre-commit hook in client..."
-cd client
+cd client || exit 1
 
 echo "Running eslint and prettier..."
+yarn vite-node translate || { echo "Translation failed. Aborting commit."; exit 1; }
 yarn lint-staged
 
 echo "Running tsc..."
-yarn tsc
+yarn tsc || { echo "TypeScript errors. Aborting commit."; exit 1; }
+
+echo "Pre-commit checks completed successfully."
