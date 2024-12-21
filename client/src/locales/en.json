@@ -40,7 +40,8 @@
     "no": "No",
     "yes": "Yes",
     "action": "Action",
-    "category": "Category"
+    "category": "Category",
+    "test": "Test"
   },
   "dashboard": {
     "markCompletedMessage": "Do you want to mark these tasks as completed?",
