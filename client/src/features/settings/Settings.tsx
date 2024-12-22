@@ -3,7 +3,6 @@ import { useDarkMode } from '@hooks/useDarkMode';
 import { Form, Formik } from 'formik';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
-import { Password } from 'primereact/password';
 import * as Yup from 'yup';
 
 interface SettingsFormValues {
@@ -123,26 +122,7 @@ const Settings = () => {
                   </div>
 
                   <div className="flex-1">
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="new-username">Username</label>
-                      <InputText
-                        id="new-username"
-                        name="username"
-                        value={values.username}
-                        onChange={handleChange}
-                        className={`w-full ${touched.username && errors.username ? 'border-red-500' : 'border-gray-300'}`}
-                        placeholder="Enter username"
-                      />
-                      {touched.username && errors.username && (
-                        <small className="text-red-600">
-                          {errors.username}
-                        </small>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex-1">
-                    <div className="flex flex-col gap-2">
+                    {/* <div className="flex flex-col gap-2">
                       <label htmlFor="password">Password</label>
                       <span
                         className={`p-input-icon-right w-full ${touched.password && errors.password ? 'border-red-500' : 'border-gray-300'}`}
@@ -159,8 +139,8 @@ const Settings = () => {
                           placeholder="Enter password"
                           pt={{
                             input: { className: 'w-full' },
-                            // ShowIcon: { className: 'h-full flex items-center' },
-                            // hideIcon: { className: 'h-full flex items-center' }
+                            ShowIcon: { className: 'h-full flex items-center' },
+                            hideIcon: { className: 'h-full flex items-center' }
                           }}
                         />
                       </span>
@@ -189,9 +169,9 @@ const Settings = () => {
                           feedback={false}
                           placeholder="Confirm password"
                           pt={{
-                            input: { className: 'w-full' },
-                            // ShowIcon: { className: 'h-full flex items-center' },
-                            // hideIcon: { className: 'h-full flex items-center' }
+                            input: { className: 'w-full' }, */}
+                    {/* ShowIcon: { className: 'h-full flex items-center' },
+                            hideIcon: { className: 'h-full flex items-center' }
                           }}
                         />
                       </span>
@@ -200,7 +180,7 @@ const Settings = () => {
                           {errors.confirmPassword}
                         </small>
                       )}
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="flex-1">
