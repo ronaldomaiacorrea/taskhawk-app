@@ -1,5 +1,6 @@
 import './App.css';
 import { AuthProvider } from '@context/AuthContext';
+import ViewPortProvider from '@context/ViewPortProvider';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute';
 import Calendar from './features/calendar/Calendar';
@@ -23,20 +24,22 @@ function App() {
             element={
               <PrivateRoute>
                 <div className="flex flex-col min-h-screen">
-                  <Header />
-                  <div className="flex flex-1 dark:bg-black dark:text-white bg-white text-black">
-                    <Sidebar />
-                    <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
-                      <Routes>
-                        <Route path="/" element={<Dashboard />} />
-                        <Route path="tasks" element={<Tasks />} />
-                        <Route path="calendar" element={<Calendar />} />
-                        <Route path="settings" element={<Settings />} />
-                        <Route path="categories" element={<Categories />} />
-                      </Routes>
+                  <ViewPortProvider>
+                    <Header />
+                    <div className="flex flex-1 dark:bg-black dark:text-white bg-white text-black">
+                      <Sidebar />
+                      <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
+                        <Routes>
+                          <Route path="/" element={<Dashboard />} />
+                          <Route path="tasks" element={<Tasks />} />
+                          <Route path="calendar" element={<Calendar />} />
+                          <Route path="settings" element={<Settings />} />
+                          <Route path="categories" element={<Categories />} />
+                        </Routes>
+                      </div>
                     </div>
-                  </div>
-                  <Footer />
+                    <Footer />
+                  </ViewPortProvider>
                 </div>
               </PrivateRoute>
             }
