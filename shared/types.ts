@@ -17,6 +17,15 @@ export interface Task {
 	categoryId: number;
 }
 
+export type Language = 'en-US' | 'es' | 'fr' | 'pt-BR' | 'zh';
+
+export interface UserSettings {
+	darkMode: boolean;
+	username: string;
+	email: string;	
+	language: Language
+}
+
 export interface IUser {
 	id: string;
 	email: string;

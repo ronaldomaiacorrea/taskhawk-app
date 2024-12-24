@@ -1,4 +1,3 @@
-import { DarkModeContext } from '@context/DarkModeProvider';
 import { ViewPortContext } from '@context/ViewPortProvider';
 import { sidebarLinks } from '@utils';
 import { Button } from 'primereact/button';
@@ -8,7 +7,6 @@ import { Link } from 'react-router-dom';
 import TaskHawkLogo from '../assets/TaskHawk_Logo_Transparent.png';
 
 const Header = () => {
-  const { toggleTheme } = useContext(DarkModeContext);
   const [isSideBarVisible, setIsSideBarVisible] = useState(false);
   const viewPortWidth = useContext<number>(ViewPortContext);
 
@@ -29,12 +27,7 @@ const Header = () => {
             <div className="text-2xl font-bold text-white">Task Hawk</div>
           </div>
           <div className="flex gap-2 items-center">
-            <Button
-              icon="pi pi-sun"
-              outlined
-              onClick={toggleTheme}
-              className="bg-teal-900 border-teal-900 dark:bg-teal-900 dark:border-teal-900 text-teal-500 dark:text-teal-400"
-            />
+            <div>User and Logout</div>
             <div className="sm:hidden">
               <Button
                 icon="pi pi-bars"

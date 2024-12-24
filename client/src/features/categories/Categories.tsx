@@ -113,7 +113,9 @@ const Categories = () => {
   return (
     <>
       <Toast ref={toast} />
-      <PageTitle>{t('common.categories')}</PageTitle>
+      <PageTitle description={t('categories.description')}>
+        {t('common.categories')}
+      </PageTitle>
       <Button
         icon="pi pi-plus"
         label="Category"

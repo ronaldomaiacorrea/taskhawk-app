@@ -1,13 +1,14 @@
 import { useDarkMode } from '@hooks/useDarkMode';
+import type { UserSettings } from '@shared/types';
 import React, { createContext } from 'react';
 
 interface DarkModeContextType {
-  theme: string;
+  darkMode: UserSettings['darkMode'];
   toggleTheme: () => void;
 }
 
 export const DarkModeContext = createContext<DarkModeContextType>({
-  theme: 'light',
+  darkMode: false,
   toggleTheme: () => {},
 });
 
@@ -16,10 +17,10 @@ type DarkModeProviderProps = {
 };
 
 const DarkModeProvider = ({ children }: DarkModeProviderProps) => {
-  const [theme, toggleTheme] = useDarkMode();
+  const [darkMode, toggleTheme] = useDarkMode();
 
   return (
-    <DarkModeContext.Provider value={{ theme, toggleTheme }}>
+    <DarkModeContext.Provider value={{ darkMode, toggleTheme }}>
       {children}
     </DarkModeContext.Provider>
   );

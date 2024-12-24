@@ -26,7 +26,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <PageTitle>{t('common.dashboard')}</PageTitle>
+      <PageTitle description={t('dashboard.description')}>
+        {t('common.dashboard')}
+      </PageTitle>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col space-y-8 align-center justify-evenly space-x-0 lg:flex-row lg:space-y-0 lg:space-x-8">
           <div className="flex-1">

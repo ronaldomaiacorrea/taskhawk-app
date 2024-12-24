@@ -38,7 +38,9 @@ const Tasks = () => {
 
   return (
     <>
-      <PageTitle>{t('tasks.tasksManagementTitle')}</PageTitle>
+      <PageTitle description={t('tasks.taskDescriptionText')}>
+        {t('tasks.tasksManagementTitle')}
+      </PageTitle>
       <div className="lg:space-y-0 space-y-6">
         <div className="flex flex-col justify-between lg:items-center lg:flex-row lg:space-y-0">
           <div>

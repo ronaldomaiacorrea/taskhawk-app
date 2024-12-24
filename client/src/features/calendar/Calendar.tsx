@@ -45,7 +45,9 @@ const Calendar = () => {
 
   return (
     <>
-      <PageTitle>{t('common.calendar')}</PageTitle>
+      <PageTitle description={t('calendar.description')}>
+        {t('common.calendar')}
+      </PageTitle>
       <Tooltip />
       <FullCalendar
         locale={i18n.language}
