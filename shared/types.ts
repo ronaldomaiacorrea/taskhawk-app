@@ -20,7 +20,7 @@ export interface Task {
 export type Language = 'en-US' | 'es' | 'fr' | 'pt-BR' | 'zh';
 
 export interface UserSettings {
-	darkMode: boolean;
+	theme: 'light' | 'dark';
 	username: string;
 	email: string;	
 	language: Language

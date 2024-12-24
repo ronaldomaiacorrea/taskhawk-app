@@ -1,37 +1,58 @@
+import { useTranslations } from '@hooks/useTranslations';
+import type { UserSettings } from '@shared/types';
+
 interface ThemeSelectorProps {
-  darkMode: boolean;
-  changeTheme: (darkMode: boolean) => void;
+  theme: UserSettings['theme'];
+  onChangeTheme: (theme: UserSettings['theme']) => void;
 }
 
-const themes = [
-  { value: false, icon: 'pi pi-sun', label: 'Light' },
-  { value: true, icon: 'pi pi-moon', label: 'Dark' },
-];
+const ThemeSelector = ({ theme, onChangeTheme }: ThemeSelectorProps) => {
+  const { t } = useTranslations();
 
-const ThemeSelector = ({ darkMode, changeTheme }: ThemeSelectorProps) => (
-  <div className="grid grid-cols-2 gap-4">
-    {themes.map((theme) => (
+  return (
+    <div className="grid sm:grid-cols-2 gap-4">
       <button
-        key={theme.label}
         type="button"
-        onClick={() => changeTheme(theme.value)}
+        onClick={() => onChangeTheme('light')}
         className={`flex items-center gap-3 p-4 rounded-xl transition-all ${
-          darkMode === theme.value
-            ? 'bg-indigo-50 border-2 border-indigo-700 text-indigo-900'
-            : 'bg-white text-black border-2 border-gray-100 hover:border-gray-200'
+          theme === 'dark'
+            ? 'bg-zinc-900 border-1 border-teal-700 text-white hover:bg-zinc-800 hover:border-teal-900'
+            : 'bg-indigo-50 text-black border-2 border-indigo-100 hover:border-indigo-300 hover:bg-indigo-100'
         }`}
       >
         <div
           className={`p-2 rounded-lg ${
-            darkMode === theme.value ? 'bg-indigo-100' : 'bg-gray-100'
+            theme === 'dark'
+              ? 'bg-zinc-900 border-teal-900 text-white'
+              : 'bg-indigo-100 text-black'
           }`}
         >
-          <i className={theme.icon}></i>
+          <i className="pi pi-sun"></i>
         </div>
-        <span className="font-medium">{theme.label}</span>
+        <span className="font-medium">{t('common.lightMode')}</span>
       </button>
-    ))}
-  </div>
-);
+      <button
+        type="button"
+        onClick={() => onChangeTheme('dark')}
+        className={`flex items-center gap-3 p-4 rounded-xl transition-all ${
+          theme === 'dark'
+            ? 'bg-zinc-800 border-2 border-gray-700 text-white'
+            : 'bg-white text-black border-1 border-indigo-100  hover:border-indigo-300 hover:bg-indigo-100'
+        }`}
+      >
+        <div
+          className={`p-2 rounded-lg ${
+            theme === 'dark'
+              ? 'bg-zinc-900 border-teal-900 text-white'
+              : 'bg-gray-100 text-black'
+          }`}
+        >
+          <i className="pi pi-moon"></i>
+        </div>
+        <span className="font-medium">{t('common.darkMode')}</span>
+      </button>
+    </div>
+  );
+};
 
 export default ThemeSelector;

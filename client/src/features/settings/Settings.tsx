@@ -1,21 +1,20 @@
 import { PageTitle } from '@common';
-import { useDarkMode } from '@hooks/useDarkMode';
+import { ThemeContext } from '@context/ThemeProvider';
 import { useTranslations } from '@hooks/useTranslations';
 import type { Language, UserSettings } from '@shared/types';
 import { Form, Formik } from 'formik';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import EditProfile from './components/Profile';
 import SettingsCard from './components/SettingsCard';
 import ThemeSelector from './components/ThemeSelector';
 import useSettingsValidationsSchema from './validations/useSettingsValidationsSchema';
 
 const Settings = () => {
-  const [darkMode] = useDarkMode();
+  const { theme, setTheme } = useContext(ThemeContext);
   const { t, i18n } = useTranslations();
 
-  // Initial form values
   const initialValues: UserSettings = {
-    darkMode,
+    theme: 'light',
     username: '',
     email: '',
     language: i18n.language as Language,
@@ -50,7 +49,7 @@ const Settings = () => {
                 icon="pi pi-cog"
                 description={t('settings.themeDescription')}
               >
-                <ThemeSelector darkMode={darkMode} changeTheme={() => {}} />
+                <ThemeSelector theme={theme} onChangeTheme={setTheme} />
               </SettingsCard>
               <SettingsCard
                 title={t('settings.languageTitle')}

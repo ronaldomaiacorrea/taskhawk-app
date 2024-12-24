@@ -1,6 +1,6 @@
 import './App.css';
 import { AuthProvider } from '@context/AuthContext';
-import DarkModeProvider from '@context/DarkModeProvider';
+import ThemeProvider from '@context/ThemeProvider';
 import ViewPortProvider from '@context/ViewPortProvider';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute';
@@ -24,9 +24,9 @@ function App() {
             path="/*"
             element={
               <PrivateRoute>
-                <DarkModeProvider>
-                  <div className="flex flex-col min-h-screen">
-                    <ViewPortProvider>
+                <div className="flex flex-col min-h-screen">
+                  <ViewPortProvider>
+                    <ThemeProvider>
                       <Header />
                       <div className="flex flex-1 dark:bg-black dark:text-white bg-white text-black">
                         <Sidebar />
@@ -41,9 +41,9 @@ function App() {
                         </div>
                       </div>
                       <Footer />
-                    </ViewPortProvider>
-                  </div>
-                </DarkModeProvider>
+                    </ThemeProvider>
+                  </ViewPortProvider>
+                </div>
               </PrivateRoute>
             }
           />
