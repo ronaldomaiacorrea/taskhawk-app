@@ -116,13 +116,6 @@
     "passwordRequired": "A senha é necessária",
     "failedErrorMessage": "Falha no login. Por favor, verifique suas credenciais"
   },
-  "languages": {
-    "english": "Inglês",
-    "spanish": "Espanhol",
-    "french": "Francês",
-    "portugueseBR": "Portuguese Brazil",
-    "chinese": "Chinês simplificado"
-  },
   "settings": {
     "description": "Gerenciar as preferências e configurações de sua conta.",
     "usernameValidationRequired": "O nome de usuário é obrigatório.",

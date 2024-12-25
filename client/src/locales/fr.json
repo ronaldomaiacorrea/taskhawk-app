@@ -116,13 +116,6 @@
     "passwordRequired": "Le mot de passe est requis",
     "failedErrorMessage": "La connexion a échoué. Veuillez vérifier vos informations d'identification"
   },
-  "languages": {
-    "english": "Anglais",
-    "spanish": "Espagnol",
-    "french": "Français",
-    "portugueseBR": "Portugais Brésil",
-    "chinese": "Chinois simplifié"
-  },
   "settings": {
     "description": "Gérer les préférences et les paramètres de votre compte.",
     "usernameValidationRequired": "Le nom d'utilisateur est requis.",

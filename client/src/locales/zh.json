@@ -116,13 +116,6 @@
     "passwordRequired": "需要密码",
     "failedErrorMessage": "登录失败。请检查您的凭据"
   },
-  "languages": {
-    "english": "英语",
-    "spanish": "西班牙语",
-    "french": "法语",
-    "portugueseBR": "葡萄牙语 巴西",
-    "chinese": "简体中文"
-  },
   "settings": {
     "description": "管理您的账户偏好和设置。",
     "usernameValidationRequired": "需要用户名。",

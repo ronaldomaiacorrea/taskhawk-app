@@ -118,7 +118,7 @@ const Categories = () => {
       </PageTitle>
       <Button
         icon="pi pi-plus"
-        label="Category"
+        label={t('common.category')}
         outlined
         className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
         onClick={() => setIsCreateDialogVisible(true)}

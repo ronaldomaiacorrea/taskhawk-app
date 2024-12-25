@@ -116,13 +116,6 @@
     "passwordRequired": "Se requiere contraseña",
     "failedErrorMessage": "Error en el inicio de sesión. Por favor, compruebe sus credenciales"
   },
-  "languages": {
-    "english": "Inglés",
-    "spanish": "Español",
-    "french": "Francés",
-    "portugueseBR": "Portugués Brasil",
-    "chinese": "Chino simplificado"
-  },
   "settings": {
     "description": "Gestione las preferencias y la configuración de su cuenta.",
     "usernameValidationRequired": "El nombre de usuario es obligatorio.",

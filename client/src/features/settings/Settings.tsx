@@ -4,6 +4,7 @@ import { useTranslations } from '@hooks/useTranslations';
 import type { Language, UserSettings } from '@shared/types';
 import { Form, Formik } from 'formik';
 import { useContext, useEffect } from 'react';
+import LanguageSelector from './components/LanguageSelector';
 import EditProfile from './components/Profile';
 import SettingsCard from './components/SettingsCard';
 import ThemeSelector from './components/ThemeSelector';
@@ -27,7 +28,9 @@ const Settings = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 dark:bg-zinc-900">
-      <PageTitle description={t('settings.description')}>Settings</PageTitle>
+      <PageTitle description={t('settings.description')}>
+        {t('common.settings')}
+      </PageTitle>
       <Formik
         initialValues={initialValues}
         validationSchema={settingsValidationsSchema}
@@ -56,7 +59,10 @@ const Settings = () => {
                 icon="pi pi-globe"
                 description={t('settings.languageDescription')}
               >
-                Test
+                <LanguageSelector
+                  value={i18n.language as Language}
+                  onChangeLanguage={(value) => i18n.changeLanguage(value)}
+                />
               </SettingsCard>
             </div>
           </div>

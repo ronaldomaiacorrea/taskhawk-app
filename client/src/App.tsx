@@ -28,9 +28,9 @@ function App() {
                   <ViewPortProvider>
                     <ThemeProvider>
                       <Header />
-                      <div className="flex flex-1 dark:bg-black dark:text-white bg-white text-black">
+                      <div className="flex flex-1 dark:text-white bg-white text-black dark:bg-zinc-900">
                         <Sidebar />
-                        <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl dark:bg-zinc-900">
+                        <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
                           <Routes>
                             <Route path="/" element={<Dashboard />} />
                             <Route path="tasks" element={<Tasks />} />

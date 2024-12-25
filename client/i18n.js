@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import detector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import en from './src/locales/en.json';
+import es from './src/locales/es.json';
 import fr from './src/locales/fr.json';
 import pt from './src/locales/pt-br.json';
 import zh from './src/locales/zh.json';
@@ -9,6 +10,9 @@ import zh from './src/locales/zh.json';
 const resources = {
   en: {
     translation: en,
+  },
+  es: {
+    translation: es,
   },
   fr: {
     translation: fr,

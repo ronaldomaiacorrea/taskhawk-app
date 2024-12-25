@@ -18,13 +18,13 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-slate-800 to-teal-800/90 px-8 shadow-md shadow-teal-500/50 backdrop-blur-md py-1S">
+      <header className="sticky top-0 z-50 bg-gradient-to-r from-slate-800 to-teal-800/90 px-8 shadow-md shadow-teal-500/50 backdrop-blur-md">
         <div className="mx-auto sm:h-auto h-16 flex flex-row justify-between items-center text-white">
           <div className="flex items-center gap-2">
             <div className="font-bold hidden sm:block">
-              <img src={TaskHawkLogo} width={100} alt="Task Hawk logo" />
+              <img src={TaskHawkLogo} width={60} alt="Task Hawk logo" />
             </div>
-            <div className="text-2xl font-bold text-white">Task Hawk</div>
+            <div className="text-xl font-bold text-white">Task Hawk</div>
           </div>
           <div className="flex gap-2 items-center">
             <div>User and Logout</div>

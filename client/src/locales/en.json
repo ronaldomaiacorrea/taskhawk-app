@@ -116,13 +116,6 @@
     "passwordRequired": "Password is required",
     "failedErrorMessage": "Login failed. Please check your credentials"
   },
-  "languages": {
-    "english": "English",
-    "spanish": "Spanish",
-    "french": "French",
-    "portugueseBR": "Portuguese Brazil",
-    "chinese": "Chinese simplified"
-  },
   "settings": {
     "description": "Manage your account preferences and settings.",
     "usernameValidationRequired": "Username is required.",
