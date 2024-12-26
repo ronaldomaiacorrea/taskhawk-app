@@ -18,12 +18,14 @@ const LanguageSelector = ({
           onClick={() => onChangeLanguage(language.value as Language)}
           className={`w-full border-0 flex items-center justify-between p-4 rounded-xl transition-all ${
             value === language.value
-              ? 'bg-indigo-200 text-blue-700 hover:bg-indigo-200 hover:border-indigo-300'
-              : 'bg-white hover:bg-indigo-50'
+              ? 'bg-indigo-200 text-blue-700 dark:bg-zinc-700 dark:hover:bg-zinc-800 hover:bg-indigo-300'
+              : 'bg-white dark:hover:bg-zinc-800 dark:bg-zinc-900 hover:bg-indigo-100'
           }`}
         >
           <div className="flex items-center gap-3">
-            <span className="font-medium text-black">{language.label}</span>
+            <span className="font-medium text-black dark:text-white">
+              {language.label}
+            </span>
           </div>
           {value === language.value && (
             <div className="px-3 py-1 rounded-full text-sm bg-blue-100 text-indigo-700">
