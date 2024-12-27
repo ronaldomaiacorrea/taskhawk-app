@@ -53,6 +53,22 @@ export interface Category {
 	description?: string;
 }
 
+export interface SettingsProfile {
+	fullName: string;
+	email: string;
+	profileImage?: File;
+}
+
+export interface SettingsPassword {
+	password: string;
+	confirmPassword: string;
+}
+
+export interface SettingsPreferences {
+	theme: string;
+	language: string;
+}
+
 export enum ICON {
 	Calendar = 'pi pi-calendar',
 	Clipboard = 'pi pi-clipboard',
