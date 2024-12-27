@@ -44,6 +44,7 @@
     "test": "Test"
   },
   "dashboard": {
+    "description": "Get an overview of your tasks and progress, track metrics, all in one place.",
     "markCompletedMessage": "Do you want to mark these tasks as completed?",
     "upComingDeadlinesTitle": "Upcoming deadlines",
     "upComingDeadlinesDescription": "Tasks approaching their due dates.",
@@ -55,6 +56,7 @@
     "tasksPerPriorityDescription": "Number of tasks per priority."
   },
   "tasks": {
+    "taskDescriptionText": "Organize, manage, and prioritize your tasks effortlessly to meet your deadlines.",
     "tasksManagementTitle": "Tasks management",
     "notDefined": "No tasks defined",
     "confirmCompletion": "Confirm task completion",
@@ -84,6 +86,7 @@
   },
   "categories": {
     "emptyTasksWarning": "No tasks associated with this category.",
+    "description": "Manage and personalize your categories tailored to your needs.",
     "tasksAssociatedWarning": "Categories with assigned tasks cannot be edited or deleted.",
     "namePlaceHolder": "Enter category name",
     "descriptionPlaceHolder": "Enter category description",
@@ -112,5 +115,28 @@
     "passwordPlaceHolder": "Enter your password",
     "passwordRequired": "Password is required",
     "failedErrorMessage": "Login failed. Please check your credentials"
+  },
+  "settings": {
+    "description": "Manage your account preferences and settings.",
+    "usernameValidationRequired": "Username is required.",
+    "usernameMinCharacters": "Username must be at least {{number}} characters.",
+    "passwordMinCharacters": "Password must be at least {{number}} characters.",
+    "passwordMinNumbers": "Password must contain at least one number.",
+    "passwordMinLowerCase": "Password must contain at least one lowercase letter.",
+    "passwordMinUpperCase": "Password must contain at least one uppercase letter.",
+    "passwordMatch": "'Passwords must match.",
+    "confirmPasswordRequired": "Confirm password is required.",
+    "profileTitle": "Profile Information",
+    "profileDescription": "Update your username and password.",
+    "passwordDescription": "Change your password to keep your account secure.",
+    "themeTitle": "Appearance",
+    "themeDescription": "Customize the look and feel of the interface.",
+    "languageTitle": "Language",
+    "languageDescription": "Choose your preferred language.",
+    "usernamePlaceHolder": "Enter new username",
+    "emailPlaceHolder": "Enter new email"
+  },
+  "calendar": {
+    "description": "Visualize, edit, and delete your tasks effortlessly with the interactive calendar."
   }
 }

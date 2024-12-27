@@ -113,10 +113,12 @@ const Categories = () => {
   return (
     <>
       <Toast ref={toast} />
-      <PageTitle>{t('common.categories')}</PageTitle>
+      <PageTitle description={t('categories.description')}>
+        {t('common.categories')}
+      </PageTitle>
       <Button
         icon="pi pi-plus"
-        label="Category"
+        label={t('common.category')}
         outlined
         className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
         onClick={() => setIsCreateDialogVisible(true)}

@@ -52,7 +52,8 @@
     "completedTasksTitle": "加班完成任务",
     "completedTasksDescription": "每月完成任务的数量。",
     "tasksPerPriorityTitle": "每个优先级的任务",
-    "tasksPerPriorityDescription": "每个优先级的任务数。"
+    "tasksPerPriorityDescription": "每个优先级的任务数。",
+    "description": "概览任务和进度，跟踪指标，一切尽在其中。"
   },
   "tasks": {
     "tasksManagementTitle": "任务管理",
@@ -80,7 +81,8 @@
     "sunday": "星期日",
     "noDescription": "这项任务没有说明。",
     "confirmDelete": "您确定要删除这些任务吗？",
-    "confirmDeletionTitle": "确认任务删除"
+    "confirmDeletionTitle": "确认任务删除",
+    "taskDescriptionText": "毫不费力地组织、管理和安排任务的优先次序，在截止日期前完成任务。"
   },
   "categories": {
     "emptyTasksWarning": "本类别无相关任务。",
@@ -103,7 +105,8 @@
       "nameIsRequired": "请提供类别名称。",
       "nameMaxLength": "姓名不得超过 30 个字符。",
       "descriptionMaxLength": "描述不得超过 100 个字符。"
-    }
+    },
+    "description": "根据您的需求管理和个性化您的类别。"
   },
   "login": {
     "emailPlaceHolder": "输入您的电子邮件",
@@ -112,5 +115,28 @@
     "passwordPlaceHolder": "输入密码",
     "passwordRequired": "需要密码",
     "failedErrorMessage": "登录失败。请检查您的凭据"
+  },
+  "settings": {
+    "description": "管理您的账户偏好和设置。",
+    "usernameValidationRequired": "需要用户名。",
+    "usernameMinCharacters": "用户名必须至少包含 {{number}} 个字符。",
+    "passwordMinCharacters": "密码必须至少包含 {{number}} 个字符。",
+    "passwordMinNumbers": "密码必须至少包含一个数字。",
+    "passwordMinLowerCase": "密码必须至少包含一个小写字母。",
+    "passwordMinUpperCase": "密码必须至少包含一个大写字母。",
+    "passwordMatch": "密码必须匹配。",
+    "confirmPasswordRequired": "需要确认密码。",
+    "profileTitle": "简介信息",
+    "profileDescription": "更新您的用户名和密码。",
+    "passwordDescription": "更改密码，确保账户安全。",
+    "themeTitle": "外观",
+    "themeDescription": "自定义界面的外观和感觉。",
+    "languageTitle": "语言",
+    "languageDescription": "选择您喜欢的语言。",
+    "usernamePlaceHolder": "输入新用户名",
+    "emailPlaceHolder": "输入新电子邮件"
+  },
+  "calendar": {
+    "description": "利用交互式日历，轻松实现任务的可视化、编辑和删除。"
   }
 }

@@ -38,13 +38,15 @@ const Tasks = () => {
 
   return (
     <>
-      <PageTitle>{t('tasks.tasksManagementTitle')}</PageTitle>
+      <PageTitle description={t('tasks.taskDescriptionText')}>
+        {t('tasks.tasksManagementTitle')}
+      </PageTitle>
       <div className="lg:space-y-0 space-y-6">
         <div className="flex flex-col justify-between lg:items-center lg:flex-row lg:space-y-0">
           <div>
             <Button
               icon="pi pi-plus"
-              label="Task"
+              label={t('common.task')}
               outlined
               className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
               // OnClick={() => setIsCreateDialogVisible(true)}

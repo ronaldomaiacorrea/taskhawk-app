@@ -52,7 +52,8 @@
     "completedTasksTitle": "Tâches accomplies en heures supplémentaires",
     "completedTasksDescription": "Nombre de tâches accomplies chaque mois.",
     "tasksPerPriorityTitle": "Tâches par priorité",
-    "tasksPerPriorityDescription": "Nombre de tâches par priorité."
+    "tasksPerPriorityDescription": "Nombre de tâches par priorité.",
+    "description": "Obtenez une vue d'ensemble de vos tâches et de vos progrès, suivez les indicateurs, le tout en un seul endroit."
   },
   "tasks": {
     "tasksManagementTitle": "Gestion des tâches",
@@ -80,7 +81,8 @@
     "sunday": "Dimanche",
     "noDescription": "Cette tâche n'a pas de description.",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer ces tâches ?",
-    "confirmDeletionTitle": "Confirmer la suppression des tâches"
+    "confirmDeletionTitle": "Confirmer la suppression des tâches",
+    "taskDescriptionText": "Organisez, gérez et hiérarchisez vos tâches sans effort pour respecter vos délais."
   },
   "categories": {
     "emptyTasksWarning": "Aucune tâche n'est associée à cette catégorie.",
@@ -103,7 +105,8 @@
       "nameIsRequired": "Veuillez indiquer un nom de catégorie.",
       "nameMaxLength": "Le nom ne doit pas dépasser 30 caractères.",
       "descriptionMaxLength": "La description ne doit pas dépasser 100 caractères."
-    }
+    },
+    "description": "Gérez et personnalisez vos catégories en fonction de vos besoins."
   },
   "login": {
     "emailPlaceHolder": "Saisissez votre adresse électronique",
@@ -112,5 +115,28 @@
     "passwordPlaceHolder": "Entrez votre mot de passe",
     "passwordRequired": "Le mot de passe est requis",
     "failedErrorMessage": "La connexion a échoué. Veuillez vérifier vos informations d'identification"
+  },
+  "settings": {
+    "description": "Gérer les préférences et les paramètres de votre compte.",
+    "usernameValidationRequired": "Le nom d'utilisateur est requis.",
+    "usernameMinCharacters": "Le nom d'utilisateur doit comporter au moins {{nombre}} caractères.",
+    "passwordMinCharacters": "Le mot de passe doit comporter au moins {{nombre}} caractères.",
+    "passwordMinNumbers": "Le mot de passe doit contenir au moins un chiffre.",
+    "passwordMinLowerCase": "Le mot de passe doit contenir au moins une lettre minuscule.",
+    "passwordMinUpperCase": "Le mot de passe doit contenir au moins une lettre majuscule.",
+    "passwordMatch": "Les mots de passe doivent correspondre.",
+    "confirmPasswordRequired": "La confirmation du mot de passe est requise.",
+    "profileTitle": "Informations sur le profil",
+    "profileDescription": "Mettez à jour votre nom d'utilisateur et votre mot de passe.",
+    "passwordDescription": "Changez votre mot de passe pour sécuriser votre compte.",
+    "themeTitle": "Apparence",
+    "themeDescription": "Personnaliser l'aspect et la convivialité de l'interface.",
+    "languageTitle": "Langue",
+    "languageDescription": "Choisissez votre langue préférée.",
+    "usernamePlaceHolder": "Saisir un nouveau nom d'utilisateur",
+    "emailPlaceHolder": "Saisir un nouvel e-mail"
+  },
+  "calendar": {
+    "description": "Visualisez, modifiez et supprimez vos tâches sans effort grâce au calendrier interactif."
   }
 }

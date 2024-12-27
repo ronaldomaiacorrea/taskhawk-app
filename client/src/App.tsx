@@ -1,5 +1,6 @@
 import './App.css';
 import { AuthProvider } from '@context/AuthContext';
+import ThemeProvider from '@context/ThemeProvider';
 import ViewPortProvider from '@context/ViewPortProvider';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute';
@@ -25,20 +26,22 @@ function App() {
               <PrivateRoute>
                 <div className="flex flex-col min-h-screen">
                   <ViewPortProvider>
-                    <Header />
-                    <div className="flex flex-1 dark:bg-black dark:text-white bg-white text-black">
-                      <Sidebar />
-                      <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
-                        <Routes>
-                          <Route path="/" element={<Dashboard />} />
-                          <Route path="tasks" element={<Tasks />} />
-                          <Route path="calendar" element={<Calendar />} />
-                          <Route path="settings" element={<Settings />} />
-                          <Route path="categories" element={<Categories />} />
-                        </Routes>
+                    <ThemeProvider>
+                      <Header />
+                      <div className="flex flex-1 dark:text-white bg-white text-black dark:bg-zinc-900">
+                        <Sidebar />
+                        <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
+                          <Routes>
+                            <Route path="/" element={<Dashboard />} />
+                            <Route path="tasks" element={<Tasks />} />
+                            <Route path="calendar" element={<Calendar />} />
+                            <Route path="settings" element={<Settings />} />
+                            <Route path="categories" element={<Categories />} />
+                          </Routes>
+                        </div>
                       </div>
-                    </div>
-                    <Footer />
+                      <Footer />
+                    </ThemeProvider>
                   </ViewPortProvider>
                 </div>
               </PrivateRoute>

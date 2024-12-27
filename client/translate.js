@@ -20,7 +20,7 @@ const localesPath = path.join(__dirname, 'src', 'locales');
 const languageMap = {
   'pt-br.json': 'pt-BR',
   'es.json': 'es',
-  'fr.json': 'fr-CA',
+  'fr.json': 'fr',
   'zh.json': 'zh',
 };
 

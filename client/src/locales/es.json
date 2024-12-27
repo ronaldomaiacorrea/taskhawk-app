@@ -52,7 +52,8 @@
     "completedTasksTitle": "Tareas realizadas en horas extraordinarias",
     "completedTasksDescription": "Número de tareas completadas cada mes.",
     "tasksPerPriorityTitle": "Tareas por prioridad",
-    "tasksPerPriorityDescription": "Número de tareas por prioridad."
+    "tasksPerPriorityDescription": "Número de tareas por prioridad.",
+    "description": "Obtenga una visión general de sus tareas y progresos, realice un seguimiento de las métricas, todo en un mismo lugar."
   },
   "tasks": {
     "tasksManagementTitle": "Gestión de tareas",
@@ -80,7 +81,8 @@
     "sunday": "Domingo",
     "noDescription": "Esta tarea no tiene descripción.",
     "confirmDelete": "¿Está seguro de que desea eliminar estas tareas?",
-    "confirmDeletionTitle": "Confirmar la eliminación de tareas"
+    "confirmDeletionTitle": "Confirmar la eliminación de tareas",
+    "taskDescriptionText": "Organice, gestione y priorice sus tareas sin esfuerzo para cumplir sus plazos."
   },
   "categories": {
     "emptyTasksWarning": "No hay tareas asociadas a esta categoría.",
@@ -103,7 +105,8 @@
       "nameIsRequired": "Indique el nombre de la categoría.",
       "nameMaxLength": "El nombre no debe superar los 30 caracteres.",
       "descriptionMaxLength": "La descripción no debe superar los 100 caracteres."
-    }
+    },
+    "description": "Gestione y personalice sus categorías a la medida de sus necesidades."
   },
   "login": {
     "emailPlaceHolder": "Introduzca su dirección de correo electrónico",
@@ -112,5 +115,28 @@
     "passwordPlaceHolder": "Introduzca su contraseña",
     "passwordRequired": "Se requiere contraseña",
     "failedErrorMessage": "Error en el inicio de sesión. Por favor, compruebe sus credenciales"
+  },
+  "settings": {
+    "description": "Gestione las preferencias y la configuración de su cuenta.",
+    "usernameValidationRequired": "El nombre de usuario es obligatorio.",
+    "usernameMinCharacters": "El nombre de usuario debe tener al menos {{number}} caracteres.",
+    "passwordMinCharacters": "La contraseña debe tener al menos {{número}} caracteres.",
+    "passwordMinNumbers": "La contraseña debe contener al menos un número.",
+    "passwordMinLowerCase": "La contraseña debe contener al menos una letra minúscula.",
+    "passwordMinUpperCase": "La contraseña debe contener al menos una letra mayúscula.",
+    "passwordMatch": "Las contraseñas deben coincidir.",
+    "confirmPasswordRequired": "Es necesario confirmar la contraseña.",
+    "profileTitle": "Información sobre el perfil",
+    "profileDescription": "Actualice su nombre de usuario y contraseña.",
+    "passwordDescription": "Cambia tu contraseña para mantener la seguridad de tu cuenta.",
+    "themeTitle": "Apariencia",
+    "themeDescription": "Personaliza el aspecto de la interfaz.",
+    "languageTitle": "Idioma",
+    "languageDescription": "Elija el idioma que prefiera.",
+    "usernamePlaceHolder": "Introducir nuevo nombre de usuario",
+    "emailPlaceHolder": "Introducir nuevo correo electrónico"
+  },
+  "calendar": {
+    "description": "Visualice, edite y elimine sus tareas sin esfuerzo con el calendario interactivo."
   }
 }

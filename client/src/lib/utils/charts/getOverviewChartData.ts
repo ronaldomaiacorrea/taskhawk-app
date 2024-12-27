@@ -23,8 +23,10 @@ export const getOverviewChartData = (tasks: Task[] | undefined) => {
     [Status.IN_PROGRESS]: t('tasks.inProgress'),
   };
 
-  const labels = Object.values(Status).map((label) => statusTranslated[label]);
-  const dataValues = new Array(7).fill(0);
+  const statuses = Object.values(Status);
+  const labels = statuses.map((status) => statusTranslated[status]);
+
+  const dataValues = new Array(statuses.length).fill(0);
 
   const statusIndexMap: Record<Status, number> = {
     [Status.TO_DO]: 0,
@@ -47,11 +49,16 @@ export const getOverviewChartData = (tasks: Task[] | undefined) => {
     plugins: {
       legend: {
         display: true,
-        position: 'bottom' as const,
-        text: 'Status',
-        borderRadius: 10,
+        position: 'bottom',
+        text: t('tasks.status'),
         labels: {
-          usePointStyle: true,
+          usePointStyle: false,
+          boxWidth: 20,
+          padding: 20,
+          margin: 6,
+          font: {
+            size: 12,
+          },
         },
       },
       tooltip: {
@@ -74,10 +81,9 @@ export const getOverviewChartData = (tasks: Task[] | undefined) => {
     },
   };
 
-  const chartBackgroundColors = dataValues.map((_, index) => {
-    const taskStatus = labels[index] as Status;
-    return backgroundColors[taskStatus];
-  });
+  const chartBackgroundColors = statuses.map(
+    (status) => backgroundColors[status],
+  );
 
   const chartData = {
     labels,

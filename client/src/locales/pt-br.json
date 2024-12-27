@@ -52,7 +52,8 @@
     "completedTasksTitle": "Tarefas concluídas em horas extras",
     "completedTasksDescription": "Número de tarefas concluídas a cada mês.",
     "tasksPerPriorityTitle": "Tarefas por prioridade",
-    "tasksPerPriorityDescription": "Número de tarefas por prioridade."
+    "tasksPerPriorityDescription": "Número de tarefas por prioridade.",
+    "description": "Tenha uma visão geral de suas tarefas e do progresso, acompanhe as métricas, tudo em um só lugar."
   },
   "tasks": {
     "tasksManagementTitle": "Gerenciamento de tarefas",
@@ -80,7 +81,8 @@
     "sunday": "Domingo",
     "noDescription": "Essa tarefa não tem descrição.",
     "confirmDelete": "Tem certeza de que deseja excluir essas tarefas?",
-    "confirmDeletionTitle": "Confirmar a exclusão de tarefas"
+    "confirmDeletionTitle": "Confirmar a exclusão de tarefas",
+    "taskDescriptionText": "Organize, gerencie e priorize suas tarefas sem esforço para cumprir seus prazos."
   },
   "categories": {
     "emptyTasksWarning": "Não há tarefas associadas a essa categoria.",
@@ -103,7 +105,8 @@
       "nameIsRequired": "Forneça um nome de categoria.",
       "nameMaxLength": "O nome não deve exceder 30 caracteres.",
       "descriptionMaxLength": "A descrição não deve exceder 100 caracteres."
-    }
+    },
+    "description": "Gerencie e personalize suas categorias de acordo com suas necessidades."
   },
   "login": {
     "emailPlaceHolder": "Digite seu e-mail",
@@ -112,5 +115,28 @@
     "passwordPlaceHolder": "Digite sua senha",
     "passwordRequired": "A senha é necessária",
     "failedErrorMessage": "Falha no login. Por favor, verifique suas credenciais"
+  },
+  "settings": {
+    "description": "Gerenciar as preferências e configurações de sua conta.",
+    "usernameValidationRequired": "O nome de usuário é obrigatório.",
+    "usernameMinCharacters": "O nome de usuário deve ter pelo menos {{número}} caracteres.",
+    "passwordMinCharacters": "A senha deve ter pelo menos {{número}} caracteres.",
+    "passwordMinNumbers": "A senha deve conter pelo menos um número.",
+    "passwordMinLowerCase": "A senha deve conter pelo menos uma letra minúscula.",
+    "passwordMinUpperCase": "A senha deve conter pelo menos uma letra maiúscula.",
+    "passwordMatch": "'As senhas devem corresponder.",
+    "confirmPasswordRequired": "É necessário confirmar a senha.",
+    "profileTitle": "Informações sobre o perfil",
+    "profileDescription": "Atualize seu nome de usuário e senha.",
+    "passwordDescription": "Altere sua senha para manter sua conta segura.",
+    "themeTitle": "Aparência",
+    "themeDescription": "Personalize a aparência da interface.",
+    "languageTitle": "Idioma",
+    "languageDescription": "Escolha o idioma de sua preferência.",
+    "usernamePlaceHolder": "Digite o novo nome de usuário",
+    "emailPlaceHolder": "Inserir novo e-mail"
+  },
+  "calendar": {
+    "description": "Visualize, edite e exclua suas tarefas sem esforço com o calendário interativo."
   }
 }
