@@ -1,19 +1,17 @@
-version: "3.8"
-
 services:
   api:
     build:
       context: ./server
       dockerfile: Dockerfile
     ports:
-      - "3030:3030"
+      - "${API_PORT}:3030"
     volumes:
       - ./server:/app/server
       - ./shared:/app/shared
       - /app/server/node_modules
     environment:
       - NODE_ENV=development
-      - PORT=3030
+      - PORT=${API_PORT}
     command: bun --watch src/index.ts
 
   client:
@@ -21,14 +19,14 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "${CLIENT_PORT}:3000"
     volumes:
       - ./client:/app/client
       - ./shared:/app/shared
       - /app/client/node_modules
     environment:
       - NODE_ENV=development
-      - VITE_API_URL=http://localhost:3030
+      - VITE_API_URL=http://localhost:${API_PORT}
     depends_on:
       - api
 
