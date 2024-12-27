@@ -35,7 +35,7 @@ TaskHawk is a cutting-edge task management application built with React and Type
   - Automatic theme detection
   - Manual theme toggle
   - Consistent styling across themes
-    
+
 - 🌍 Localization
   
   - Supported Languages:
@@ -120,7 +120,7 @@ src/
 
    ```bash
    # Start frontend (from client directory)
-   bun run dev
+   yarn dev
 
    # Start backend (from server directory)
    bun run dev
@@ -139,7 +139,7 @@ In the client directory:
 - `yarn lint` - Lint the codebase
 - `yarn lint:fix` - Lint and fix lint errors
 - `yarn coverage` - Run tests with coverage report
-- 'yarn clean` - Delete dist, node_modules, nuke the project
+- `yarn clean` - Delete dist, node_modules, nuke the project
 
 In the server directory:
 
