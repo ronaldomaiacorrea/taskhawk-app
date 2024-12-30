@@ -1,22 +1,47 @@
 import { ConfirmDialog } from '@common';
 import { useTranslations } from '@hooks/useTranslations';
-import { useCategories, useTasks } from '@queries';
+import { useCategories, useCreateTask, useTasks } from '@queries';
 import type { Task } from '@shared/types';
 import { Button } from 'primereact/button';
-import { useState } from 'react';
+import type { Toast, ToastMessage } from 'primereact/toast';
+import { useCallback, useRef, useState } from 'react';
 import PageTitle from 'src/common/PageTitle';
-// Import { useState } from 'react';
-// Import { InputText } from 'primereact/inputtext';
-
+import CreateTask from './components/CreateTask';
 import TasksTable from './components/TasksTable';
 
 const Tasks = () => {
   const { t } = useTranslations();
-  // Const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
+  const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
   const { data: categories = [] } = useCategories();
   const { data: tasks = [] } = useTasks();
+  const toast = useRef<Toast | null>(null);
+  const { mutate: addTask } = useCreateTask();
+
+  const displayToast = useCallback(
+    (message: string, severity?: ToastMessage['severity']) => {
+      toast.current?.show({
+        severity: severity,
+        summary: t('common.action'),
+        detail: message,
+        life: 3000,
+      });
+    },
+    [],
+  );
+
+  const handleCreateTask = (newTask: Omit<Task, 'id'>) => {
+    window.console.log(newTask);
+    addTask(newTask, {
+      onSuccess: () => {
+        displayToast(t('categories.createdCategory'), 'success');
+        setIsCreateDialogVisible(false);
+      },
+      onError: () =>
+        displayToast(t('categories.failedCreateCategory'), 'error'),
+    });
+  };
 
   const confirmDelete = (selectedTasks: Task[]) => {
     setTasksToDelete(selectedTasks);
@@ -49,7 +74,7 @@ const Tasks = () => {
               label={t('common.task')}
               outlined
               className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
-              // OnClick={() => setIsCreateDialogVisible(true)}
+              onClick={() => setIsCreateDialogVisible(true)}
             />
           </div>
         </div>
@@ -75,6 +100,11 @@ const Tasks = () => {
           onConfirm={() => {}}
         />
       </div>
+      <CreateTask
+        closeDialog={() => setIsCreateDialogVisible(false)}
+        isVisible={isCreateDialogVisible}
+        onCreateTask={handleCreateTask}
+      />
     </>
   );
 };

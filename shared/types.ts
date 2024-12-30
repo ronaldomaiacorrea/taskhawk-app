@@ -7,14 +7,15 @@ export enum Status {
 }
 
 export interface Task {
-	id: number;
+	id: string;
+	user_id?: string;
 	title: string;
 	description?: string;
 	creationDate: Date;
 	dueDate: Date;
-	priority: 'High' | 'Medium' | 'Low';
-	status: Status;
-	categoryId: number;
+	priority: 'High' | 'Medium' | 'Low' | '';
+	status?: Status;
+	category_id?: number;	
 }
 
 export type Language = 'en-US' | 'es' | 'fr' | 'pt-BR' | 'zh';
@@ -51,6 +52,26 @@ export interface IAuthUser {
 	}
 }
 
+export interface IUserProfile {
+	data: {
+	  identities: {
+		identity_id: string;
+		id: string;
+		user_id: string;
+		identity_data: {
+		  email: string;
+		  email_verified: boolean;
+		  phone_verified: boolean;
+		  sub: string;
+		};
+		provider: string;		
+		last_sign_in_at: string;
+		created_at: string;
+		updated_at: string;
+		email: string;
+	  }[];
+	};
+  }
 export type TaskWithCategory = Task & {
 	categoryName?: string;
 };
@@ -60,6 +81,7 @@ export interface Category {
 	name: string;
 	icon: ICON;
 	description?: string;
+	user_id?: string;
 }
 
 export enum ICON {

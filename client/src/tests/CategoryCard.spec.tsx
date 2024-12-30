@@ -22,27 +22,27 @@ const defaultProps: CategoryCardProps = {
 
 const mockTasks: Task[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Task 1',
-    categoryId: 1,
+    category_id: 1,
     creationDate: new Date(),
     dueDate: new Date(),
     priority: 'High',
     status: Status.TO_DO,
   },
   {
-    id: 2,
+    id: '2',
     title: 'Task 2',
-    categoryId: 2,
+    category_id: 2,
     creationDate: new Date(),
     dueDate: new Date(),
     priority: 'High',
     status: Status.COMPLETED,
   },
   {
-    id: 3,
+    id: '3',
     title: 'Task 3',
-    categoryId: 3,
+    category_id: 3,
     creationDate: new Date(),
     dueDate: new Date(),
     priority: 'High',

@@ -1,6 +1,7 @@
 import './App.css';
-import { AuthProvider } from '@context/AuthContext';
+import { AuthProvider } from '@context/AuthProvider';
 import ThemeProvider from '@context/ThemeProvider';
+import UserProvider from '@context/UserProvider';
 import ViewPortProvider from '@context/ViewPortProvider';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute';
@@ -25,24 +26,29 @@ function App() {
             element={
               <PrivateRoute>
                 <div className="flex flex-col min-h-screen">
-                  <ViewPortProvider>
-                    <ThemeProvider>
-                      <Header />
-                      <div className="flex flex-1 dark:text-white bg-white text-black dark:bg-zinc-900">
-                        <Sidebar />
-                        <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
-                          <Routes>
-                            <Route path="/" element={<Dashboard />} />
-                            <Route path="tasks" element={<Tasks />} />
-                            <Route path="calendar" element={<Calendar />} />
-                            <Route path="settings" element={<Settings />} />
-                            <Route path="categories" element={<Categories />} />
-                          </Routes>
+                  <UserProvider>
+                    <ViewPortProvider>
+                      <ThemeProvider>
+                        <Header />
+                        <div className="flex flex-1 dark:text-white bg-white text-black dark:bg-zinc-900">
+                          <Sidebar />
+                          <div className="flex-1 xl:mx-auto px-8 pb-8 max-w-screen-2xl">
+                            <Routes>
+                              <Route path="/" element={<Dashboard />} />
+                              <Route path="tasks" element={<Tasks />} />
+                              <Route path="calendar" element={<Calendar />} />
+                              <Route path="settings" element={<Settings />} />
+                              <Route
+                                path="categories"
+                                element={<Categories />}
+                              />
+                            </Routes>
+                          </div>
                         </div>
-                      </div>
-                      <Footer />
-                    </ThemeProvider>
-                  </ViewPortProvider>
+                        <Footer />
+                      </ThemeProvider>
+                    </ViewPortProvider>
+                  </UserProvider>
                 </div>
               </PrivateRoute>
             }

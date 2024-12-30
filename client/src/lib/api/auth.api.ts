@@ -1,5 +1,5 @@
 import { AUTH_API_URL } from '@constants';
-import type { IAuthUser } from '@shared/types';
+import type { IAuthUser, IUserProfile } from '@shared/types';
 import { handleResponse } from './general.api';
 
 export const authApi = {
@@ -55,6 +55,6 @@ export const authApi = {
 
   getUserProfile: async () => {
     const response = await fetch(`${AUTH_API_URL}/profile`);
-    return handleResponse<IAuthUser>(response);
+    return handleResponse<IUserProfile>(response);
   },
 };

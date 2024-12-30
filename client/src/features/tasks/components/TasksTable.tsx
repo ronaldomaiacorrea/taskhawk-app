@@ -50,7 +50,7 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
 
   const categoryTemplate = (task: Task) => {
     const taskCategory = categories.find(
-      (category) => category.id === task.categoryId,
+      (category) => category.id === task.category_id,
     );
 
     return (
@@ -159,7 +159,7 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
         body={categoryTemplate}
         header={t('common.category')}
         sortable
-        sortField="categoryId"
+        sortField="category_id"
         style={{ minWidth: '150px' }}
       />
     </DataTable>
