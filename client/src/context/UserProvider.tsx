@@ -1,4 +1,3 @@
-import { Spinner } from '@common';
 import type { IUserProfile } from '@shared/types';
 import React, { createContext } from 'react';
 import { useUserProfile } from 'src/lib/queries/auth';
@@ -16,11 +15,8 @@ type UserProviderProps = {
 const UserProvider = ({ children }: UserProviderProps) => {
   const { data: userProfile, isLoading } = useUserProfile();
 
-  if (isLoading) {
-    <Spinner />;
-  }
-
-  const user = userProfile ? userProfile.data.identities[0] : null;
+  const user =
+    !isLoading && userProfile ? userProfile.data.identities[0] : null;
 
   return (
     <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
