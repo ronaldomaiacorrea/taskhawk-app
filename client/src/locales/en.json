@@ -99,7 +99,9 @@
     "taskDescriptionPlaceHolder": "Enter task description",
     "taskPriorityPlaceHolder": "Select a priority",
     "taskStatusPlaceHolder": "Select a status",
-    "taskCategoryPlaceHolder": "Select a category"
+    "taskCategoryPlaceHolder": "Select a category",
+    "taskCreationSuccessMessage": "Task successfully created.",
+    "taskCreationErrorMessage": "Failed to create new task."
   },
   "categories": {
     "emptyTasksWarning": "No tasks associated with this category.",

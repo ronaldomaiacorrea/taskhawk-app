@@ -99,7 +99,9 @@
     "taskDescriptionPlaceHolder": "输入任务描述",
     "taskPriorityPlaceHolder": "选择优先级",
     "taskStatusPlaceHolder": "选择状态",
-    "taskCategoryPlaceHolder": "选择类别"
+    "taskCategoryPlaceHolder": "选择类别",
+    "taskCreationSuccessMessage": "任务创建成功。",
+    "taskCreationErrorMessage": "创建新任务失败。"
   },
   "categories": {
     "emptyTasksWarning": "本类别无相关任务。",

@@ -99,7 +99,9 @@
     "taskDescriptionPlaceHolder": "Introduzca la descripción de la tarea",
     "taskPriorityPlaceHolder": "Seleccione una prioridad",
     "taskStatusPlaceHolder": "Seleccione un estado",
-    "taskCategoryPlaceHolder": "Seleccione una categoría"
+    "taskCategoryPlaceHolder": "Seleccione una categoría",
+    "taskCreationSuccessMessage": "Tarea creada con éxito.",
+    "taskCreationErrorMessage": "Error al crear nueva tarea."
   },
   "categories": {
     "emptyTasksWarning": "No hay tareas asociadas a esta categoría.",

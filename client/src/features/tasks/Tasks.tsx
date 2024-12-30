@@ -1,9 +1,11 @@
-import { ConfirmDialog } from '@common';
+import { ConfirmDialog, Spinner } from '@common';
 import { useTranslations } from '@hooks/useTranslations';
 import { useCategories, useCreateTask, useTasks } from '@queries';
 import type { Task } from '@shared/types';
 import { Button } from 'primereact/button';
-import type { Toast, ToastMessage } from 'primereact/toast';
+import { Message } from 'primereact/message';
+import { Toast } from 'primereact/toast';
+import type { ToastMessage } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
 import PageTitle from 'src/common/PageTitle';
 import CreateTask from './components/CreateTask';
@@ -14,8 +16,13 @@ const Tasks = () => {
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
   const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
-  const { data: categories = [] } = useCategories();
-  const { data: tasks = [] } = useTasks();
+  const {
+    data: categories = [],
+    isLoading: isLoadingCategories,
+    isError: isErrorCategories,
+    error: errorCategories,
+  } = useCategories();
+  const { data: tasks = [], isLoading, isError, error } = useTasks();
   const toast = useRef<Toast | null>(null);
   const { mutate: addTask } = useCreateTask();
 
@@ -32,14 +39,14 @@ const Tasks = () => {
   );
 
   const handleCreateTask = (newTask: Omit<Task, 'id'>) => {
-    window.console.log(newTask);
     addTask(newTask, {
       onSuccess: () => {
-        displayToast(t('categories.createdCategory'), 'success');
+        displayToast(t('tasks.taskCreationSuccessMessage'), 'success');
         setIsCreateDialogVisible(false);
       },
-      onError: () =>
-        displayToast(t('categories.failedCreateCategory'), 'error'),
+      onError: () => {
+        displayToast(t('tasks.taskCreationErrorMessage'), 'error');
+      },
     });
   };
 
@@ -61,8 +68,26 @@ const Tasks = () => {
     </>
   );
 
+  if (isLoading || isLoadingCategories) {
+    return (
+      <div className="flex flex-row justify-center items-center min-h-screen">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (isErrorCategories || isError) {
+    return (
+      <Message
+        severity="error"
+        text={errorCategories?.message || error?.message}
+      />
+    );
+  }
+
   return (
     <>
+      <Toast ref={toast} />
       <PageTitle description={t('tasks.taskDescriptionText')}>
         {t('tasks.tasksManagementTitle')}
       </PageTitle>
@@ -97,7 +122,7 @@ const Tasks = () => {
             setIsDeleteDialogVisible(false);
           }}
           content={dialogContent}
-          onConfirm={() => {}}
+          onConfirm={() => { }}
         />
       </div>
       <CreateTask

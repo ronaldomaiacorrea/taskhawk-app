@@ -99,7 +99,9 @@
     "taskDescriptionPlaceHolder": "Saisir la description de la tâche",
     "taskPriorityPlaceHolder": "Sélectionner une priorité",
     "taskStatusPlaceHolder": "Sélectionner un statut",
-    "taskCategoryPlaceHolder": "Sélectionner une catégorie"
+    "taskCategoryPlaceHolder": "Sélectionner une catégorie",
+    "taskCreationSuccessMessage": "Tâche créée avec succès.",
+    "taskCreationErrorMessage": "Échec de la création d'une nouvelle tâche."
   },
   "categories": {
     "emptyTasksWarning": "Aucune tâche n'est associée à cette catégorie.",
