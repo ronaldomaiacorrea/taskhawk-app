@@ -43,6 +43,10 @@ TaskHawk is a cutting-edge task management application built with React and Type
     - Canadian French: fr-ca
     - Portuguese-Brazil: pt-br
     - Simplified Chinese: zn
+      
+🤖 AI Agent
+
+  - Users can interact with the AI Agent in any language. The Agent assists with managing tasks and categories, providing an intuitive and efficient experience.
 
 ## Tech Stack
 
