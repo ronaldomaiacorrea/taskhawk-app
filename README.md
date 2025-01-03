@@ -40,7 +40,7 @@ TaskHawk is a cutting-edge task management application built with React and Type
   
   - Supported Languages:
     - English: en
-    - Canadian French: fr-ca
+    - French: fr
     - Portuguese-Brazil: pt-br
     - Simplified Chinese: zn
       
