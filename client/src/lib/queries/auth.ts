@@ -1,6 +1,7 @@
-import { authApi } from "@api/auth.api";
-import { TASK_APP_QUERY_KEYS } from "@constants";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { authApi } from '@api/auth.api';
+import { TASK_APP_QUERY_KEYS } from '@constants';
+import type { IUserProfile } from '@shared/types';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useSignUp = () => {
   const queryClient = useQueryClient();
@@ -90,7 +91,7 @@ export const useDeleteUser = () => {
 };
 
 export const useUserProfile = () =>
-  useQuery({
-    queryKey: ["auth", "profile"],
+  useQuery<IUserProfile, Error>({
+    queryKey: [TASK_APP_QUERY_KEYS.AUTH, 'profile'],
     queryFn: () => authApi.getUserProfile(),
   });

@@ -1,22 +1,54 @@
-import { ConfirmDialog } from '@common';
+import { ConfirmDialog, Spinner } from '@common';
 import { useTranslations } from '@hooks/useTranslations';
-import { useCategories, useTasks } from '@queries';
+import { useCategories, useCreateTask, useTasks } from '@queries';
 import type { Task } from '@shared/types';
 import { Button } from 'primereact/button';
-import { useState } from 'react';
+import { Message } from 'primereact/message';
+import { Toast } from 'primereact/toast';
+import type { ToastMessage } from 'primereact/toast';
+import { useCallback, useRef, useState } from 'react';
 import PageTitle from 'src/common/PageTitle';
-// Import { useState } from 'react';
-// Import { InputText } from 'primereact/inputtext';
-
+import CreateTask from './components/CreateTask';
 import TasksTable from './components/TasksTable';
 
 const Tasks = () => {
   const { t } = useTranslations();
-  // Const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
-  const { data: categories = [] } = useCategories();
-  const { data: tasks = [] } = useTasks();
+  const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
+  const {
+    data: categories = [],
+    isLoading: isLoadingCategories,
+    isError: isErrorCategories,
+    error: errorCategories,
+  } = useCategories();
+  const { data: tasks = [], isLoading, isError, error } = useTasks();
+  const toast = useRef<Toast | null>(null);
+  const { mutate: addTask } = useCreateTask();
+
+  const displayToast = useCallback(
+    (message: string, severity?: ToastMessage['severity']) => {
+      toast.current?.show({
+        severity: severity,
+        summary: t('common.action'),
+        detail: message,
+        life: 3000,
+      });
+    },
+    [],
+  );
+
+  const handleCreateTask = (newTask: Omit<Task, 'id'>) => {
+    addTask(newTask, {
+      onSuccess: () => {
+        displayToast(t('tasks.taskCreationSuccessMessage'), 'success');
+        setIsCreateDialogVisible(false);
+      },
+      onError: () => {
+        displayToast(t('tasks.taskCreationErrorMessage'), 'error');
+      },
+    });
+  };
 
   const confirmDelete = (selectedTasks: Task[]) => {
     setTasksToDelete(selectedTasks);
@@ -36,8 +68,26 @@ const Tasks = () => {
     </>
   );
 
+  if (isLoading || isLoadingCategories) {
+    return (
+      <div className="flex flex-row justify-center items-center min-h-screen">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (isErrorCategories || isError) {
+    return (
+      <Message
+        severity="error"
+        text={errorCategories?.message || error?.message}
+      />
+    );
+  }
+
   return (
     <>
+      <Toast ref={toast} />
       <PageTitle description={t('tasks.taskDescriptionText')}>
         {t('tasks.tasksManagementTitle')}
       </PageTitle>
@@ -49,7 +99,7 @@ const Tasks = () => {
               label={t('common.task')}
               outlined
               className="my-4 text-teal-500 border-teal-500 dark:text-teal-400 dark:border-teal-400"
-              // OnClick={() => setIsCreateDialogVisible(true)}
+              onClick={() => setIsCreateDialogVisible(true)}
             />
           </div>
         </div>
@@ -72,9 +122,14 @@ const Tasks = () => {
             setIsDeleteDialogVisible(false);
           }}
           content={dialogContent}
-          onConfirm={() => {}}
+          onConfirm={() => { }}
         />
       </div>
+      <CreateTask
+        closeDialog={() => setIsCreateDialogVisible(false)}
+        isVisible={isCreateDialogVisible}
+        onCreateTask={handleCreateTask}
+      />
     </>
   );
 };

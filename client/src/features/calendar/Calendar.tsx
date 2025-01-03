@@ -1,4 +1,4 @@
-import { backgroundColors } from '@constants';
+// Import { backgroundColors } from '@constants';
 import frLocale from '@fullcalendar/core/locales/fr-ca';
 import ptLocale from '@fullcalendar/core/locales/pt-br';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
@@ -7,35 +7,9 @@ import listPlugin from '@fullcalendar/list';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { useTranslations } from '@hooks/useTranslations';
-import { Status } from '@shared/types';
-import type { Task } from '@shared/types';
+
 import { Tooltip } from 'primereact/tooltip';
 import PageTitle from 'src/common/PageTitle';
-
-// Import { useMonthTasks } from '@queries/tasks';
-
-const tasks: Task[] = [
-  {
-    id: 1,
-    title: 'Design Homepage',
-    description: 'Create a responsive design for the homepage.',
-    creationDate: new Date('2024-10-12T14:30:00'),
-    dueDate: new Date('2024-10-12T19:30:00'),
-    priority: 'High',
-    status: Status.IN_PROGRESS,
-    categoryId: 1,
-  },
-  {
-    id: 2,
-    title: 'Home work',
-    description: 'Do the homework',
-    creationDate: new Date('2024-10-09T14:30:00'),
-    dueDate: new Date('2024-10-10T14:30:00'),
-    priority: 'Medium',
-    status: Status.OVERDUE,
-    categoryId: 1,
-  },
-];
 
 const Calendar = () => {
   const { t, i18n } = useTranslations();
@@ -65,14 +39,14 @@ const Calendar = () => {
         titleFormat={{ year: 'numeric', month: 'long', day: 'numeric' }}
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView={'dayGridMonth'}
-        events={tasks.map((task) => ({
-          title: task.title,
-          start: task.creationDate.toISOString(),
-          end: task.dueDate.toISOString(),
-          description: task.description,
-          backgroundColor: backgroundColors[task.status],
-          borderColor: backgroundColors[task.status],
-        }))}
+        // Events={tasks.map((task) => ({
+        //   title: task.title,
+        //   start: task.creationDate.toISOString(),
+        //   end: task.dueDate.toISOString(),
+        //   description: task.description,
+        //   backgroundColor: backgroundColors[task.status],
+        //   borderColor: backgroundColors[task.status],
+        // }))}
         allDaySlot={false}
         height={1000}
         timeZone="local"

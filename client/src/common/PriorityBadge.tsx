@@ -15,7 +15,9 @@ export interface PriorityBadgeProps {
 const PriorityBadge = ({ task }: PriorityBadgeProps) => {
   const { t } = useTranslations();
 
-  const priorityMapping = useMemo<Record<Task['priority'], PriorityInfo>>(
+  const priorityMapping = useMemo<
+    Record<'High' | 'Medium' | 'Low', PriorityInfo>
+  >(
     () => ({
       High: {
         icon: 'pi pi-arrow-up',
@@ -36,11 +38,12 @@ const PriorityBadge = ({ task }: PriorityBadgeProps) => {
     [task, t],
   );
 
-  const priorityInfo = priorityMapping[task.priority];
-  const { text, icon, textColor } = priorityInfo;
+  const priorityInfo = task.priority !== '' && priorityMapping[task.priority];
   if (!priorityInfo) {
     return null;
   }
+
+  const { text, icon, textColor } = priorityInfo;
 
   return (
     <div className={textColor}>

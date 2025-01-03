@@ -16,7 +16,7 @@ export interface StatusBadgeProps {
 const StatusBadge = ({ task }: StatusBadgeProps) => {
   const { t } = useTranslations();
 
-  const statusMapping = useMemo<Record<Task['status'], StatusInfo>>(
+  const statusMapping = useMemo<Record<Status, StatusInfo>>(
     () => ({
       [Status.OVERDUE]: {
         color: 'text-red-500',
@@ -43,15 +43,18 @@ const StatusBadge = ({ task }: StatusBadgeProps) => {
         icon: 'pi pi-ban',
         text: t('tasks.blocked'),
       },
+      undefined: {},
     }),
     [task.status],
   );
 
-  const statusInfo = statusMapping[task.status] || {};
-  const { text, color, icon } = statusInfo;
+  const statusInfo = task?.status ? statusMapping[task?.status] : undefined;
+
   if (!statusInfo) {
     return null;
   }
+
+  const { text, color, icon } = statusInfo;
 
   return (
     <div className={color}>

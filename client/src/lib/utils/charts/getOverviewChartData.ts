@@ -37,7 +37,7 @@ export const getOverviewChartData = (tasks: Task[] | undefined) => {
   };
 
   tasks?.forEach((task) => {
-    const index = statusIndexMap[task.status];
+    const index = task.status ? statusIndexMap[task.status] : undefined;
     if (index !== undefined) {
       dataValues[index]++;
     }
