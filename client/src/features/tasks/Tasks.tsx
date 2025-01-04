@@ -1,6 +1,11 @@
 import { ConfirmDialog, Spinner } from '@common';
 import { useTranslations } from '@hooks/useTranslations';
-import { useCategories, useCreateTask, useTasks } from '@queries';
+import {
+  useCategories,
+  useCreateTask,
+  useDeleteTasks,
+  useTasks,
+} from '@queries';
 import type { Task } from '@shared/types';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
@@ -25,6 +30,7 @@ const Tasks = () => {
   const { data: tasks = [], isLoading, isError, error } = useTasks();
   const toast = useRef<Toast | null>(null);
   const { mutate: addTask } = useCreateTask();
+  const { mutate: deleteTasks } = useDeleteTasks();
 
   const displayToast = useCallback(
     (message: string, severity?: ToastMessage['severity']) => {
@@ -53,6 +59,21 @@ const Tasks = () => {
   const confirmDelete = (selectedTasks: Task[]) => {
     setTasksToDelete(selectedTasks);
     setIsDeleteDialogVisible(true);
+  };
+
+  const handleDeleteTask = (tasks: Task[]) => {
+    if (!Array.isArray(tasks)) {
+      return;
+    }
+
+    deleteTasks(tasks, {
+      onSuccess: () => {
+        displayToast(t('tasks.tasksDeletedSuccesMessage'), 'success');
+        setIsDeleteDialogVisible(false);
+        setTasksToDelete([]);
+      },
+      onError: () => displayToast(t('tasks.tasksDeletedErrorMessage'), 'error'),
+    });
   };
 
   const dialogContent = (
@@ -122,7 +143,7 @@ const Tasks = () => {
             setIsDeleteDialogVisible(false);
           }}
           content={dialogContent}
-          onConfirm={() => { }}
+          onConfirm={() => handleDeleteTask(tasksToDelete)}
         />
       </div>
       <CreateTask

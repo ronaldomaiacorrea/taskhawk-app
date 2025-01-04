@@ -36,7 +36,7 @@ const mergeTasksWithCategories = async (
 		throw new Error('Failed to load categories');
 	}
 
-	const categoryName = categories[task.categoryId];
+	const categoryName = task.category_id ? categories[task.category_id]: undefined;
 
 	return { ...task, categoryName };
 };
@@ -110,23 +110,27 @@ tasksRoute.post('/', zValidator('json', createTaskSchema), async (c) => {
 });
 
 // DELETE request
-tasksRoute.delete('/:id', async (c) => {
-	const id = Number.parseInt(c.req.param('id'));
+tasksRoute.delete('/batch-delete', async (c) => {
+	const { ids } = await c.req.json(); 
 
-	const { data: task, error } = await supabase
-		.from('tasks')
-		.delete()
-		.eq('id', id)
-		.select();
+	if (!ids || !Array.isArray(ids) || ids.length === 0) {
+        return c.json({ error: 'Invalid or missing IDs' }, 400);
+    }
 
-	if (error) {
-		return c.json({ error: error.message }, 500);
-	}
+	const { data: deletedTasks, error } = await supabase
+        .from('tasks')
+        .delete()
+        .in('id', ids)
+        .select();
 
-	if (!task || task.length === 0) {
-		return c.json({ error: 'Task not found or already deleted' }, 404);
-	}
+    if (error) {
+        return c.json({ error: error.message }, 500);
+    }
 
-	return c.json({ message: 'Task deleted successfully', task: task[0] }, 200);
+	if (!deletedTasks || deletedTasks.length === 0) {
+        return c.json({ error: 'Tasks not found or already deleted' }, 404);
+    }
+
+    return c.json({ message: 'Tasks deleted successfully', tasks: deletedTasks }, 200);
 });
 // TODO: put

@@ -27,3 +27,16 @@ export const useCreateTask = () => {
     },
   });
 };
+
+export const useDeleteTasks = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<Task[], Error, Task[]>({
+    mutationFn: (tasks: Task[]) => taskApi.delete(tasks),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [TASK_APP_QUERY_KEYS.TASKS],
+      });
+    },
+  });
+};

@@ -101,7 +101,9 @@
     "taskStatusPlaceHolder": "Seleccione un estado",
     "taskCategoryPlaceHolder": "Seleccione una categoría",
     "taskCreationSuccessMessage": "Tarea creada con éxito.",
-    "taskCreationErrorMessage": "Error al crear nueva tarea."
+    "taskCreationErrorMessage": "Error al crear nueva tarea.",
+    "tasksDeletedSuccesMessage": "Tareas eliminadas con éxito.",
+    "tasksDeletedErrorMessage": "No se han podido eliminar las tareas seleccionadas."
   },
   "categories": {
     "emptyTasksWarning": "No hay tareas asociadas a esta categoría.",

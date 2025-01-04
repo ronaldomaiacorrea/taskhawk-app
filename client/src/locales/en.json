@@ -101,7 +101,9 @@
     "taskStatusPlaceHolder": "Select a status",
     "taskCategoryPlaceHolder": "Select a category",
     "taskCreationSuccessMessage": "Task successfully created.",
-    "taskCreationErrorMessage": "Failed to create new task."
+    "taskCreationErrorMessage": "Failed to create new task.",
+    "tasksDeletedSuccesMessage": "Tasks successfully deleted.",
+    "tasksDeletedErrorMessage": "Failed to deleted selected tasks."
   },
   "categories": {
     "emptyTasksWarning": "No tasks associated with this category.",
