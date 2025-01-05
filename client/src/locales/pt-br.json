@@ -101,7 +101,9 @@
     "taskStatusPlaceHolder": "Selecione um status",
     "taskCategoryPlaceHolder": "Selecione uma categoria",
     "taskCreationSuccessMessage": "Tarefa criada com sucesso.",
-    "taskCreationErrorMessage": "Falha ao criar nova tarefa."
+    "taskCreationErrorMessage": "Falha ao criar nova tarefa.",
+    "tasksDeletedSuccesMessage": "Tarefas excluídas com sucesso.",
+    "tasksDeletedErrorMessage": "Falha ao excluir tarefas selecionadas."
   },
   "categories": {
     "emptyTasksWarning": "Não há tarefas associadas a essa categoria.",

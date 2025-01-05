@@ -101,7 +101,9 @@
     "taskStatusPlaceHolder": "选择状态",
     "taskCategoryPlaceHolder": "选择类别",
     "taskCreationSuccessMessage": "任务创建成功。",
-    "taskCreationErrorMessage": "创建新任务失败。"
+    "taskCreationErrorMessage": "创建新任务失败。",
+    "tasksDeletedSuccesMessage": "任务已成功删除。",
+    "tasksDeletedErrorMessage": "删除选定任务失败。"
   },
   "categories": {
     "emptyTasksWarning": "本类别无相关任务。",
