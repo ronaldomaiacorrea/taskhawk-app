@@ -5,6 +5,7 @@ import {
   useCreateTask,
   useDeleteTasks,
   useTasks,
+  useUpdateTask,
 } from '@queries';
 import type { Task } from '@shared/types';
 import { Button } from 'primereact/button';
@@ -14,13 +15,16 @@ import type { ToastMessage } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
 import PageTitle from 'src/common/PageTitle';
 import CreateTask from './components/CreateTask';
+import EditTask from './components/EditTask';
 import TasksTable from './components/TasksTable';
 
 const Tasks = () => {
   const { t } = useTranslations();
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
+  const [taskToEdit, setTaskToEdit] = useState<Task | undefined>(undefined);
   const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
+  const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
   const {
     data: categories = [],
     isLoading: isLoadingCategories,
@@ -31,6 +35,7 @@ const Tasks = () => {
   const toast = useRef<Toast | null>(null);
   const { mutate: addTask } = useCreateTask();
   const { mutate: deleteTasks } = useDeleteTasks();
+  const { mutate: updateTask } = useUpdateTask();
 
   const displayToast = useCallback(
     (message: string, severity?: ToastMessage['severity']) => {
@@ -73,6 +78,29 @@ const Tasks = () => {
         setTasksToDelete([]);
       },
       onError: () => displayToast(t('tasks.tasksDeletedErrorMessage'), 'error'),
+    });
+  };
+
+  const handleEditTask = (task: Task) => {
+    if (!task) {
+      return;
+    }
+    setTaskToEdit(task);
+    setIsEditDialogVisible(true);
+  };
+
+  const handleUpdateTask = (task: Task) => {
+    if (!task) {
+      return;
+    }
+
+    updateTask(task, {
+      onSuccess: () => {
+        displayToast(t('tasks.tasksUpdatedSuccesMessage'), 'success');
+        setIsDeleteDialogVisible(false);
+        setTaskToEdit(undefined);
+      },
+      onError: () => displayToast(t('tasks.tasksUpdatedErrorMessage'), 'error'),
     });
   };
 
@@ -129,6 +157,7 @@ const Tasks = () => {
             tasks={tasks}
             categories={categories}
             deleteTasks={confirmDelete}
+            onEditTask={(task: Task) => handleEditTask(task)}
           />
         </div>
       </div>
@@ -151,6 +180,17 @@ const Tasks = () => {
         isVisible={isCreateDialogVisible}
         onCreateTask={handleCreateTask}
       />
+      {taskToEdit && (
+        <EditTask
+          task={taskToEdit}
+          isVisible={isEditDialogVisible}
+          closeDialog={() => {
+            setTaskToEdit(undefined);
+            setIsEditDialogVisible(false);
+          }}
+          onUpdateTask={(values: Task) => handleUpdateTask(values)}
+        />
+      )}
     </>
   );
 };

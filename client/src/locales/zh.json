@@ -59,8 +59,8 @@
     "tasksManagementTitle": "任务管理",
     "notDefined": "未定义任务",
     "confirmCompletion": "确认任务完成",
-    "dueDate": "两个日期",
-    "creationDate": "创建日期",
+    "dueDate": "到期日",
+    "creationDate": "创建于",
     "priority": "优先权",
     "status": "现状",
     "high": "高",
@@ -103,7 +103,9 @@
     "taskCreationSuccessMessage": "任务创建成功。",
     "taskCreationErrorMessage": "创建新任务失败。",
     "tasksDeletedSuccesMessage": "任务已成功删除。",
-    "tasksDeletedErrorMessage": "删除选定任务失败。"
+    "tasksDeletedErrorMessage": "删除选定任务失败。",
+    "tasksUpdatedSuccesMessage": "任务更新成功。",
+    "tasksUpdatedErrorMessage": "更新选定任务失败。"
   },
   "categories": {
     "emptyTasksWarning": "本类别无相关任务。",

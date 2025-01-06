@@ -24,7 +24,7 @@
     "edit": "Editer",
     "add": "Ajouter",
     "search": "Recherche",
-    "noData": "Pas de données disponibles.",
+    "noData": "Aucune donnée disponible.",
     "darkMode": "Mode sombre",
     "lightMode": "Mode lumineux",
     "title": "Titre",
@@ -33,7 +33,7 @@
     "author": "Auteur",
     "logo": "Logo",
     "expandAll": "Tout développer",
-    "collapseAll": "Tout fermer",
+    "collapseAll": "Tout afficher",
     "keywordSearch": "Recherche par mot-clé",
     "ok": "Ok",
     "options": "Options",
@@ -44,7 +44,7 @@
     "test": "Test"
   },
   "dashboard": {
-    "markCompletedMessage": "Voulez-vous marquer ces tâches comme étant terminées ?",
+    "markCompletedMessage": "Voulez-vous marquer ces tâches comme terminées ?",
     "upComingDeadlinesTitle": "Prochaines échéances",
     "upComingDeadlinesDescription": "Les tâches approchent de leur date d'échéance.",
     "statusOverviewTitle": "Aperçu du statut",
@@ -59,8 +59,8 @@
     "tasksManagementTitle": "Gestion des tâches",
     "notDefined": "Pas de tâches définies",
     "confirmCompletion": "Confirmer l'achèvement de la tâche",
-    "dueDate": "Deux dates",
-    "creationDate": "Date de création",
+    "dueDate": "Échéance le",
+    "creationDate": "Créé le",
     "priority": "Priorité",
     "status": "Statut",
     "high": "Haut",
@@ -103,7 +103,9 @@
     "taskCreationSuccessMessage": "Tâche créée avec succès.",
     "taskCreationErrorMessage": "Échec de la création d'une nouvelle tâche.",
     "tasksDeletedSuccesMessage": "Tâches supprimées avec succès.",
-    "tasksDeletedErrorMessage": "Échec de la suppression des tâches sélectionnées."
+    "tasksDeletedErrorMessage": "Échec de la suppression des tâches sélectionnées.",
+    "tasksUpdatedSuccesMessage": "Tâches mises à jour avec succès.",
+    "tasksUpdatedErrorMessage": "Échec de la mise à jour des tâches sélectionnées."
   },
   "categories": {
     "emptyTasksWarning": "Aucune tâche n'est associée à cette catégorie.",

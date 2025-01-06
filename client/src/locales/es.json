@@ -59,8 +59,8 @@
     "tasksManagementTitle": "Gestión de tareas",
     "notDefined": "No hay tareas definidas",
     "confirmCompletion": "Confirmar la finalización de la tarea",
-    "dueDate": "Dos fechas",
-    "creationDate": "Fecha de creación",
+    "dueDate": "Vence el",
+    "creationDate": "Creado el",
     "priority": "Prioridad",
     "status": "Estado",
     "high": "Alta",
@@ -103,7 +103,9 @@
     "taskCreationSuccessMessage": "Tarea creada con éxito.",
     "taskCreationErrorMessage": "Error al crear nueva tarea.",
     "tasksDeletedSuccesMessage": "Tareas eliminadas con éxito.",
-    "tasksDeletedErrorMessage": "No se han podido eliminar las tareas seleccionadas."
+    "tasksDeletedErrorMessage": "No se han podido eliminar las tareas seleccionadas.",
+    "tasksUpdatedSuccesMessage": "Tareas actualizadas correctamente.",
+    "tasksUpdatedErrorMessage": "No se han podido actualizar las tareas seleccionadas."
   },
   "categories": {
     "emptyTasksWarning": "No hay tareas asociadas a esta categoría.",

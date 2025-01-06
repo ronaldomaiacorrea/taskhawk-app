@@ -60,8 +60,8 @@
     "tasksManagementTitle": "Tasks management",
     "notDefined": "No tasks defined",
     "confirmCompletion": "Confirm task completion",
-    "dueDate": "Due date",
-    "creationDate": "Creation date",
+    "dueDate": "Due on",
+    "creationDate": "Created on",
     "priority": "Priority",
     "status": "Status",
     "high": "High",
@@ -103,7 +103,9 @@
     "taskCreationSuccessMessage": "Task successfully created.",
     "taskCreationErrorMessage": "Failed to create new task.",
     "tasksDeletedSuccesMessage": "Tasks successfully deleted.",
-    "tasksDeletedErrorMessage": "Failed to deleted selected tasks."
+    "tasksDeletedErrorMessage": "Failed to delete selected tasks.",
+    "tasksUpdatedSuccesMessage": "Tasks successfully updated.",
+    "tasksUpdatedErrorMessage": "Failed to update selected tasks."
   },
   "categories": {
     "emptyTasksWarning": "No tasks associated with this category.",

@@ -89,11 +89,15 @@ categoriesRoute.patch(
 	async (c) => {
 		const id = Number.parseInt(c.req.param('id'));
 
-		const updates = await c.req.json();
+		if (isNaN(id)) {
+            return c.json({ error: 'Invalid category ID' }, 400);
+        }
+
+		const update = await c.req.json();
 
 		const { data: updatedCategory, error } = await supabase
 			.from('categories')
-			.update(updates)
+			.update(update)
 			.eq('id', id)
 			.select();
 
