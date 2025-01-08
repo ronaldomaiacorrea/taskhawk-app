@@ -46,7 +46,7 @@ const mergeAndTranslate = async (englishObj, targetObj, targetLang) => {
       }
       await mergeAndTranslate(englishObj[key], targetObj[key], targetLang);
     } else {
-      if (!targetObj[key]) {
+      if (!targetObj[key] || targetObj[key] !== englishObj[key]) {
         targetObj[key] = await translateKeys(englishObj[key], targetLang);
       }
     }

@@ -211,7 +211,7 @@ const TaskFormFields = () => {
         <label htmlFor="dueDate">{t('tasks.dueDate')}</label>
         <Calendar
           id="dueDate"
-          value={values.dueDate}
+          value={new Date(values.dueDate)}
           onChange={(e) => setFieldValue('dueDate', e.value)}
           invalid={Boolean(touched.dueDate && errors.dueDate)}
           dateFormat="mm/dd/yy"

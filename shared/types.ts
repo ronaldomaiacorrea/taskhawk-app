@@ -72,9 +72,6 @@ export interface IUserProfile {
 	  }[];
 	};
   }
-export type TaskWithCategory = Task & {
-	categoryName?: string;
-};
 
 export interface Category {
 	id: number;

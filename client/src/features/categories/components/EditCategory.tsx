@@ -36,8 +36,8 @@ const EditCategory = ({
           visible={isVisible}
           className="max-w-3xl w-full mx-auto px-4"
           onHide={() => {
-            resetForm();
             closeDialog();
+            resetForm();
           }}
           footer={
             <ActionButtons

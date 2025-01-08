@@ -15,9 +15,15 @@ export interface TasksTableProps {
   tasks: Task[];
   categories: Category[];
   deleteTasks: (tasks: Task[]) => void;
+  onEditTask: (task: Task) => void;
 }
 
-const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
+const TasksTable = ({
+  tasks,
+  categories,
+  deleteTasks,
+  onEditTask,
+}: TasksTableProps) => {
   const { t } = useTranslations();
   const [expandedRows, setExpandedRows] = useState<
     DataTableExpandedRows | Task[] | undefined
@@ -104,6 +110,12 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
     </div>
   );
 
+  const editTemplate = (task: Task) => (
+    <Button text severity="info" onClick={() => onEditTask(task)}>
+      {t('common.edit')}
+    </Button>
+  );
+
   return (
     <DataTable
       value={tasks}
@@ -161,6 +173,11 @@ const TasksTable = ({ tasks, categories, deleteTasks }: TasksTableProps) => {
         sortable
         sortField="category_id"
         style={{ minWidth: '150px' }}
+      />
+      <Column
+        headerStyle={{ width: '5rem', textAlign: 'center' }}
+        bodyStyle={{ textAlign: 'center', overflow: 'visible' }}
+        body={(task: Task) => editTemplate(task)}
       />
     </DataTable>
   );

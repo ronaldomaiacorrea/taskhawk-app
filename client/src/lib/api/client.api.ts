@@ -73,7 +73,7 @@ export const taskApi = {
     return handleResponse<Task>(response);
   },
 
-  update: async (id: number, data: Task) => {
+  update: async (id: string, data: Task) => {
     const response = await fetch(`${TASKS_API_URL}/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },

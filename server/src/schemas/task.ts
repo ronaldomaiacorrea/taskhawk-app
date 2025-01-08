@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { Status } from '../../../shared/types';
 
-const createTaskSchema = z.object({
+const taskSchema = z.object({
 	title: z.string().min(1).max(100),
 	description: z.string().optional(),
 	creationDate: z.coerce.date(),
@@ -9,6 +9,7 @@ const createTaskSchema = z.object({
 	priority: z.enum(['Low', 'Medium', 'High']),
 	status: z.enum(Object.values(Status) as [Status, ...Status[]]),
 	category_id: z.number().int().positive().min(1),
+	user_id: z.string().uuid()
 });
 
-export default createTaskSchema;
+export default taskSchema;

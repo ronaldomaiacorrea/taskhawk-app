@@ -5,6 +5,7 @@ import {
   useCreateTask,
   useDeleteTasks,
   useTasks,
+  useUpdateTask,
 } from '@queries';
 import type { Task } from '@shared/types';
 import { Button } from 'primereact/button';
@@ -14,12 +15,13 @@ import type { ToastMessage } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
 import PageTitle from 'src/common/PageTitle';
 import CreateTask from './components/CreateTask';
+import EditTask from './components/EditTask';
 import TasksTable from './components/TasksTable';
 
 const Tasks = () => {
   const { t } = useTranslations();
-  const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
+  const [taskToEdit, setTaskToEdit] = useState<Task | undefined>(undefined);
   const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
   const {
     data: categories = [],
@@ -31,6 +33,7 @@ const Tasks = () => {
   const toast = useRef<Toast | null>(null);
   const { mutate: addTask } = useCreateTask();
   const { mutate: deleteTasks } = useDeleteTasks();
+  const { mutate: updateTask } = useUpdateTask();
 
   const displayToast = useCallback(
     (message: string, severity?: ToastMessage['severity']) => {
@@ -58,7 +61,6 @@ const Tasks = () => {
 
   const confirmDelete = (selectedTasks: Task[]) => {
     setTasksToDelete(selectedTasks);
-    setIsDeleteDialogVisible(true);
   };
 
   const handleDeleteTask = (tasks: Task[]) => {
@@ -69,10 +71,30 @@ const Tasks = () => {
     deleteTasks(tasks, {
       onSuccess: () => {
         displayToast(t('tasks.tasksDeletedSuccesMessage'), 'success');
-        setIsDeleteDialogVisible(false);
         setTasksToDelete([]);
       },
       onError: () => displayToast(t('tasks.tasksDeletedErrorMessage'), 'error'),
+    });
+  };
+
+  const handleEditTask = (task: Task) => {
+    if (!task) {
+      return;
+    }
+    setTaskToEdit(task);
+  };
+
+  const handleUpdateTask = (task: Task) => {
+    if (!task) {
+      return;
+    }
+
+    updateTask(task, {
+      onSuccess: () => {
+        displayToast(t('tasks.tasksUpdatedSuccesMessage'), 'success');
+        setTaskToEdit(undefined);
+      },
+      onError: () => displayToast(t('tasks.tasksUpdatedErrorMessage'), 'error'),
     });
   };
 
@@ -129,19 +151,15 @@ const Tasks = () => {
             tasks={tasks}
             categories={categories}
             deleteTasks={confirmDelete}
+            onEditTask={(task: Task) => handleEditTask(task)}
           />
         </div>
       </div>
       <div className="w-3/4">
         <ConfirmDialog
           header={t('tasks.confirmDeletionTitle')}
-          visible={isDeleteDialogVisible}
-          handleHiding={() => {
-            if (!isDeleteDialogVisible) {
-              return;
-            }
-            setIsDeleteDialogVisible(false);
-          }}
+          visible={tasksToDelete.length > 0}
+          handleHiding={() => setTasksToDelete([])}
           content={dialogContent}
           onConfirm={() => handleDeleteTask(tasksToDelete)}
         />
@@ -151,6 +169,14 @@ const Tasks = () => {
         isVisible={isCreateDialogVisible}
         onCreateTask={handleCreateTask}
       />
+      {taskToEdit && (
+        <EditTask
+          task={taskToEdit}
+          isVisible={!!taskToEdit}
+          closeDialog={() => setTaskToEdit(undefined)}
+          onUpdateTask={(values: Task) => handleUpdateTask(values)}
+        />
+      )}
     </>
   );
 };
