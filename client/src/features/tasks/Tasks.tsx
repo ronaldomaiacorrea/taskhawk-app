@@ -20,11 +20,9 @@ import TasksTable from './components/TasksTable';
 
 const Tasks = () => {
   const { t } = useTranslations();
-  const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
   const [tasksToDelete, setTasksToDelete] = useState<Task[]>([]);
   const [taskToEdit, setTaskToEdit] = useState<Task | undefined>(undefined);
   const [isCreateDialogVisible, setIsCreateDialogVisible] = useState(false);
-  const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
   const {
     data: categories = [],
     isLoading: isLoadingCategories,
@@ -63,7 +61,6 @@ const Tasks = () => {
 
   const confirmDelete = (selectedTasks: Task[]) => {
     setTasksToDelete(selectedTasks);
-    setIsDeleteDialogVisible(true);
   };
 
   const handleDeleteTask = (tasks: Task[]) => {
@@ -74,7 +71,6 @@ const Tasks = () => {
     deleteTasks(tasks, {
       onSuccess: () => {
         displayToast(t('tasks.tasksDeletedSuccesMessage'), 'success');
-        setIsDeleteDialogVisible(false);
         setTasksToDelete([]);
       },
       onError: () => displayToast(t('tasks.tasksDeletedErrorMessage'), 'error'),
@@ -86,7 +82,6 @@ const Tasks = () => {
       return;
     }
     setTaskToEdit(task);
-    setIsEditDialogVisible(true);
   };
 
   const handleUpdateTask = (task: Task) => {
@@ -97,7 +92,6 @@ const Tasks = () => {
     updateTask(task, {
       onSuccess: () => {
         displayToast(t('tasks.tasksUpdatedSuccesMessage'), 'success');
-        setIsDeleteDialogVisible(false);
         setTaskToEdit(undefined);
       },
       onError: () => displayToast(t('tasks.tasksUpdatedErrorMessage'), 'error'),
@@ -164,13 +158,8 @@ const Tasks = () => {
       <div className="w-3/4">
         <ConfirmDialog
           header={t('tasks.confirmDeletionTitle')}
-          visible={isDeleteDialogVisible}
-          handleHiding={() => {
-            if (!isDeleteDialogVisible) {
-              return;
-            }
-            setIsDeleteDialogVisible(false);
-          }}
+          visible={tasksToDelete.length > 0}
+          handleHiding={() => setTasksToDelete([])}
           content={dialogContent}
           onConfirm={() => handleDeleteTask(tasksToDelete)}
         />
@@ -183,11 +172,8 @@ const Tasks = () => {
       {taskToEdit && (
         <EditTask
           task={taskToEdit}
-          isVisible={isEditDialogVisible}
-          closeDialog={() => {
-            setTaskToEdit(undefined);
-            setIsEditDialogVisible(false);
-          }}
+          isVisible={!!taskToEdit}
+          closeDialog={() => setTaskToEdit(undefined)}
           onUpdateTask={(values: Task) => handleUpdateTask(values)}
         />
       )}

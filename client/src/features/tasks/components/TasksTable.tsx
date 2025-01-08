@@ -112,7 +112,6 @@ const TasksTable = ({
 
   const editTemplate = (task: Task) => (
     <Button text severity="info" onClick={() => onEditTask(task)}>
-      {' '}
       {t('common.edit')}
     </Button>
   );
