@@ -49,12 +49,7 @@ const Calendar = () => {
         headerToolbar={{
           left: 'prev,next,today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-        }}
-        eventTimeFormat={{
-          hour: '2-digit',
-          minute: '2-digit',
-          meridiem: false,
+          right: 'dayGridMonth,timeGridDay,listWeek',
         }}
         titleFormat={{ year: 'numeric', month: 'long', day: 'numeric' }}
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
@@ -75,7 +70,7 @@ const Calendar = () => {
         allDaySlot={false}
         height={1200}
         timeZone="local"
-        dayMaxEvents
+        dayMaxEvents={2}
         editable
         selectable
         listDayFormat={{ weekday: 'long' }}
@@ -87,9 +82,12 @@ const Calendar = () => {
         eventClick={(info) => handleEdit(info)}
         eventDidMount={(info) => {
           const description =
-            info.event.extendedProps.description || 'No description';
-          const status = info.event.extendedProps.status || 'No status';
-          info.el.setAttribute('title', `${description} - Status: ${status}`);
+            info.event.extendedProps.description || t('tasks.noDescription');
+          const status = info.event.extendedProps.status;
+          info.el.setAttribute(
+            'title',
+            `${description} - ${t('tasks.status')}: ${status}`,
+          );
         }}
         eventOrder={(a, b) => {
           const eventA = a as EventApi;
@@ -99,16 +97,21 @@ const Calendar = () => {
             statusOrder[eventB.extendedProps.status]
           );
         }}
-        eventContent={(eventInfo) => (
-          <div>
-            <strong>{eventInfo.timeText}</strong> -{' '}
-            <span>{eventInfo.event.title}</span>
-            <div>{eventInfo.event.extendedProps.description}</div>
-            <div>
-              <div>{`${t('tasks.status')}: ${eventInfo.event.extendedProps.status}`}</div>
+        eventContent={(eventInfo) => {
+          const isDayGridMonth = eventInfo.view.type === 'dayGridMonth' || '';
+          return (
+            <div
+              className={`flex items-center gap-1 text-slate-900 dark:text-gray-100' first-letter ${
+                isDayGridMonth
+                  ? 'flex items-center gap-1 p-2 m-1 font-semibold'
+                  : ''
+              }`}
+            >
+              <span>{eventInfo.timeText}</span>
+              <strong>{eventInfo.event.title}</strong>
             </div>
-          </div>
-        )}
+          );
+        }}
       />
     </>
   );
